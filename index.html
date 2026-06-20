@@ -302,107 +302,149 @@
         }
 
         .product-list-wrap.open {
-            max-height: 6000px;
+            max-height: 9999px;
         }
 
         .product-list {
-            padding: 0.2rem 1.8rem 1.6rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
+            padding: 1.2rem 1.8rem 1.8rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
         }
 
-        /* ===== PRODUCT ROW ===== */
-        .product-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.55rem 0.8rem;
-            border-radius: 14px;
+        /* ===== PRODUCT CARD ===== */
+        .product-card {
             background: #0b1121;
             border: 1px solid #1b253d;
-            transition: 0.15s;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-
-        .product-row:hover {
-            background: #131d33;
-            border-color: #f5b81b44;
-        }
-
-        .product-row .left {
+            border-radius: 16px;
+            padding: 1rem;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 0.8rem;
-            flex: 1;
-            min-width: 150px;
-        }
-
-        .product-row .left i {
-            width: 20px;
-            color: #f5b81b;
-            font-size: 0.9rem;
             text-align: center;
+            transition: 0.25s ease;
+            cursor: default;
+            position: relative;
+            overflow: hidden;
         }
 
-        .product-row .product-img {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, #f5b81b08, transparent 70%);
+            opacity: 0;
+            transition: 0.4s ease;
+            pointer-events: none;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: #f5b81b66;
+            box-shadow: 0 12px 30px -8px #000000cc, 0 0 0 1px #f5b81b33;
+            background: #141d33;
+        }
+
+        .product-card .product-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
             object-fit: cover;
             border: 1px solid #2a3650;
             background: #0a0e1a;
-            flex-shrink: 0;
+            margin-bottom: 0.6rem;
+            transition: 0.3s ease;
         }
 
-        .product-row .name {
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+            border-color: #f5b81b66;
+        }
+
+        .product-card .product-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            background: #0a0e1a;
+            border: 1px solid #2a3650;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #f5b81b;
+            margin-bottom: 0.6rem;
+            transition: 0.3s ease;
+        }
+
+        .product-card:hover .product-icon {
+            border-color: #f5b81b66;
+            background: #f5b81b15;
+        }
+
+        .product-card .name {
             color: #e4ebff;
-            font-weight: 500;
-            font-size: 0.95rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            line-height: 1.3;
+            margin-bottom: 0.3rem;
+            min-height: 2.4rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .product-row .price {
+        .product-card .price {
             color: #f5d76e;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 1rem;
             background: #1a2340;
-            padding: 0.1rem 1rem;
+            padding: 0.15rem 0.9rem;
             border-radius: 60px;
             border: 1px solid #f5b81b33;
-            white-space: nowrap;
+            margin-bottom: 0.7rem;
+            display: inline-block;
         }
 
-        .product-row .btn-beli {
+        .product-card .btn-beli {
             background: #f5b81b;
             border: none;
             color: #0a0e1a;
             font-weight: 700;
-            padding: 0.2rem 1.2rem;
+            padding: 0.4rem 1.2rem;
             border-radius: 60px;
             font-size: 0.75rem;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 0.4rem;
             cursor: pointer;
-            transition: 0.15s;
+            transition: 0.2s ease;
             box-shadow: 0 2px 10px #f5b81b44;
-            white-space: nowrap;
+            width: 100%;
+            justify-content: center;
         }
 
-        .product-row .btn-beli:hover {
+        .product-card .btn-beli:hover {
             background: #f5c84a;
             transform: scale(1.02);
         }
 
-        .product-row .btn-beli i {
+        .product-card .btn-beli i {
             font-size: 0.8rem;
         }
 
         /* ===== SUB BAGIAN CASH ===== */
         .sub-section {
-            margin-top: 0.8rem;
-            padding-top: 0.6rem;
+            grid-column: 1 / -1;
+            margin-top: 0.5rem;
+            padding-top: 0.8rem;
             border-top: 1px dashed #25304b;
         }
 
@@ -412,7 +454,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.8rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -423,9 +465,20 @@
             font-size: 0.7rem;
         }
 
+        .sub-section .product-card {
+            background: #0f1629;
+            border-color: #1b253d;
+        }
+
+        .sub-section .product-card:hover {
+            background: #161f36;
+            border-color: #f5b81b66;
+        }
+
         /* ===== FORM ROBUX ===== */
         .robux-form {
-            padding: 0.2rem 0 1rem 0;
+            grid-column: 1 / -1;
+            padding: 0 0 0.8rem 0;
         }
 
         .form-group {
@@ -618,6 +671,29 @@
             margin-top: 0.2rem;
         }
 
+        .modal-content .file-preview {
+            margin-top: 0.5rem;
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 10px;
+            display: none;
+            border: 1px solid #1b253d;
+            background: #0a0e1a;
+            padding: 0.3rem;
+        }
+
+        .modal-content .file-preview.show {
+            display: block;
+        }
+
+        .modal-content .file-preview img {
+            max-width: 100%;
+            max-height: 140px;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+
         .modal-content .btn-submit-order {
             width: 100%;
             padding: 0.8rem;
@@ -758,21 +834,18 @@
                 font-size: 1.2rem;
             }
             .product-list {
-                padding: 0.2rem 1.2rem 1.2rem;
+                padding: 0.8rem 1.2rem 1.2rem;
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 0.8rem;
             }
-            .product-row {
-                flex-wrap: wrap;
-                gap: 0.4rem 0.6rem;
-                padding: 0.6rem 0.8rem;
+            .product-card .product-img {
+                width: 60px;
+                height: 60px;
             }
-            .product-row .btn-beli {
-                margin-left: auto;
-                padding: 0.2rem 1rem;
-                font-size: 0.7rem;
-            }
-            .product-row .product-img {
-                width: 40px;
-                height: 40px;
+            .product-card .product-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.6rem;
             }
             .sub-info {
                 flex-direction: column;
@@ -809,12 +882,34 @@
                 font-size: 0.7rem;
                 padding: 0.2rem 0.8rem;
             }
-            .product-row .price {
+            .product-list {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 0.6rem;
+                padding: 0.6rem 0.8rem 1rem;
+            }
+            .product-card {
+                padding: 0.7rem;
+            }
+            .product-card .product-img {
+                width: 50px;
+                height: 50px;
+            }
+            .product-card .product-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            .product-card .name {
                 font-size: 0.8rem;
+                min-height: 2rem;
+            }
+            .product-card .price {
+                font-size: 0.85rem;
                 padding: 0.1rem 0.7rem;
             }
-            .product-row .name {
-                font-size: 0.85rem;
+            .product-card .btn-beli {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.8rem;
             }
             .block-header .header-content .badge-count {
                 font-size: 0.6rem;
@@ -884,7 +979,7 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- BLOK 1 : GAMEPASS DDS + CASH                              -->
+    <!-- BLOK 1 : GAMEPASS DDS + CASH (CARD)                      -->
     <!-- ========================================================= -->
     <div class="category-block">
         <div class="block-header" data-target="list1">
@@ -898,131 +993,115 @@
         <div class="product-list-wrap" id="list1">
             <div class="product-list">
 
-                <!-- GAMEPASS DDS -->
-                <div class="product-row" data-nama="Suspension" data-harga="4300">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/drg7jh.jpg" alt="Suspension" class="product-img" />
-                        <span class="name">Suspension</span>
-                    </div>
+                <!-- GAMEPASS DDS CARDS -->
+                <div class="product-card" data-nama="Suspension" data-harga="4300">
+                    <img src="https://files.catbox.moe/drg7jh.jpg" alt="Suspension" class="product-img" />
+                    <span class="name">Suspension</span>
                     <span class="price">Rp 4.300</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="Boombox" data-harga="3000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/taebh6.jpg" alt="Boombox" class="product-img" />
-                        <span class="name">Boombox</span>
-                    </div>
+
+                <div class="product-card" data-nama="Boombox" data-harga="3000">
+                    <img src="https://files.catbox.moe/taebh6.jpg" alt="Boombox" class="product-img" />
+                    <span class="name">Boombox</span>
                     <span class="price">Rp 3.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="Advance Paint" data-harga="7500">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/xru01z.jpg" alt="Advance Paint" class="product-img" />
-                        <span class="name">Advance Paint</span>
-                    </div>
+
+                <div class="product-card" data-nama="Advance Paint" data-harga="7500">
+                    <img src="https://files.catbox.moe/xru01z.jpg" alt="Advance Paint" class="product-img" />
+                    <span class="name">Advance Paint</span>
                     <span class="price">Rp 7.500</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="Premium Aksesoris" data-harga="6500">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/drg7jh.jpg" alt="Premium Aksesoris" class="product-img" />
-                        <span class="name">Premium Aksesoris</span>
-                    </div>
+
+                <div class="product-card" data-nama="Premium Aksesoris" data-harga="6500">
+                    <img src="https://files.catbox.moe/drg7jh.jpg" alt="Premium Aksesoris" class="product-img" />
+                    <span class="name">Premium Aksesoris</span>
                     <span class="price">Rp 6.500</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="Exclusive Rims" data-harga="10000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/y83ebh.jpg" alt="Exclusive Rims" class="product-img" />
-                        <span class="name">Exclusive Rims</span>
-                    </div>
+
+                <div class="product-card" data-nama="Exclusive Rims" data-harga="10000">
+                    <img src="https://files.catbox.moe/y83ebh.jpg" alt="Exclusive Rims" class="product-img" />
+                    <span class="name">Exclusive Rims</span>
                     <span class="price">Rp 10.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="Custom Plate" data-harga="9000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/v0wyhz.jpg" alt="Custom Plate" class="product-img" />
-                        <span class="name">Custom Plate</span>
-                    </div>
+
+                <div class="product-card" data-nama="Custom Plate" data-harga="9000">
+                    <img src="https://files.catbox.moe/v0wyhz.jpg" alt="Custom Plate" class="product-img" />
+                    <span class="name">Custom Plate</span>
                     <span class="price">Rp 9.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="Slot Limit Unlock" data-harga="10000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/o6kz71.jpg" alt="Slot Limit Unlock" class="product-img" />
-                        <span class="name">Slot Limit Unlock</span>
-                    </div>
+
+                <div class="product-card" data-nama="Slot Limit Unlock" data-harga="10000">
+                    <img src="https://files.catbox.moe/o6kz71.jpg" alt="Slot Limit Unlock" class="product-img" />
+                    <span class="name">Slot Limit Unlock</span>
                     <span class="price">Rp 10.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="Drag Space" data-harga="14000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/11s7d2.jpg" alt="Drag Space" class="product-img" />
-                        <span class="name">Drag Space</span>
-                    </div>
+
+                <div class="product-card" data-nama="Drag Space" data-harga="14000">
+                    <img src="https://files.catbox.moe/11s7d2.jpg" alt="Drag Space" class="product-img" />
+                    <span class="name">Drag Space</span>
                     <span class="price">Rp 14.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="Luxury" data-harga="14500">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/l5x1kr.jpg" alt="Luxury" class="product-img" />
-                        <span class="name">Luxury</span>
-                    </div>
+
+                <div class="product-card" data-nama="Luxury" data-harga="14500">
+                    <img src="https://files.catbox.moe/l5x1kr.jpg" alt="Luxury" class="product-img" />
+                    <span class="name">Luxury</span>
                     <span class="price">Rp 14.500</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="Police" data-harga="17000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/fv0i1h.jpg" alt="Police" class="product-img" />
-                        <span class="name">Police</span>
-                    </div>
+
+                <div class="product-card" data-nama="Police" data-harga="17000">
+                    <img src="https://files.catbox.moe/fv0i1h.jpg" alt="Police" class="product-img" />
+                    <span class="name">Police</span>
                     <span class="price">Rp 17.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="2x Paycheck" data-harga="54000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/vkoyom.jpg" alt="2x Paycheck" class="product-img" />
-                        <span class="name">2x Paycheck</span>
-                    </div>
+
+                <div class="product-card" data-nama="2x Paycheck" data-harga="54000">
+                    <img src="https://files.catbox.moe/vkoyom.jpg" alt="2x Paycheck" class="product-img" />
+                    <span class="name">2x Paycheck</span>
                     <span class="price">Rp 54.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
 
-                <!-- CASH -->
+                <!-- CASH SUB SECTION -->
                 <div class="sub-section">
                     <div class="sub-section-title">
                         <i class="fas fa-coins"></i> Cash
                         <span style="font-weight:400;text-transform:none;color:#6a7da0;font-size:0.7rem;">— top up instan</span>
                     </div>
-                    <div class="product-row" data-nama="Cash 10 Juta" data-harga="5000">
-                        <div class="left">
-                            <img src="https://files.catbox.moe/taj09h.jpg" alt="Cash 10 Juta" class="product-img" />
-                            <span class="name">Cash 10 Juta</span>
-                        </div>
+
+                    <div class="product-card" data-nama="Cash 10 Juta" data-harga="5000">
+                        <img src="https://files.catbox.moe/taj09h.jpg" alt="Cash 10 Juta" class="product-img" />
+                        <span class="name">Cash 10 Juta</span>
                         <span class="price">Rp 5.000</span>
                         <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                     </div>
-                    <div class="product-row" data-nama="Cash 50 Juta" data-harga="8000">
-                        <div class="left">
-                            <img src="https://files.catbox.moe/yaf2jk.jpg" alt="Cash 50 Juta" class="product-img" />
-                            <span class="name">Cash 50 Juta</span>
-                        </div>
+
+                    <div class="product-card" data-nama="Cash 50 Juta" data-harga="8000">
+                        <img src="https://files.catbox.moe/yaf2jk.jpg" alt="Cash 50 Juta" class="product-img" />
+                        <span class="name">Cash 50 Juta</span>
                         <span class="price">Rp 8.000</span>
                         <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                     </div>
-                    <div class="product-row" data-nama="Cash 100 Juta" data-harga="14000">
-                        <div class="left">
-                            <img src="https://files.catbox.moe/7krb35.jpg" alt="Cash 100 Juta" class="product-img" />
-                            <span class="name">Cash 100 Juta</span>
-                        </div>
+
+                    <div class="product-card" data-nama="Cash 100 Juta" data-harga="14000">
+                        <img src="https://files.catbox.moe/7krb35.jpg" alt="Cash 100 Juta" class="product-img" />
+                        <span class="name">Cash 100 Juta</span>
                         <span class="price">Rp 14.000</span>
                         <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                     </div>
-                    <div class="product-row" data-nama="Cash 500 Juta" data-harga="46000">
-                        <div class="left">
-                            <img src="https://files.catbox.moe/ddioll.jpg" alt="Cash 500 Juta" class="product-img" />
-                            <span class="name">Cash 500 Juta</span>
-                        </div>
+
+                    <div class="product-card" data-nama="Cash 500 Juta" data-harga="46000">
+                        <img src="https://files.catbox.moe/ddioll.jpg" alt="Cash 500 Juta" class="product-img" />
+                        <span class="name">Cash 500 Juta</span>
                         <span class="price">Rp 46.000</span>
                         <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                     </div>
@@ -1033,7 +1112,7 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- BLOK 2 : ROBUX                                            -->
+    <!-- BLOK 2 : ROBUX (CARD)                                     -->
     <!-- ========================================================= -->
     <div class="category-block">
         <div class="block-header" data-target="list2">
@@ -1060,34 +1139,45 @@
                     </div>
                 </div>
 
-                <!-- ROBUX LIST -->
-                <div class="product-row" data-nama="320 RBX" data-harga="67000">
-                    <div class="left"><i class="fab fa-roblox"></i><span class="name">320 RBX</span></div>
+                <!-- ROBUX CARDS -->
+                <div class="product-card" data-nama="320 RBX" data-harga="67000">
+                    <div class="product-icon"><i class="fab fa-roblox"></i></div>
+                    <span class="name">320 RBX</span>
                     <span class="price">Rp 67.000</span>
                     <button class="btn-beli robux-btn"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="500 RBX" data-harga="80000">
-                    <div class="left"><i class="fab fa-roblox"></i><span class="name">500 RBX</span></div>
+
+                <div class="product-card" data-nama="500 RBX" data-harga="80000">
+                    <div class="product-icon"><i class="fab fa-roblox"></i></div>
+                    <span class="name">500 RBX</span>
                     <span class="price">Rp 80.000</span>
                     <button class="btn-beli robux-btn"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="1.000 RBX" data-harga="160000">
-                    <div class="left"><i class="fab fa-roblox"></i><span class="name">1.000 RBX</span></div>
+
+                <div class="product-card" data-nama="1.000 RBX" data-harga="160000">
+                    <div class="product-icon"><i class="fab fa-roblox"></i></div>
+                    <span class="name">1.000 RBX</span>
                     <span class="price">Rp 160.000</span>
                     <button class="btn-beli robux-btn"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="1.500 RBX" data-harga="235000">
-                    <div class="left"><i class="fab fa-roblox"></i><span class="name">1.500 RBX</span></div>
+
+                <div class="product-card" data-nama="1.500 RBX" data-harga="235000">
+                    <div class="product-icon"><i class="fab fa-roblox"></i></div>
+                    <span class="name">1.500 RBX</span>
                     <span class="price">Rp 235.000</span>
                     <button class="btn-beli robux-btn"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="2.000 RBX" data-harga="312000">
-                    <div class="left"><i class="fab fa-roblox"></i><span class="name">2.000 RBX</span></div>
+
+                <div class="product-card" data-nama="2.000 RBX" data-harga="312000">
+                    <div class="product-icon"><i class="fab fa-roblox"></i></div>
+                    <span class="name">2.000 RBX</span>
                     <span class="price">Rp 312.000</span>
                     <button class="btn-beli robux-btn"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
-                <div class="product-row" data-nama="2.500 RBX" data-harga="381000">
-                    <div class="left"><i class="fab fa-roblox"></i><span class="name">2.500 RBX</span></div>
+
+                <div class="product-card" data-nama="2.500 RBX" data-harga="381000">
+                    <div class="product-icon"><i class="fab fa-roblox"></i></div>
+                    <span class="name">2.500 RBX</span>
                     <span class="price">Rp 381.000</span>
                     <button class="btn-beli robux-btn"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
@@ -1097,7 +1187,7 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- BLOK 3 : GAMEPASS CDID                                    -->
+    <!-- BLOK 3 : GAMEPASS CDID (CARD)                            -->
     <!-- ========================================================= -->
     <div class="category-block">
         <div class="block-header" data-target="list3">
@@ -1111,92 +1201,72 @@
         <div class="product-list-wrap" id="list3">
             <div class="product-list">
 
-                <div class="product-row" data-nama="Luxury House" data-harga="14000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/fefclr.jpg" alt="Luxury House" class="product-img" />
-                        <span class="name">Luxury House</span>
-                    </div>
+                <div class="product-card" data-nama="Luxury House" data-harga="14000">
+                    <img src="https://files.catbox.moe/fefclr.jpg" alt="Luxury House" class="product-img" />
+                    <span class="name">Luxury House</span>
                     <span class="price">Rp 14.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
 
-                <div class="product-row" data-nama="Additional Ownable Car" data-harga="13000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/dtjuvs.jpg" alt="Additional Ownable Car" class="product-img" />
-                        <span class="name">Additional Ownable Car</span>
-                    </div>
+                <div class="product-card" data-nama="Additional Ownable Car" data-harga="13000">
+                    <img src="https://files.catbox.moe/dtjuvs.jpg" alt="Additional Ownable Car" class="product-img" />
+                    <span class="name">Additional Ownable Car</span>
                     <span class="price">Rp 13.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
 
-                <div class="product-row" data-nama="Emergency Vehicle" data-harga="16000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/cp37xc.jpg" alt="Emergency Vehicle" class="product-img" />
-                        <span class="name">Emergency Vehicle</span>
-                    </div>
+                <div class="product-card" data-nama="Emergency Vehicle" data-harga="16000">
+                    <img src="https://files.catbox.moe/cp37xc.jpg" alt="Emergency Vehicle" class="product-img" />
+                    <span class="name">Emergency Vehicle</span>
                     <span class="price">Rp 16.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
 
-                <div class="product-row" data-nama="Retro Pass" data-harga="20000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/pczy8y.jpg" alt="Retro Pass" class="product-img" />
-                        <span class="name">Retro Pass</span>
-                    </div>
+                <div class="product-card" data-nama="Retro Pass" data-harga="20000">
+                    <img src="https://files.catbox.moe/pczy8y.jpg" alt="Retro Pass" class="product-img" />
+                    <span class="name">Retro Pass</span>
                     <span class="price">Rp 20.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
 
-                <div class="product-row" data-nama="Rare Imports" data-harga="23000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/crfbe7.jpg" alt="Rare Imports" class="product-img" />
-                        <span class="name">Rare Imports</span>
-                    </div>
+                <div class="product-card" data-nama="Rare Imports" data-harga="23000">
+                    <img src="https://files.catbox.moe/crfbe7.jpg" alt="Rare Imports" class="product-img" />
+                    <span class="name">Rare Imports</span>
                     <span class="price">Rp 23.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
 
-                <div class="product-row" data-nama="Advance Modification" data-harga="26000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/hw92r2.jpg" alt="Advance Modification" class="product-img" />
-                        <span class="name">Advance Modification</span>
-                    </div>
+                <div class="product-card" data-nama="Advance Modification" data-harga="26000">
+                    <img src="https://files.catbox.moe/hw92r2.jpg" alt="Advance Modification" class="product-img" />
+                    <span class="name">Advance Modification</span>
                     <span class="price">Rp 26.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
 
-                <div class="product-row" data-nama="Luxury Car" data-harga="27000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/imwtbm.jpg" alt="Luxury Car" class="product-img" />
-                        <span class="name">Luxury Car</span>
-                    </div>
+                <div class="product-card" data-nama="Luxury Car" data-harga="27000">
+                    <img src="https://files.catbox.moe/imwtbm.jpg" alt="Luxury Car" class="product-img" />
+                    <span class="name">Luxury Car</span>
                     <span class="price">Rp 27.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
 
-                <div class="product-row" data-nama="2x Additional" data-harga="27400">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/tj2jo3.jpg" alt="2x Additional" class="product-img" />
-                        <span class="name">2x Additional</span>
-                    </div>
+                <div class="product-card" data-nama="2x Additional" data-harga="27400">
+                    <img src="https://files.catbox.moe/tj2jo3.jpg" alt="2x Additional" class="product-img" />
+                    <span class="name">2x Additional</span>
                     <span class="price">Rp 27.400</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
 
-                <div class="product-row" data-nama="2x Paycheck" data-harga="46000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/t1ln91.jpg" alt="2x Paycheck" class="product-img" />
-                        <span class="name">2x Paycheck</span>
-                    </div>
+                <div class="product-card" data-nama="2x Paycheck" data-harga="46000">
+                    <img src="https://files.catbox.moe/t1ln91.jpg" alt="2x Paycheck" class="product-img" />
+                    <span class="name">2x Paycheck</span>
                     <span class="price">Rp 46.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
 
-                <div class="product-row" data-nama="+50% Job Warning" data-harga="48000">
-                    <div class="left">
-                        <img src="https://files.catbox.moe/04qmcq.jpg" alt="+50% Job Warning" class="product-img" />
-                        <span class="name">+50% Job Warning</span>
-                    </div>
+                <div class="product-card" data-nama="+50% Job Warning" data-harga="48000">
+                    <img src="https://files.catbox.moe/04qmcq.jpg" alt="+50% Job Warning" class="product-img" />
+                    <span class="name">+50% Job Warning</span>
                     <span class="price">Rp 48.000</span>
                     <button class="btn-beli"><i class="fas fa-shopping-cart"></i> Beli</button>
                 </div>
@@ -1246,6 +1316,9 @@
             <label><i class="fas fa-upload"></i> Upload Bukti Pembayaran</label>
             <input type="file" id="buktiBayar" accept="image/*" />
             <p class="file-name" id="fileName">Belum ada file dipilih</p>
+            <div class="file-preview" id="filePreview">
+                <img id="previewImage" src="" alt="Preview" />
+            </div>
         </div>
 
         <!-- Tombol Selesai -->
@@ -1301,20 +1374,26 @@
         const modalPrice = document.getElementById('modalPrice');
         const fileInput = document.getElementById('buktiBayar');
         const fileName = document.getElementById('fileName');
+        const filePreview = document.getElementById('filePreview');
+        const previewImage = document.getElementById('previewImage');
         const submitBtn = document.getElementById('submitOrder');
         let currentProduct = '';
         let currentPrice = 0;
         let isRobux = false;
+        let uploadedFile = null;
 
         // Fungsi buka modal
         function openModal(productName, price, robux = false) {
             currentProduct = productName;
             currentPrice = price;
             isRobux = robux;
+            uploadedFile = null;
             modalProduct.textContent = 'Produk: ' + productName;
             modalPrice.textContent = 'Total: Rp ' + price.toLocaleString('id-ID');
             fileInput.value = '';
             fileName.textContent = 'Belum ada file dipilih';
+            filePreview.classList.remove('show');
+            previewImage.src = '';
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
             modal.classList.add('active');
@@ -1332,27 +1411,63 @@
             if (e.target === this) closeModalFunc();
         });
 
-        // Event listener untuk file upload
+        // Event listener untuk file upload - preview & upload ke server
         fileInput.addEventListener('change', function() {
             if (this.files && this.files[0]) {
-                fileName.textContent = '📎 ' + this.files[0].name;
+                const file = this.files[0];
+                uploadedFile = file;
+                fileName.textContent = '📎 ' + file.name;
+
+                // Preview gambar
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    filePreview.classList.add('show');
+                };
+                reader.readAsDataURL(file);
+
                 submitBtn.disabled = false;
             } else {
                 fileName.textContent = 'Belum ada file dipilih';
+                filePreview.classList.remove('show');
+                previewImage.src = '';
                 submitBtn.disabled = true;
             }
         });
+
+        // ===== UPLOAD FILE KE SERVER (menggunakan free image hosting) =====
+        function uploadToServer(file) {
+            return new Promise((resolve, reject) => {
+                const formData = new FormData();
+                formData.append('image', file);
+
+                // Menggunakan free image hosting API (catbox.moe)
+                fetch('https://catbox.moe/user/api.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    if (data.startsWith('http')) {
+                        resolve(data.trim());
+                    } else {
+                        reject('Gagal upload gambar: ' + data);
+                    }
+                })
+                .catch(err => reject(err));
+            });
+        }
 
         // ===== TOMBOL BELI =====
         const allBuyBtns = document.querySelectorAll('.btn-beli');
         allBuyBtns.forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                const row = this.closest('.product-row');
-                if (!row) return;
+                const card = this.closest('.product-card');
+                if (!card) return;
 
-                const nameEl = row.querySelector('.name');
-                const priceEl = row.querySelector('.price');
+                const nameEl = card.querySelector('.name');
+                const priceEl = card.querySelector('.price');
                 const productName = nameEl ? nameEl.textContent.trim() : 'Produk';
                 const priceText = priceEl ? priceEl.textContent.trim() : 'Rp 0';
                 const price = parseInt(priceText.replace(/[^0-9]/g, '')) || 0;
@@ -1381,46 +1496,52 @@
 
         // ===== SUBMIT ORDER =====
         submitBtn.addEventListener('click', function() {
-            const file = fileInput.files[0];
-            if (!file) {
+            if (!uploadedFile) {
                 alert('⚠️ Mohon upload bukti pembayaran terlebih dahulu!');
                 return;
             }
 
-            // Baca file sebagai base64 untuk dikirim via WA
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const base64Image = e.target.result;
+            // Disable button saat upload
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengupload...';
 
-                // Ambil username Robux jika ada
-                let robuxData = '';
-                if (isRobux) {
-                    const userInput = document.getElementById('robuxUser');
-                    const passInput = document.getElementById('robuxPass');
-                    const username = userInput ? userInput.value.trim() : '';
-                    const password = passInput ? passInput.value.trim() : '';
-                    if (username) robuxData += `%0AUsername%20Roblox%3A%20${encodeURIComponent(username)}`;
-                    if (password) robuxData += `%0APassword%20Roblox%3A%20${encodeURIComponent(password)}`;
-                }
+            // Upload file ke server
+            uploadToServer(uploadedFile)
+                .then(imageUrl => {
+                    // Ambil username Robux jika ada
+                    let robuxData = '';
+                    if (isRobux) {
+                        const userInput = document.getElementById('robuxUser');
+                        const passInput = document.getElementById('robuxPass');
+                        const username = userInput ? userInput.value.trim() : '';
+                        const password = passInput ? passInput.value.trim() : '';
+                        if (username) robuxData += `%0AUsername%20Roblox%3A%20${encodeURIComponent(username)}`;
+                        if (password) robuxData += `%0APassword%20Roblox%3A%20${encodeURIComponent(password)}`;
+                    }
 
-                // Format pesan WhatsApp - nomor baru
-                const waNumber = '6282154329388';
-                let msg = `Halo%20UMBU%20STORE%2C%20saya%20mau%20order%3A`;
-                msg += `%0A%0A📦%20Produk%3A%20${encodeURIComponent(currentProduct)}`;
-                msg += `%0A💰%20Harga%3A%20Rp%20${currentPrice.toLocaleString('id-ID')}`;
-                if (robuxData) msg += robuxData;
-                msg += `%0A%0A✅%20Saya%20sudah%20melakukan%20pembayaran%20via%20QRIS.`;
-                msg += `%0A📎%20Bukti%20pembayaran%20terlampir%20di%20bawah%3A`;
+                    // Format pesan WhatsApp dengan link gambar
+                    const waNumber = '6282154329388';
+                    let msg = `Halo%20UMBU%20STORE%2C%20saya%20mau%20order%3A`;
+                    msg += `%0A%0A📦%20Produk%3A%20${encodeURIComponent(currentProduct)}`;
+                    msg += `%0A💰%20Harga%3A%20Rp%20${currentPrice.toLocaleString('id-ID')}`;
+                    if (robuxData) msg += robuxData;
+                    msg += `%0A%0A✅%20Saya%20sudah%20melakukan%20pembayaran%20via%20QRIS.`;
+                    msg += `%0A📎%20Bukti%20pembayaran%3A%20${encodeURIComponent(imageUrl)}`;
 
-                // Kirim via WhatsApp dengan base64 image
-                const waUrl = `https://wa.me/${waNumber}?text=${msg}`;
-                window.open(waUrl, '_blank');
+                    // Kirim via WhatsApp
+                    const waUrl = `https://wa.me/${waNumber}?text=${msg}`;
+                    window.open(waUrl, '_blank');
 
-                // Tutup modal
-                closeModalFunc();
-            };
-
-            reader.readAsDataURL(file);
+                    // Reset dan tutup modal
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
+                    closeModalFunc();
+                })
+                .catch(error => {
+                    alert('❌ Gagal upload bukti pembayaran: ' + error);
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
+                });
         });
 
         // ===== KEYBOARD ESC UNTUK TUTUP MODAL =====
