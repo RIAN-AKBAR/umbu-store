@@ -1390,6 +1390,7 @@
         let currentPrice = 0;
         let isRobux = false;
         let uploadedFile = null;
+        let imageBase64 = null;
 
         // Fungsi buka modal
         function openModal(productName, price, robux = false) {
@@ -1397,6 +1398,7 @@
             currentPrice = price;
             isRobux = robux;
             uploadedFile = null;
+            imageBase64 = null;
             modalProduct.textContent = 'Produk: ' + productName;
             modalPrice.textContent = 'Total: Rp ' + price.toLocaleString('id-ID');
             fileInput.value = '';
@@ -1420,87 +1422,64 @@
             if (e.target === this) closeModalFunc();
         });
 
-        // Event listener untuk file upload
+        // Event listener untuk file upload - convert ke base64
         fileInput.addEventListener('change', function() {
             if (this.files && this.files[0]) {
                 const file = this.files[0];
                 uploadedFile = file;
                 fileName.textContent = '📎 ' + file.name;
 
-                // Preview gambar
+                // Convert ke base64
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    previewImage.src = e.target.result;
+                    imageBase64 = e.target.result;
+                    previewImage.src = imageBase64;
                     filePreview.classList.add('show');
+                    submitBtn.disabled = false;
                 };
                 reader.readAsDataURL(file);
-
-                submitBtn.disabled = false;
             } else {
                 fileName.textContent = 'Belum ada file dipilih';
                 filePreview.classList.remove('show');
                 previewImage.src = '';
+                imageBase64 = null;
                 submitBtn.disabled = true;
             }
         });
 
-        // ===== UPLOAD FILE KE SERVER (Catbox) =====
-        function uploadToCatbox(file) {
+        // ===== UPLOAD KE TELEGRAPH (metode alternatif) =====
+        function uploadToTelegraph(file) {
             return new Promise((resolve, reject) => {
                 const formData = new FormData();
-                formData.append('fileToUpload', file);
-                formData.append('reqtype', 'fileupload');
+                formData.append('file', file);
 
-                fetch('https://catbox.moe/user/api.php', {
+                fetch('https://telegra.ph/upload', {
                     method: 'POST',
-                    body: formData,
-                    mode: 'cors'
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('HTTP error ' + response.status);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    const trimmed = data.trim();
-                    if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
-                        resolve(trimmed);
-                    } else {
-                        reject('Catbox error: ' + trimmed);
-                    }
-                })
-                .catch(err => {
-                    reject('Network error: ' + err.message);
-                });
-            });
-        }
-
-        // ===== UPLOAD KE IMGUR (Fallback) =====
-        function uploadToImgur(file) {
-            return new Promise((resolve, reject) => {
-                const formData = new FormData();
-                formData.append('image', file);
-
-                fetch('https://api.imgur.com/3/image', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': 'Client-ID 546c25a59c58ad7'
-                    },
                     body: formData
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
-                        resolve(data.data.link);
+                    if (data && data[0] && data[0].src) {
+                        resolve('https://telegra.ph' + data[0].src);
                     } else {
-                        reject('Imgur error: ' + (data.data?.error || 'Unknown error'));
+                        reject('Telegraph upload failed');
                     }
                 })
-                .catch(err => {
-                    reject('Imgur network error: ' + err.message);
-                });
+                .catch(err => reject(err));
             });
+        }
+
+        // ===== KONVERSI BASE64 KE BLOB =====
+        function base64ToBlob(base64) {
+            const parts = base64.split(';base64,');
+            const contentType = parts[0].split(':')[1];
+            const raw = window.atob(parts[1]);
+            const rawLength = raw.length;
+            const uInt8Array = new Uint8Array(rawLength);
+            for (let i = 0; i < rawLength; ++i) {
+                uInt8Array[i] = raw.charCodeAt(i);
+            }
+            return new Blob([uInt8Array], { type: contentType });
         }
 
         // ===== TOMBOL BELI =====
@@ -1541,81 +1520,89 @@
 
         // ===== SUBMIT ORDER =====
         submitBtn.addEventListener('click', function() {
-            if (!uploadedFile) {
+            if (!uploadedFile && !imageBase64) {
                 alert('⚠️ Mohon upload bukti pembayaran terlebih dahulu!');
                 return;
             }
 
-            // Disable button saat upload
+            // Disable button saat proses
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengupload...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
 
-            // Coba upload ke Catbox dulu
-            uploadToCatbox(uploadedFile)
-                .then(imageUrl => {
-                    sendToWhatsApp(imageUrl);
-                })
-                .catch(catboxError => {
-                    // Jika Catbox gagal, coba Imgur sebagai fallback
-                    console.log('Catbox error, trying Imgur...', catboxError);
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mencoba Imgur...';
-
-                    uploadToImgur(uploadedFile)
-                        .then(imageUrl => {
-                            sendToWhatsApp(imageUrl);
-                        })
-                        .catch(imgurError => {
-                            // Jika semua gagal, tawarkan kirim manual
-                            console.log('Imgur error:', imgurError);
-                            const confirmSend = confirm(
-                                '❌ Gagal upload bukti pembayaran ke semua server.\n\n' +
-                                'Error Catbox: ' + catboxError + '\n' +
-                                'Error Imgur: ' + imgurError + '\n\n' +
-                                'Apakah Anda ingin tetap melanjutkan pesanan tanpa bukti? ' +
-                                '(Anda bisa kirim bukti manual via chat)'
-                            );
-
-                            if (confirmSend) {
-                                sendToWhatsApp(null, true);
-                            } else {
-                                submitBtn.disabled = false;
-                                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
-                            }
-                        });
-                });
-
-            function sendToWhatsApp(imageUrl, isManual = false) {
-                // Ambil username Robux jika ada
-                let robuxData = '';
-                if (isRobux) {
-                    const userInput = document.getElementById('robuxUser');
-                    const passInput = document.getElementById('robuxPass');
-                    const username = userInput ? userInput.value.trim() : '';
-                    const password = passInput ? passInput.value.trim() : '';
-                    if (username) robuxData += `%0AUsername%20Roblox%3A%20${encodeURIComponent(username)}`;
-                    if (password) robuxData += `%0APassword%20Roblox%3A%20${encodeURIComponent(password)}`;
-                }
-
-                const waNumber = '6282154329388';
-                let msg = `Halo%20UMBU%20STORE%2C%20saya%20mau%20order%3A`;
-                msg += `%0A%0A📦%20Produk%3A%20${encodeURIComponent(currentProduct)}`;
-                msg += `%0A💰%20Harga%3A%20Rp%20${currentPrice.toLocaleString('id-ID')}`;
-                if (robuxData) msg += robuxData;
-                msg += `%0A%0A✅%20Saya%20sudah%20melakukan%20pembayaran%20via%20QRIS.`;
-
-                if (imageUrl) {
-                    msg += `%0A📎%20Bukti%20pembayaran%3A%20${encodeURIComponent(imageUrl)}`;
-                } else if (isManual) {
-                    msg += `%0A⚠️%20Bukti%20pembayaran%20akan%20saya%20kirim%20manual%20via%20chat.`;
-                }
-
-                const waUrl = `https://wa.me/${waNumber}?text=${msg}`;
-                window.open(waUrl, '_blank');
-
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
-                closeModalFunc();
+            // Ambil username Robux jika ada
+            let robuxData = '';
+            if (isRobux) {
+                const userInput = document.getElementById('robuxUser');
+                const passInput = document.getElementById('robuxPass');
+                const username = userInput ? userInput.value.trim() : '';
+                const password = passInput ? passInput.value.trim() : '';
+                if (username) robuxData += `%0AUsername%20Roblox%3A%20${encodeURIComponent(username)}`;
+                if (password) robuxData += `%0APassword%20Roblox%3A%20${encodeURIComponent(password)}`;
             }
+
+            const waNumber = '6282154329388';
+
+            // ===== OPSI 1: Kirim gambar sebagai base64 (data URI) =====
+            // WhatsApp bisa menerima data URI langsung
+            // Tapi kadang terlalu panjang, jadi kita kirim sebagai link
+
+            // ===== OPSI 2: Upload ke Telegraph =====
+            const fileBlob = base64ToBlob(imageBase64);
+            const fileName = uploadedFile ? uploadedFile.name : 'bukti.jpg';
+            const fileForUpload = new File([fileBlob], fileName, { type: fileBlob.type });
+
+            uploadToTelegraph(fileForUpload)
+                .then(imageUrl => {
+                    // Kirim ke WhatsApp dengan link
+                    let msg = `Halo%20UMBU%20STORE%2C%20saya%20mau%20order%3A`;
+                    msg += `%0A%0A📦%20Produk%3A%20${encodeURIComponent(currentProduct)}`;
+                    msg += `%0A💰%20Harga%3A%20Rp%20${currentPrice.toLocaleString('id-ID')}`;
+                    if (robuxData) msg += robuxData;
+                    msg += `%0A%0A✅%20Saya%20sudah%20melakukan%20pembayaran%20via%20QRIS.`;
+                    msg += `%0A📎%20Bukti%20pembayaran%3A%20${encodeURIComponent(imageUrl)}`;
+
+                    const waUrl = `https://wa.me/${waNumber}?text=${msg}`;
+                    window.open(waUrl, '_blank');
+
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
+                    closeModalFunc();
+                })
+                .catch(error => {
+                    // ===== Fallback: Kirim base64 langsung =====
+                    console.log('Telegraph error, trying base64 fallback:', error);
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mencoba metode lain...';
+
+                    // Kirim base64 (data URI) - lebih pendek dari base64 full
+                    // Kita konversi ke format yang lebih ringkas
+                    const compressedBase64 = imageBase64.length > 2000 ? 
+                        imageBase64.substring(0, 2000) + '...' : 
+                        imageBase64;
+
+                    let msg = `Halo%20UMBU%20STORE%2C%20saya%20mau%20order%3A`;
+                    msg += `%0A%0A📦%20Produk%3A%20${encodeURIComponent(currentProduct)}`;
+                    msg += `%0A💰%20Harga%3A%20Rp%20${currentPrice.toLocaleString('id-ID')}`;
+                    if (robuxData) msg += robuxData;
+                    msg += `%0A%0A✅%20Saya%20sudah%20melakukan%20pembayaran%20via%20QRIS.`;
+                    msg += `%0A📎%20Bukti%20pembayaran%20(link%20gagal%2C%20saya%20kirim%20manual)%3A`;
+                    msg += `%0A%0A⚠️%20Mohon%20cek%20chat%20untuk%20bukti%20pembayaran.`;
+
+                    const waUrl = `https://wa.me/${waNumber}?text=${msg}`;
+                    window.open(waUrl, '_blank');
+
+                    // Buka chat lagi dengan bukti sebagai attachment (cara manual)
+                    setTimeout(() => {
+                        alert(
+                            '📸 Bukti pembayaran sudah siap.\n\n' +
+                            'Silakan kirim file ini secara manual ke chat WhatsApp yang sudah terbuka.\n\n' +
+                            'Atau klik OK untuk menutup.'
+                        );
+                    }, 1000);
+
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
+                    closeModalFunc();
+                });
         });
 
         // ===== KEYBOARD ESC UNTUK TUTUP MODAL =====
