@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UMBU STORE · Digital Store</title>
+    <title>ROLXUM · Digital Store</title>
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
@@ -48,16 +48,14 @@
         }
 
         .brand-icon {
-            background: #f5b81b;
-            width: 54px;
-            height: 54px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: #0a0e1a;
-            box-shadow: 0 0 28px #f5b81b66;
+            width: 70px;
+            height: 70px;
+            border-radius: 0;
+            object-fit: contain;
+            border: 2px solid #f5b81b66;
+            box-shadow: 0 0 28px #f5b81b44;
+            background: #0a0e1a;
+            padding: 4px;
         }
 
         .brand-left h1 {
@@ -86,6 +84,13 @@
             color: #f5b81b;
         }
 
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
         .wa-badge {
             background: #25d366;
             padding: 0.5rem 1.5rem;
@@ -103,6 +108,168 @@
 
         .wa-badge i {
             font-size: 1.2rem;
+        }
+
+        .help-badge {
+            background: #f5b81b;
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            color: #0a0e1a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+            box-shadow: 0 0 20px #f5b81b44;
+        }
+
+        .help-badge:hover {
+            background: #f5c84a;
+            transform: scale(1.02);
+        }
+
+        .help-badge i {
+            font-size: 1rem;
+        }
+
+        .cart-badge {
+            background: #f5b81b;
+            padding: 0.5rem 1.5rem;
+            border-radius: 60px;
+            font-weight: 700;
+            color: #0a0e1a;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+            box-shadow: 0 0 24px #f5b81b55;
+        }
+
+        .cart-badge:hover {
+            background: #f5c84a;
+            transform: scale(1.02);
+        }
+
+        .cart-badge i {
+            font-size: 1.2rem;
+        }
+
+        .cart-badge .cart-count {
+            background: #0a0e1a;
+            color: #f5b81b;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        /* ===== CAROUSEL ===== */
+        .carousel-section {
+            margin-bottom: 2.5rem;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #2a3650;
+            box-shadow: 0 8px 28px -8px #000000aa;
+            background: #0a0e1a;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0e1a;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(245, 184, 27, 0.7);
+        }
+
+        .carousel-btn.prev {
+            left: 10px;
+        }
+
+        .carousel-btn.next {
+            right: 10px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .carousel-dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+        }
+
+        .carousel-dots .dot.active {
+            background: #f5b81b;
+            width: 24px;
+            border-radius: 10px;
         }
 
         /* ===== WELCOME SECTION ===== */
@@ -237,22 +404,30 @@
             padding: 1.2rem 1.8rem;
             cursor: pointer;
             user-select: none;
-            transition: background 0.15s;
+            transition: all 0.3s ease;
             border-bottom: 1px solid transparent;
+            background: linear-gradient(145deg, #0f1729, #0b1121);
+            border-radius: 32px 32px 0 0;
         }
 
         .block-header:hover {
-            background: #141d33;
+            background: linear-gradient(145deg, #141d33, #0f1729);
         }
 
         .block-header .header-img {
             width: 60px;
             height: 60px;
-            border-radius: 14px;
+            border-radius: 16px;
             object-fit: cover;
-            border: 1px solid #2a3650;
+            border: 2px solid #2a3650;
             flex-shrink: 0;
             background: #0a0e1a;
+            transition: 0.3s ease;
+        }
+
+        .block-header:hover .header-img {
+            border-color: #f5b81b66;
+            transform: scale(1.05);
         }
 
         .block-header .header-content {
@@ -273,7 +448,7 @@
         .block-header .header-content .badge-count {
             background: #1e2842;
             color: #b0c0df;
-            padding: 0.1rem 0.9rem;
+            padding: 0.15rem 0.9rem;
             border-radius: 40px;
             font-size: 0.7rem;
             font-weight: 600;
@@ -284,14 +459,26 @@
             color: #6a7da0;
             font-size: 1rem;
             transition: transform 0.3s ease;
-            width: 20px;
-            text-align: center;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a2340;
+            border-radius: 50%;
+            border: 1px solid #2a3650;
             margin-left: auto;
+        }
+
+        .block-header .arrow-icon i {
+            transition: 0.3s ease;
         }
 
         .block-header .arrow-icon.open {
             transform: rotate(180deg);
             color: #f5b81b;
+            border-color: #f5b81b44;
+            background: #f5b81b15;
         }
 
         /* ===== LIST PRODUK ===== */
@@ -409,38 +596,65 @@
             padding: 0.15rem 0.9rem;
             border-radius: 60px;
             border: 1px solid #f5b81b33;
-            margin-bottom: 0.7rem;
+            margin-bottom: 0.5rem;
             display: inline-block;
         }
 
-        .product-card .btn-beli {
+        .product-card .btn-buy {
             background: #f5b81b;
-            border: none;
+            border: 1px solid #f5b81b;
             color: #0a0e1a;
             font-weight: 700;
-            padding: 0.4rem 1.2rem;
+            padding: 0.5rem 1rem;
             border-radius: 60px;
-            font-size: 0.75rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
+            font-size: 0.8rem;
             cursor: pointer;
             transition: 0.2s ease;
-            box-shadow: 0 2px 10px #f5b81b44;
             width: 100%;
+            display: flex;
+            align-items: center;
             justify-content: center;
+            gap: 0.5rem;
         }
 
-        .product-card .btn-beli:hover {
+        .product-card .btn-buy:hover {
             background: #f5c84a;
             transform: scale(1.02);
         }
 
-        .product-card .btn-beli i {
+        .product-card .btn-buy i {
             font-size: 0.8rem;
         }
 
-        /* ===== SUB BAGIAN CASH ===== */
+        .product-card .btn-add-cart {
+            background: #1a2340;
+            border: 1px solid #2a3650;
+            color: #b0c0df;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.2s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-top: 0.3rem;
+        }
+
+        .product-card .btn-add-cart:hover {
+            background: #2a3650;
+            color: #f0f4ff;
+            border-color: #f5b81b66;
+        }
+
+        .product-card .btn-add-cart i {
+            font-size: 0.7rem;
+        }
+
+        /* ===== SUB BAGIAN ===== */
         .sub-section {
             grid-column: 1 / -1;
             margin-top: 0.5rem;
@@ -473,6 +687,84 @@
         .sub-section .product-card:hover {
             background: #161f36;
             border-color: #f5b81b66;
+        }
+
+        /* ===== ROBUX CARD ===== */
+        .robux-card {
+            background: #0b1121;
+            border: 1px solid #1b253d;
+            border-radius: 16px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: 0.25s ease;
+        }
+
+        .robux-card:hover {
+            transform: translateY(-4px);
+            border-color: #f5b81b66;
+            box-shadow: 0 12px 30px -8px #000000cc, 0 0 0 1px #f5b81b33;
+            background: #141d33;
+        }
+
+        .robux-card .product-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1px solid #2a3650;
+            background: #0a0e1a;
+            margin-bottom: 0.6rem;
+            transition: 0.3s ease;
+        }
+
+        .robux-card:hover .product-img {
+            transform: scale(1.05);
+            border-color: #f5b81b66;
+        }
+
+        .robux-card .name {
+            color: #e4ebff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            line-height: 1.3;
+            margin-bottom: 0.3rem;
+        }
+
+        .robux-card .price {
+            color: #f5d76e;
+            font-weight: 700;
+            font-size: 1rem;
+            background: #1a2340;
+            padding: 0.15rem 0.9rem;
+            border-radius: 60px;
+            border: 1px solid #f5b81b33;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .robux-card .btn-buy-robux {
+            width: 100%;
+            background: #f5b81b;
+            border: 1px solid #f5b81b;
+            color: #0a0e1a;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .robux-card .btn-buy-robux:hover {
+            background: #f5c84a;
+            transform: scale(1.02);
         }
 
         /* ===== FORM ROBUX ===== */
@@ -534,8 +826,8 @@
             margin-right: 4px;
         }
 
-        /* ===== MODAL QRIS ===== */
-        .modal-overlay {
+        /* ===== MODAL USERNAME & QUANTITY ===== */
+        .username-modal-overlay {
             display: none;
             position: fixed;
             top: 0;
@@ -550,24 +842,22 @@
             padding: 1rem;
         }
 
-        .modal-overlay.active {
+        .username-modal-overlay.active {
             display: flex;
         }
 
-        .modal-content {
+        .username-modal {
             background: #0f1729;
             border-radius: 32px;
-            max-width: 500px;
+            max-width: 450px;
             width: 100%;
-            max-height: 95vh;
-            overflow-y: auto;
             padding: 2rem 2rem 1.8rem;
             border: 1px solid #2a3650;
             box-shadow: 0 24px 60px -12px #000000ee;
             position: relative;
         }
 
-        .modal-content .close-modal {
+        .username-modal .close-modal {
             position: absolute;
             top: 1rem;
             right: 1.5rem;
@@ -579,125 +869,111 @@
             border: none;
         }
 
-        .modal-content .close-modal:hover {
+        .username-modal .close-modal:hover {
             color: #f0f4ff;
             transform: rotate(90deg);
         }
 
-        .modal-content h2 {
+        .username-modal h2 {
             color: #f0f4ff;
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-content .modal-product {
-            color: #b0c0df;
-            font-size: 0.95rem;
+            font-size: 1.3rem;
             margin-bottom: 0.3rem;
         }
 
-        .modal-content .modal-price {
+        .username-modal .modal-product-name {
+            color: #b0c0df;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .username-modal .modal-product-price {
             color: #f5d76e;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 1.2rem;
         }
 
-        .modal-content .qris-container {
-            background: #0a0e1a;
-            border-radius: 16px;
-            padding: 1.2rem;
-            text-align: center;
-            border: 1px solid #1b253d;
-            margin-bottom: 1.2rem;
+        .username-modal .form-group-modal {
+            margin-bottom: 1rem;
         }
 
-        .modal-content .qris-container img {
-            max-width: 100%;
-            max-height: 280px;
-            border-radius: 10px;
-        }
-
-        .modal-content .qris-container p {
-            color: #8a9cc0;
-            font-size: 0.75rem;
-            margin-top: 0.5rem;
-        }
-
-        .modal-content .qris-container p i {
-            color: #f5b81b;
-        }
-
-        .modal-content .upload-section {
-            margin-bottom: 1.2rem;
-        }
-
-        .modal-content .upload-section label {
+        .username-modal .form-group-modal label {
+            display: block;
             color: #b0c0df;
             font-size: 0.85rem;
             font-weight: 600;
-            display: block;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.3rem;
         }
 
-        .modal-content .upload-section input[type="file"] {
+        .username-modal .form-group-modal input {
             width: 100%;
-            padding: 0.6rem;
-            background: #0b1121;
-            border: 1px solid #1b253d;
-            border-radius: 10px;
-            color: #b0c0df;
-            font-size: 0.85rem;
-            cursor: pointer;
-        }
-
-        .modal-content .upload-section input[type="file"]::file-selector-button {
-            background: #1e2842;
-            border: none;
-            padding: 0.3rem 1rem;
-            border-radius: 6px;
-            color: #b0c0df;
-            cursor: pointer;
-            margin-right: 0.5rem;
-        }
-
-        .modal-content .upload-section input[type="file"]::file-selector-button:hover {
-            background: #2a3650;
-        }
-
-        .modal-content .file-name {
-            color: #6a7da0;
-            font-size: 0.75rem;
-            margin-top: 0.2rem;
-        }
-
-        .modal-content .file-preview {
-            margin-top: 0.5rem;
-            max-width: 100%;
-            max-height: 150px;
-            border-radius: 10px;
-            display: none;
-            border: 1px solid #1b253d;
+            padding: 0.6rem 1rem;
             background: #0a0e1a;
-            padding: 0.3rem;
+            border: 1px solid #1b253d;
+            border-radius: 10px;
+            color: #e4ebff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.2s;
         }
 
-        .modal-content .file-preview.show {
-            display: block;
+        .username-modal .form-group-modal input:focus {
+            border-color: #f5b81b;
+            box-shadow: 0 0 0 3px #f5b81b33;
         }
 
-        .modal-content .file-preview img {
-            max-width: 100%;
-            max-height: 140px;
-            border-radius: 8px;
-            display: block;
-            margin: 0 auto;
+        .username-modal .form-group-modal input::placeholder {
+            color: #5a6a8a;
         }
 
-        .modal-content .btn-submit-order {
+        .username-modal .qty-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .username-modal .qty-group button {
+            background: #1a2340;
+            border: 1px solid #2a3650;
+            color: #b0c0df;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .username-modal .qty-group button:hover {
+            background: #2a3650;
+            border-color: #f5b81b66;
+            color: #f5b81b;
+        }
+
+        .username-modal .qty-group .qty-display {
+            color: #f0f4ff;
+            font-weight: 700;
+            font-size: 1.4rem;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .username-modal .qty-group .qty-total-display {
+            color: #f5d76e;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .username-modal .btn-continue {
             width: 100%;
             padding: 0.8rem;
-            background: #25d366;
+            background: #f5b81b;
             border: none;
             border-radius: 16px;
             font-size: 1rem;
@@ -711,28 +987,471 @@
             gap: 0.6rem;
         }
 
-        .modal-content .btn-submit-order:hover {
-            background: #2fdf72;
+        .username-modal .btn-continue:hover {
+            background: #f5c84a;
             transform: scale(1.01);
         }
 
-        .modal-content .btn-submit-order:disabled {
+        .username-modal .btn-continue:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
         }
 
-        .modal-content .btn-submit-order i {
+        /* ===== MODAL PRIVATE SERVER ===== */
+        .private-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .private-modal-overlay.active {
+            display: flex;
+        }
+
+        .private-modal {
+            background: #0f1729;
+            border-radius: 32px;
+            max-width: 450px;
+            width: 100%;
+            padding: 2rem 2rem 1.8rem;
+            border: 1px solid #2a3650;
+            box-shadow: 0 24px 60px -12px #000000ee;
+            position: relative;
+        }
+
+        .private-modal .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            color: #6a7da0;
+            cursor: pointer;
+            transition: 0.2s;
+            background: none;
+            border: none;
+        }
+
+        .private-modal .close-modal:hover {
+            color: #f0f4ff;
+            transform: rotate(90deg);
+        }
+
+        .private-modal h2 {
+            color: #f0f4ff;
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .private-modal .modal-product-name {
+            color: #b0c0df;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .private-modal .modal-product-price {
+            color: #f5d76e;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+
+        .private-modal .form-group-modal {
+            margin-bottom: 1rem;
+        }
+
+        .private-modal .form-group-modal label {
+            display: block;
+            color: #b0c0df;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .private-modal .form-group-modal input {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            background: #0a0e1a;
+            border: 1px solid #1b253d;
+            border-radius: 10px;
+            color: #e4ebff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .private-modal .form-group-modal input:focus {
+            border-color: #f5b81b;
+            box-shadow: 0 0 0 3px #f5b81b33;
+        }
+
+        .private-modal .form-group-modal input::placeholder {
+            color: #5a6a8a;
+        }
+
+        .private-modal .qty-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .private-modal .qty-group button {
+            background: #1a2340;
+            border: 1px solid #2a3650;
+            color: #b0c0df;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .private-modal .qty-group button:hover {
+            background: #2a3650;
+            border-color: #f5b81b66;
+            color: #f5b81b;
+        }
+
+        .private-modal .qty-group .qty-display {
+            color: #f0f4ff;
+            font-weight: 700;
+            font-size: 1.4rem;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .private-modal .qty-group .qty-total-display {
+            color: #f5d76e;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .private-modal .btn-continue {
+            width: 100%;
+            padding: 0.8rem;
+            background: #f5b81b;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0a0e1a;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
+        .private-modal .btn-continue:hover {
+            background: #f5c84a;
+            transform: scale(1.01);
+        }
+
+        .private-modal .btn-continue:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ===== MODAL KERANJANG ===== */
+        .cart-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .cart-modal-overlay.active {
+            display: flex;
+        }
+
+        .cart-modal {
+            background: #0f1729;
+            border-radius: 32px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem 2rem 1.8rem;
+            border: 1px solid #2a3650;
+            box-shadow: 0 24px 60px -12px #000000ee;
+            position: relative;
+        }
+
+        .cart-modal .close-cart {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            color: #6a7da0;
+            cursor: pointer;
+            transition: 0.2s;
+            background: none;
+            border: none;
+        }
+
+        .cart-modal .close-cart:hover {
+            color: #f0f4ff;
+            transform: rotate(90deg);
+        }
+
+        .cart-modal h2 {
+            color: #f0f4ff;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-modal .cart-empty {
+            color: #6a7da0;
+            text-align: center;
+            padding: 2rem 0;
             font-size: 1rem;
         }
 
-        .modal-content .btn-submit-order .spinner {
-            animation: spin 1s linear infinite;
+        .cart-modal .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 0.8rem;
+            background: #0b1121;
+            border-radius: 12px;
+            border: 1px solid #1b253d;
+            margin-bottom: 0.5rem;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .cart-modal .cart-item .item-info {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .cart-modal .cart-item .item-info .item-name {
+            color: #e4ebff;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .cart-modal .cart-item .item-info .item-qty {
+            color: #8a9cc0;
+            font-size: 0.8rem;
+        }
+
+        .cart-modal .cart-item .item-info .item-user {
+            color: #6a7da0;
+            font-size: 0.7rem;
+            background: #1a2340;
+            padding: 0.1rem 0.6rem;
+            border-radius: 40px;
+        }
+
+        .cart-modal .cart-item .item-total {
+            color: #f5d76e;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .cart-modal .cart-item .btn-remove {
+            background: none;
+            border: none;
+            color: #6a7da0;
+            cursor: pointer;
+            padding: 0.2rem 0.5rem;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .cart-modal .cart-item .btn-remove:hover {
+            color: #ff4757;
+        }
+
+        .cart-modal .cart-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-top: 1px solid #1b253d;
+            margin-top: 0.5rem;
+        }
+
+        .cart-modal .cart-total .total-label {
+            color: #b0c0df;
+            font-weight: 600;
+        }
+
+        .cart-modal .cart-total .total-amount {
+            color: #f5d76e;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .cart-modal .btn-checkout {
+            width: 100%;
+            padding: 0.8rem;
+            background: #f5b81b;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0a0e1a;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .cart-modal .btn-checkout:hover {
+            background: #f5c84a;
+            transform: scale(1.01);
+        }
+
+        .cart-modal .btn-checkout:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ===== MODAL QRIS ===== */
+        .qris-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .qris-modal-overlay.active {
+            display: flex;
+        }
+
+        .qris-modal {
+            background: #0f1729;
+            border-radius: 32px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 95vh;
+            overflow-y: auto;
+            padding: 2rem 2rem 1.8rem;
+            border: 1px solid #2a3650;
+            box-shadow: 0 24px 60px -12px #000000ee;
+            position: relative;
+        }
+
+        .qris-modal .close-qris {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            color: #6a7da0;
+            cursor: pointer;
+            transition: 0.2s;
+            background: none;
+            border: none;
+        }
+
+        .qris-modal .close-qris:hover {
+            color: #f0f4ff;
+            transform: rotate(90deg);
+        }
+
+        .qris-modal h2 {
+            color: #f0f4ff;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .qris-modal .qris-product-list {
+            color: #b0c0df;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .qris-modal .qris-total {
+            color: #f5d76e;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+
+        .qris-modal .qris-container {
+            background: #0a0e1a;
+            border-radius: 16px;
+            padding: 1.2rem;
+            text-align: center;
+            border: 1px solid #1b253d;
+            margin-bottom: 1.2rem;
+        }
+
+        .qris-modal .qris-container img {
+            max-width: 100%;
+            max-height: 280px;
+            border-radius: 10px;
+        }
+
+        .qris-modal .qris-container p {
+            color: #8a9cc0;
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .qris-modal .qris-container p i {
+            color: #f5b81b;
+        }
+
+        .qris-modal .btn-pay {
+            width: 100%;
+            padding: 0.8rem;
+            background: #f5b81b;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0a0e1a;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
+        .qris-modal .btn-pay:hover {
+            background: #f5c84a;
+            transform: scale(1.01);
         }
 
         /* ===== FOOTER ===== */
@@ -777,6 +1496,13 @@
             display: flex;
             align-items: center;
             gap: 0.6rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .footer-bar .footer-contact .wa-channel:hover {
+            border-color: #25d366;
+            color: #fff;
         }
 
         .footer-bar .footer-contact .wa-channel i {
@@ -808,6 +1534,32 @@
             margin-right: 4px;
         }
 
+        .footer-channel {
+            background: #182033;
+            padding: 0.3rem 1.6rem;
+            border-radius: 60px;
+            border: 1px solid #2e3b5a;
+            color: #c8d6f0;
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            transition: 0.2s;
+            margin-top: 0.3rem;
+        }
+
+        .footer-channel:hover {
+            border-color: #25d366;
+            color: #fff;
+        }
+
+        .footer-channel i {
+            color: #25d366;
+            font-size: 1rem;
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 760px) {
             .main-header {
@@ -819,11 +1571,33 @@
             .brand-left h1 {
                 font-size: 1.8rem;
             }
-            .wa-badge {
-                padding: 0.4rem 1.2rem;
-                font-size: 0.85rem;
+            .brand-icon {
+                width: 55px;
+                height: 55px;
+            }
+            .header-right {
                 width: 100%;
-                justify-content: center;
+                justify-content: space-between;
+            }
+            .help-badge {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.8rem;
+            }
+            .wa-badge {
+                font-size: 0.8rem;
+                padding: 0.3rem 1rem;
+            }
+            .cart-badge {
+                font-size: 0.8rem;
+                padding: 0.3rem 1rem;
+            }
+            .carousel-container {
+                height: 200px;
+            }
+            .carousel-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
             }
             .welcome-section {
                 padding: 1.5rem;
@@ -844,7 +1618,7 @@
             }
             .product-list {
                 padding: 0.8rem 1.2rem 1.2rem;
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
                 gap: 0.8rem;
             }
             .product-card .product-img {
@@ -860,26 +1634,25 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
-            .form-group {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .form-group label {
-                min-width: auto;
-            }
-            .robux-form {
-                padding: 0.2rem 0 1rem 0;
-            }
             .footer-bar .footer-contact {
                 flex-direction: column;
                 gap: 0.6rem;
             }
-            .modal-content {
+            .cart-modal,
+            .qris-modal,
+            .username-modal,
+            .private-modal {
                 padding: 1.5rem;
                 margin: 0.5rem;
             }
-            .modal-content .qris-container img {
+            .qris-modal .qris-container img {
                 max-height: 200px;
+            }
+            .username-modal .qty-group button,
+            .private-modal .qty-group button {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
             }
         }
 
@@ -891,8 +1664,15 @@
                 font-size: 0.7rem;
                 padding: 0.2rem 0.8rem;
             }
+            .brand-left h1 {
+                font-size: 1.4rem;
+            }
+            .brand-icon {
+                width: 45px;
+                height: 45px;
+            }
             .product-list {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
                 gap: 0.6rem;
                 padding: 0.6rem 0.8rem 1rem;
             }
@@ -916,9 +1696,13 @@
                 font-size: 0.85rem;
                 padding: 0.1rem 0.7rem;
             }
-            .product-card .btn-beli {
+            .product-card .btn-buy {
                 font-size: 0.7rem;
-                padding: 0.3rem 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+            .product-card .btn-add-cart {
+                font-size: 0.65rem;
+                padding: 0.3rem 0.6rem;
             }
             .block-header .header-content .badge-count {
                 font-size: 0.6rem;
@@ -932,6 +1716,28 @@
                 font-size: 0.7rem;
                 padding: 0.2rem 0.8rem;
             }
+            .block-header .arrow-icon {
+                width: 20px;
+                height: 20px;
+                font-size: 0.8rem;
+            }
+            .carousel-container {
+                height: 150px;
+            }
+            .carousel-btn {
+                width: 25px;
+                height: 25px;
+                font-size: 0.7rem;
+            }
+            .header-right .help-badge span {
+                display: none;
+            }
+            .header-right .wa-badge span {
+                display: none;
+            }
+            .header-right .cart-badge span {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -942,40 +1748,70 @@
     <!-- ===== HEADER ===== -->
     <header class="main-header">
         <div class="brand-left">
-            <div class="brand-icon"><i class="fas fa-store-alt"></i></div>
-            <h1>UMBU STORE</h1>
-            <span class="brand-tag"><i class="fas fa-bolt"></i> gamepass & digital</span>
+            <img src="https://files.catbox.moe/3kwzxz.jpg" alt="ROLXUM" class="brand-icon" />
+            <h1>ROLXUM</h1>
+            <span class="brand-tag"><i class="fas fa-bolt"></i> digital store</span>
         </div>
-        <div class="wa-badge">
-            <i class="fab fa-whatsapp"></i> 0821-5432-9388
+        <div class="header-right">
+            <button class="help-badge" onclick="helpCenter()">
+                <i class="fas fa-question-circle"></i>
+                <span>Pusat Bantuan</span>
+            </button>
+            <div class="wa-badge">
+                <i class="fab fa-whatsapp"></i>
+                <span>0821-5432-9388</span>
+            </div>
+            <button class="cart-badge" onclick="openCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Keranjang</span>
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
         </div>
     </header>
 
+    <!-- ===== CAROUSEL ===== -->
+    <div class="carousel-section">
+        <div class="carousel-container">
+            <div class="carousel-slide active">
+                <img src="https://files.catbox.moe/hhlf6s.jpg" alt="Iklan 1" />
+            </div>
+            <div class="carousel-slide">
+                <img src="https://files.catbox.moe/njcebt.jpg" alt="Iklan 2" />
+            </div>
+            <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button>
+            <button class="carousel-btn next" onclick="changeSlide(1)">❯</button>
+            <div class="carousel-dots">
+                <button class="dot active" onclick="goToSlide(0)"></button>
+                <button class="dot" onclick="goToSlide(1)"></button>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== WELCOME SECTION ===== -->
     <div class="welcome-section">
-        <h2>✨ Selamat Datang di <span>UMBU STORE</span></h2>
+        <h2>✨ Selamat Datang di <span>ROLXUM</span></h2>
         <p>
             Tempat terbaik untuk <span class="highlight">Gamepass</span>, <span class="highlight">Top Up Cash</span>, 
-            <span class="highlight">Robux</span>, <span class="highlight">Jasa Joki</span>, dan masih banyak lagi! 😍
+            <span class="highlight">Robux</span>, <span class="highlight">Private Server</span>, dan masih banyak lagi! 😍
             Nikmati harga terbaik, proses cepat, dan pelayanan ramah 24/7.
         </p>
         <p>
-            <i class="fas fa-gamepad"></i> Klik produk favoritmu, langsung order via WhatsApp!
+            <i class="fas fa-gamepad"></i> Pilih produk favoritmu, lalu <span class="highlight">beli langsung</span> atau <span class="highlight">masukkan keranjang</span>!
         </p>
         <div class="category-tags">
             <span><i class="fas fa-gamepad"></i> Gamepass DDS</span>
             <span><i class="fas fa-coins"></i> Cash</span>
             <span><i class="fab fa-roblox"></i> Robux</span>
             <span><i class="fas fa-tag"></i> Gamepass CDID</span>
-            <span><i class="fas fa-pen-fancy"></i> Logo</span>
-            <span><i class="fas fa-user-cog"></i> Joki</span>
+            <span><i class="fas fa-crown"></i> GAG</span>
+            <span><i class="fas fa-server"></i> Private Server</span>
         </div>
     </div>
 
     <!-- ===== SUB INFO ===== -->
     <div class="sub-info">
         <p>
-            <i class="fas fa-crown"></i> Tempat terbaik Gamepass, Cash, Robux & Joki
+            <i class="fas fa-crown"></i> Tempat terbaik Gamepass, Cash, Robux, Private Server & GAG
             <span style="background:#1a2340;padding:0.1rem 0.9rem;border-radius:40px;font-size:0.7rem;border:1px solid #2e3b5a;">
                 <i class="fas fa-clock"></i> 24/7
             </span>
@@ -984,158 +1820,166 @@
             <span><i class="fas fa-gamepad"></i> DDS</span>
             <span><i class="fab fa-roblox"></i> Robux</span>
             <span><i class="fas fa-tag"></i> CDID</span>
+            <span><i class="fas fa-crown"></i> GAG</span>
+            <span><i class="fas fa-server"></i> Private Server</span>
         </div>
     </div>
 
     <!-- ========================================================= -->
-    <!-- BLOK 1 : GAMEPASS DDS + CASH (CARD)                      -->
+    <!-- BLOK 1 : GAMEPASS DDS                                     -->
     <!-- ========================================================= -->
     <div class="category-block">
         <div class="block-header" data-target="list1">
             <img src="https://files.catbox.moe/hsr6lw.jpg" alt="Gamepass DDS" class="header-img" />
             <div class="header-content">
                 <h2>Gamepass DDS</h2>
-                <span class="badge-count">15 item</span>
+                <span class="badge-count">11 item</span>
             </div>
             <span class="arrow-icon"><i class="fas fa-chevron-down"></i></span>
         </div>
         <div class="product-list-wrap" id="list1">
             <div class="product-list">
-
-                <!-- GAMEPASS DDS CARDS -->
-                <div class="product-card" data-nama="Suspension" data-harga="4300">
+                <div class="product-card" data-nama="Suspension" data-harga="4300" data-img="https://files.catbox.moe/drg7jh.jpg">
                     <img src="https://files.catbox.moe/drg7jh.jpg" alt="Suspension" class="product-img" />
                     <span class="name">Suspension</span>
                     <span class="price">Rp 4.300</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Boombox" data-harga="3000">
+                <div class="product-card" data-nama="Boombox" data-harga="3000" data-img="https://files.catbox.moe/taebh6.jpg">
                     <img src="https://files.catbox.moe/taebh6.jpg" alt="Boombox" class="product-img" />
                     <span class="name">Boombox</span>
                     <span class="price">Rp 3.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Advance Paint" data-harga="7500">
+                <div class="product-card" data-nama="Advance Paint" data-harga="7500" data-img="https://files.catbox.moe/xru01z.jpg">
                     <img src="https://files.catbox.moe/xru01z.jpg" alt="Advance Paint" class="product-img" />
                     <span class="name">Advance Paint</span>
                     <span class="price">Rp 7.500</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Premium Aksesoris" data-harga="6500">
+                <div class="product-card" data-nama="Premium Aksesoris" data-harga="6500" data-img="https://files.catbox.moe/drg7jh.jpg">
                     <img src="https://files.catbox.moe/drg7jh.jpg" alt="Premium Aksesoris" class="product-img" />
                     <span class="name">Premium Aksesoris</span>
                     <span class="price">Rp 6.500</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Exclusive Rims" data-harga="10000">
+                <div class="product-card" data-nama="Exclusive Rims" data-harga="10000" data-img="https://files.catbox.moe/y83ebh.jpg">
                     <img src="https://files.catbox.moe/y83ebh.jpg" alt="Exclusive Rims" class="product-img" />
                     <span class="name">Exclusive Rims</span>
                     <span class="price">Rp 10.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Custom Plate" data-harga="9000">
+                <div class="product-card" data-nama="Custom Plate" data-harga="9000" data-img="https://files.catbox.moe/v0wyhz.jpg">
                     <img src="https://files.catbox.moe/v0wyhz.jpg" alt="Custom Plate" class="product-img" />
                     <span class="name">Custom Plate</span>
                     <span class="price">Rp 9.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Slot Limit Unlock" data-harga="10000">
+                <div class="product-card" data-nama="Slot Limit Unlock" data-harga="10000" data-img="https://files.catbox.moe/o6kz71.jpg">
                     <img src="https://files.catbox.moe/o6kz71.jpg" alt="Slot Limit Unlock" class="product-img" />
                     <span class="name">Slot Limit Unlock</span>
                     <span class="price">Rp 10.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Drag Space" data-harga="14000">
+                <div class="product-card" data-nama="Drag Space" data-harga="14000" data-img="https://files.catbox.moe/11s7d2.jpg">
                     <img src="https://files.catbox.moe/11s7d2.jpg" alt="Drag Space" class="product-img" />
                     <span class="name">Drag Space</span>
                     <span class="price">Rp 14.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Luxury" data-harga="14500">
+                <div class="product-card" data-nama="Luxury" data-harga="14500" data-img="https://files.catbox.moe/l5x1kr.jpg">
                     <img src="https://files.catbox.moe/l5x1kr.jpg" alt="Luxury" class="product-img" />
                     <span class="name">Luxury</span>
                     <span class="price">Rp 14.500</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Police" data-harga="17000">
+                <div class="product-card" data-nama="Police" data-harga="17000" data-img="https://files.catbox.moe/fv0i1h.jpg">
                     <img src="https://files.catbox.moe/fv0i1h.jpg" alt="Police" class="product-img" />
                     <span class="name">Police</span>
                     <span class="price">Rp 17.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="2x Paycheck" data-harga="54000">
+                <div class="product-card" data-nama="2x Paycheck" data-harga="54000" data-img="https://files.catbox.moe/vkoyom.jpg">
                     <img src="https://files.catbox.moe/vkoyom.jpg" alt="2x Paycheck" class="product-img" />
                     <span class="name">2x Paycheck</span>
                     <span class="price">Rp 54.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <!-- CASH SUB SECTION -->
-                <div class="sub-section">
-                    <div class="sub-section-title">
-                        <i class="fas fa-coins"></i> Cash
-                        <span style="font-weight:400;text-transform:none;color:#6a7da0;font-size:0.7rem;">— top up instan</span>
-                    </div>
-
-                    <div class="product-card" data-nama="Cash 10 Juta" data-harga="5000">
-                        <img src="https://files.catbox.moe/taj09h.jpg" alt="Cash 10 Juta" class="product-img" />
-                        <span class="name">Cash 10 Juta</span>
-                        <span class="price">Rp 5.000</span>
-                        <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
-                    </div>
-
-                    <div class="product-card" data-nama="Cash 50 Juta" data-harga="8000">
-                        <img src="https://files.catbox.moe/yaf2jk.jpg" alt="Cash 50 Juta" class="product-img" />
-                        <span class="name">Cash 50 Juta</span>
-                        <span class="price">Rp 8.000</span>
-                        <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
-                    </div>
-
-                    <div class="product-card" data-nama="Cash 100 Juta" data-harga="14000">
-                        <img src="https://files.catbox.moe/7krb35.jpg" alt="Cash 100 Juta" class="product-img" />
-                        <span class="name">Cash 100 Juta</span>
-                        <span class="price">Rp 14.000</span>
-                        <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
-                    </div>
-
-                    <div class="product-card" data-nama="Cash 500 Juta" data-harga="46000">
-                        <img src="https://files.catbox.moe/ddioll.jpg" alt="Cash 500 Juta" class="product-img" />
-                        <span class="name">Cash 500 Juta</span>
-                        <span class="price">Rp 46.000</span>
-                        <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
 
     <!-- ========================================================= -->
-    <!-- BLOK 2 : ROBUX (CARD)                                     -->
+    <!-- BLOK 2 : CASH                                             -->
     <!-- ========================================================= -->
     <div class="category-block">
         <div class="block-header" data-target="list2">
-            <img src="https://files.catbox.moe/uuzm0e.png" alt="Robux" class="header-img" />
+            <img src="https://files.catbox.moe/hsr6lw.jpg" alt="Cash" class="header-img" />
+            <div class="header-content">
+                <h2>Cash</h2>
+                <span class="badge-count">4 item</span>
+            </div>
+            <span class="arrow-icon"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="product-list-wrap" id="list2">
+            <div class="product-list">
+                <div class="product-card" data-nama="Cash 10 Juta" data-harga="5000" data-img="https://files.catbox.moe/taj09h.jpg">
+                    <img src="https://files.catbox.moe/taj09h.jpg" alt="Cash 10 Juta" class="product-img" />
+                    <span class="name">Cash 10 Juta</span>
+                    <span class="price">Rp 5.000</span>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                </div>
+                <div class="product-card" data-nama="Cash 50 Juta" data-harga="8000" data-img="https://files.catbox.moe/yaf2jk.jpg">
+                    <img src="https://files.catbox.moe/yaf2jk.jpg" alt="Cash 50 Juta" class="product-img" />
+                    <span class="name">Cash 50 Juta</span>
+                    <span class="price">Rp 8.000</span>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                </div>
+                <div class="product-card" data-nama="Cash 100 Juta" data-harga="14000" data-img="https://files.catbox.moe/7krb35.jpg">
+                    <img src="https://files.catbox.moe/7krb35.jpg" alt="Cash 100 Juta" class="product-img" />
+                    <span class="name">Cash 100 Juta</span>
+                    <span class="price">Rp 14.000</span>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                </div>
+                <div class="product-card" data-nama="Cash 500 Juta" data-harga="46000" data-img="https://files.catbox.moe/ddioll.jpg">
+                    <img src="https://files.catbox.moe/ddioll.jpg" alt="Cash 500 Juta" class="product-img" />
+                    <span class="name">Cash 500 Juta</span>
+                    <span class="price">Rp 46.000</span>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- BLOK 3 : ROBUX                                            -->
+    <!-- ========================================================= -->
+    <div class="category-block">
+        <div class="block-header" data-target="list3">
+            <img src="https://files.catbox.moe/5lvvvz.jpg" alt="Robux" class="header-img" />
             <div class="header-content">
                 <h2>Robux</h2>
                 <span class="badge-count">6 item</span>
             </div>
             <span class="arrow-icon"><i class="fas fa-chevron-down"></i></span>
         </div>
-        <div class="product-list-wrap" id="list2">
+        <div class="product-list-wrap" id="list3">
             <div class="product-list">
-
-                <!-- FORM USERNAME & PASSWORD -->
                 <div class="robux-form">
                     <div class="form-group">
                         <label><i class="fas fa-user"></i> Username</label>
@@ -1147,59 +1991,51 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- ROBUX CARDS -->
-                <div class="product-card" data-nama="320 RBX" data-harga="67000">
-                    <div class="product-icon"><i class="fab fa-roblox"></i></div>
+                <div class="robux-card" data-nama="320 RBX" data-harga="67000">
+                    <img src="https://files.catbox.moe/5lvvvz.jpg" alt="Robux" class="product-img" />
                     <span class="name">320 RBX</span>
                     <span class="price">Rp 67.000</span>
-                    <button class="btn-beli robux-btn" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy-robux" onclick="buyRobuxDirect(this)"><i class="fas fa-bolt"></i> Beli Langsung</button>
                 </div>
-
-                <div class="product-card" data-nama="500 RBX" data-harga="80000">
-                    <div class="product-icon"><i class="fab fa-roblox"></i></div>
+                <div class="robux-card" data-nama="500 RBX" data-harga="80000">
+                    <img src="https://files.catbox.moe/5lvvvz.jpg" alt="Robux" class="product-img" />
                     <span class="name">500 RBX</span>
                     <span class="price">Rp 80.000</span>
-                    <button class="btn-beli robux-btn" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy-robux" onclick="buyRobuxDirect(this)"><i class="fas fa-bolt"></i> Beli Langsung</button>
                 </div>
-
-                <div class="product-card" data-nama="1.000 RBX" data-harga="160000">
-                    <div class="product-icon"><i class="fab fa-roblox"></i></div>
+                <div class="robux-card" data-nama="1.000 RBX" data-harga="160000">
+                    <img src="https://files.catbox.moe/5lvvvz.jpg" alt="Robux" class="product-img" />
                     <span class="name">1.000 RBX</span>
                     <span class="price">Rp 160.000</span>
-                    <button class="btn-beli robux-btn" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy-robux" onclick="buyRobuxDirect(this)"><i class="fas fa-bolt"></i> Beli Langsung</button>
                 </div>
-
-                <div class="product-card" data-nama="1.500 RBX" data-harga="235000">
-                    <div class="product-icon"><i class="fab fa-roblox"></i></div>
+                <div class="robux-card" data-nama="1.500 RBX" data-harga="235000">
+                    <img src="https://files.catbox.moe/5lvvvz.jpg" alt="Robux" class="product-img" />
                     <span class="name">1.500 RBX</span>
                     <span class="price">Rp 235.000</span>
-                    <button class="btn-beli robux-btn" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy-robux" onclick="buyRobuxDirect(this)"><i class="fas fa-bolt"></i> Beli Langsung</button>
                 </div>
-
-                <div class="product-card" data-nama="2.000 RBX" data-harga="312000">
-                    <div class="product-icon"><i class="fab fa-roblox"></i></div>
+                <div class="robux-card" data-nama="2.000 RBX" data-harga="312000">
+                    <img src="https://files.catbox.moe/5lvvvz.jpg" alt="Robux" class="product-img" />
                     <span class="name">2.000 RBX</span>
                     <span class="price">Rp 312.000</span>
-                    <button class="btn-beli robux-btn" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy-robux" onclick="buyRobuxDirect(this)"><i class="fas fa-bolt"></i> Beli Langsung</button>
                 </div>
-
-                <div class="product-card" data-nama="2.500 RBX" data-harga="381000">
-                    <div class="product-icon"><i class="fab fa-roblox"></i></div>
+                <div class="robux-card" data-nama="2.500 RBX" data-harga="381000">
+                    <img src="https://files.catbox.moe/5lvvvz.jpg" alt="Robux" class="product-img" />
                     <span class="name">2.500 RBX</span>
                     <span class="price">Rp 381.000</span>
-                    <button class="btn-beli robux-btn" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy-robux" onclick="buyRobuxDirect(this)"><i class="fas fa-bolt"></i> Beli Langsung</button>
                 </div>
-
             </div>
         </div>
     </div>
 
     <!-- ========================================================= -->
-    <!-- BLOK 3 : GAMEPASS CDID (CARD)                            -->
+    <!-- BLOK 4 : GAMEPASS CDID                                    -->
     <!-- ========================================================= -->
     <div class="category-block">
-        <div class="block-header" data-target="list3">
+        <div class="block-header" data-target="list4">
             <img src="https://files.catbox.moe/eqqwan.jpg" alt="Gamepass CDID" class="header-img" />
             <div class="header-content">
                 <h2>Gamepass CDID</h2>
@@ -1207,181 +2043,785 @@
             </div>
             <span class="arrow-icon"><i class="fas fa-chevron-down"></i></span>
         </div>
-        <div class="product-list-wrap" id="list3">
+        <div class="product-list-wrap" id="list4">
             <div class="product-list">
-
-                <div class="product-card" data-nama="Luxury House" data-harga="14000">
+                <div class="product-card" data-nama="Luxury House" data-harga="14000" data-img="https://files.catbox.moe/fefclr.jpg">
                     <img src="https://files.catbox.moe/fefclr.jpg" alt="Luxury House" class="product-img" />
                     <span class="name">Luxury House</span>
                     <span class="price">Rp 14.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Additional Ownable Car" data-harga="13000">
+                <div class="product-card" data-nama="Additional Ownable Car" data-harga="13000" data-img="https://files.catbox.moe/dtjuvs.jpg">
                     <img src="https://files.catbox.moe/dtjuvs.jpg" alt="Additional Ownable Car" class="product-img" />
                     <span class="name">Additional Ownable Car</span>
                     <span class="price">Rp 13.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Emergency Vehicle" data-harga="16000">
+                <div class="product-card" data-nama="Emergency Vehicle" data-harga="16000" data-img="https://files.catbox.moe/cp37xc.jpg">
                     <img src="https://files.catbox.moe/cp37xc.jpg" alt="Emergency Vehicle" class="product-img" />
                     <span class="name">Emergency Vehicle</span>
                     <span class="price">Rp 16.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Retro Pass" data-harga="20000">
+                <div class="product-card" data-nama="Retro Pass" data-harga="20000" data-img="https://files.catbox.moe/pczy8y.jpg">
                     <img src="https://files.catbox.moe/pczy8y.jpg" alt="Retro Pass" class="product-img" />
                     <span class="name">Retro Pass</span>
                     <span class="price">Rp 20.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Rare Imports" data-harga="23000">
+                <div class="product-card" data-nama="Rare Imports" data-harga="23000" data-img="https://files.catbox.moe/crfbe7.jpg">
                     <img src="https://files.catbox.moe/crfbe7.jpg" alt="Rare Imports" class="product-img" />
                     <span class="name">Rare Imports</span>
                     <span class="price">Rp 23.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Advance Modification" data-harga="26000">
+                <div class="product-card" data-nama="Advance Modification" data-harga="26000" data-img="https://files.catbox.moe/hw92r2.jpg">
                     <img src="https://files.catbox.moe/hw92r2.jpg" alt="Advance Modification" class="product-img" />
                     <span class="name">Advance Modification</span>
                     <span class="price">Rp 26.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="Luxury Car" data-harga="27000">
+                <div class="product-card" data-nama="Luxury Car" data-harga="27000" data-img="https://files.catbox.moe/imwtbm.jpg">
                     <img src="https://files.catbox.moe/imwtbm.jpg" alt="Luxury Car" class="product-img" />
                     <span class="name">Luxury Car</span>
                     <span class="price">Rp 27.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="2x Additional" data-harga="27400">
+                <div class="product-card" data-nama="2x Additional" data-harga="27400" data-img="https://files.catbox.moe/tj2jo3.jpg">
                     <img src="https://files.catbox.moe/tj2jo3.jpg" alt="2x Additional" class="product-img" />
                     <span class="name">2x Additional</span>
                     <span class="price">Rp 27.400</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="2x Paycheck" data-harga="46000">
+                <div class="product-card" data-nama="2x Paycheck" data-harga="46000" data-img="https://files.catbox.moe/t1ln91.jpg">
                     <img src="https://files.catbox.moe/t1ln91.jpg" alt="2x Paycheck" class="product-img" />
                     <span class="name">2x Paycheck</span>
                     <span class="price">Rp 46.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
-                <div class="product-card" data-nama="+50% Job Warning" data-harga="48000">
+                <div class="product-card" data-nama="+50% Job Warning" data-harga="48000" data-img="https://files.catbox.moe/04qmcq.jpg">
                     <img src="https://files.catbox.moe/04qmcq.jpg" alt="+50% Job Warning" class="product-img" />
                     <span class="name">+50% Job Warning</span>
                     <span class="price">Rp 48.000</span>
-                    <button class="btn-beli" onclick="buyProduct(this)"><i class="fas fa-shopping-cart"></i> Beli</button>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
                 </div>
-
             </div>
         </div>
     </div>
 
     <!-- ========================================================= -->
-    <!-- FOOTER                                                    -->
+    <!-- BLOK 5 : GAG (Gamepass / Aksesoris GAG)                   -->
     <!-- ========================================================= -->
+    <div class="category-block">
+        <div class="block-header" data-target="list5">
+            <img src="https://files.catbox.moe/ych9i8.jpg" alt="GAG" class="header-img" />
+            <div class="header-content">
+                <h2>GAG</h2>
+                <span class="badge-count">24 item</span>
+            </div>
+            <span class="arrow-icon"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="product-list-wrap" id="list5">
+            <div class="product-list">
+                <!-- Power House -->
+                <div class="product-card" data-nama="Power House" data-harga="38000" data-img="https://files.catbox.moe/lohpm2.jpg">
+                    <img src="https://files.catbox.moe/lohpm2.jpg" alt="Power House" class="product-img" />
+                    <span class="name">Power House</span>
+                    <span class="price">Rp 38.000</span>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                </div>
+                <div class="product-card" data-nama="Cine Wrapper" data-harga="55000" data-img="https://files.catbox.moe/wd70rg.jpg">
+                    <img src="https://files.catbox.moe/wd70rg.jpg" alt="Cine Wrapper" class="product-img" />
+                    <span class="name">Cine Wrapper</span>
+                    <span class="price">Rp 55.000</span>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                </div>
+                <div class="product-card" data-nama="Rainbow Carpet" data-harga="66000" data-img="https://files.catbox.moe/simph5.jpg">
+                    <img src="https://files.catbox.moe/simph5.jpg" alt="Rainbow Carpet" class="product-img" />
+                    <span class="name">Rainbow Carpet</span>
+                    <span class="price">Rp 66.000</span>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                </div>
+                <div class="product-card" data-nama="Freeze Ray" data-harga="80000" data-img="https://files.catbox.moe/4lby1w.jpg">
+                    <img src="https://files.catbox.moe/4lby1w.jpg" alt="Freeze Ray" class="product-img" />
+                    <span class="name">Freeze Ray</span>
+                    <span class="price">Rp 80.000</span>
+                    <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                </div>
+
+                <!-- Seed Pack -->
+                <div class="sub-section">
+                    <div class="sub-section-title"><i class="fas fa-seedling"></i> Seed Pack <span style="font-weight:400;text-transform:none;color:#6a7da0;font-size:0.7rem;">— ghost pepper</span></div>
+                    <div class="product-card" data-nama="Ghost Pepper Pack 1x" data-harga="11000" data-img="https://files.catbox.moe/mgajyx.jpg">
+                        <img src="https://files.catbox.moe/mgajyx.jpg" alt="Ghost Pepper Pack 1x" class="product-img" />
+                        <span class="name">Ghost Pepper Pack 1x</span>
+                        <span class="price">Rp 11.000</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Ghost Pepper Pack X3" data-harga="25000" data-img="https://files.catbox.moe/mgajyx.jpg">
+                        <img src="https://files.catbox.moe/mgajyx.jpg" alt="Ghost Pepper Pack X3" class="product-img" />
+                        <span class="name">Ghost Pepper Pack X3</span>
+                        <span class="price">Rp 25.000</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Ghost Pepper Pack X10" data-harga="79000" data-img="https://files.catbox.moe/mgajyx.jpg">
+                        <img src="https://files.catbox.moe/mgajyx.jpg" alt="Ghost Pepper Pack X10" class="product-img" />
+                        <span class="name">Ghost Pepper Pack X10</span>
+                        <span class="price">Rp 79.000</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Ghost Pepper Pack X50" data-harga="426000" data-img="https://files.catbox.moe/mgajyx.jpg">
+                        <img src="https://files.catbox.moe/mgajyx.jpg" alt="Ghost Pepper Pack X50" class="product-img" />
+                        <span class="name">Ghost Pepper Pack X50</span>
+                        <span class="price">Rp 426.000</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                </div>
+
+                <!-- Props / Crates -->
+                <div class="sub-section">
+                    <div class="sub-section-title"><i class="fas fa-box"></i> Props / Crates <span style="font-weight:400;text-transform:none;color:#6a7da0;font-size:0.7rem;">— berbagai crate</span></div>
+                    <div class="product-card" data-nama="Leader Crate" data-harga="2300" data-img="https://files.catbox.moe/zu588j.jpg">
+                        <img src="https://files.catbox.moe/zu588j.jpg" alt="Leader Crate" class="product-img" />
+                        <span class="name">Leader Crate</span>
+                        <span class="price">Rp 2.300</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Bench Crate" data-harga="3000" data-img="https://files.catbox.moe/noiefy.jpg">
+                        <img src="https://files.catbox.moe/noiefy.jpg" alt="Bench Crate" class="product-img" />
+                        <span class="name">Bench Crate</span>
+                        <span class="price">Rp 3.000</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Light Crate" data-harga="4000" data-img="https://files.catbox.moe/hgzqw9.jpg">
+                        <img src="https://files.catbox.moe/hgzqw9.jpg" alt="Light Crate" class="product-img" />
+                        <span class="name">Light Crate</span>
+                        <span class="price">Rp 4.000</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Sign Crate" data-harga="5400" data-img="https://files.catbox.moe/ms8ag1.jpg">
+                        <img src="https://files.catbox.moe/ms8ag1.jpg" alt="Sign Crate" class="product-img" />
+                        <span class="name">Sign Crate</span>
+                        <span class="price">Rp 5.400</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Arch Crate" data-harga="6400" data-img="https://files.catbox.moe/cemfys.jpg">
+                        <img src="https://files.catbox.moe/cemfys.jpg" alt="Arch Crate" class="product-img" />
+                        <span class="name">Arch Crate</span>
+                        <span class="price">Rp 6.400</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Roleplay Crate" data-harga="6700" data-img="https://files.catbox.moe/zbwokg.jpg">
+                        <img src="https://files.catbox.moe/zbwokg.jpg" alt="Roleplay Crate" class="product-img" />
+                        <span class="name">Roleplay Crate</span>
+                        <span class="price">Rp 6.700</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Conveyor Crate" data-harga="8200" data-img="https://files.catbox.moe/frvvj7.jpg">
+                        <img src="https://files.catbox.moe/frvvj7.jpg" alt="Conveyor Crate" class="product-img" />
+                        <span class="name">Conveyor Crate</span>
+                        <span class="price">Rp 8.200</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Bridge Crate" data-harga="9100" data-img="https://files.catbox.moe/vadzm7.jpg">
+                        <img src="https://files.catbox.moe/vadzm7.jpg" alt="Bridge Crate" class="product-img" />
+                        <span class="name">Bridge Crate</span>
+                        <span class="price">Rp 9.100</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Spring Crate" data-harga="10000" data-img="https://files.catbox.moe/m8db8o.jpg">
+                        <img src="https://files.catbox.moe/m8db8o.jpg" alt="Spring Crate" class="product-img" />
+                        <span class="name">Spring Crate</span>
+                        <span class="price">Rp 10.000</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Seesaw Crate" data-harga="14100" data-img="https://files.catbox.moe/ct2c21.jpg">
+                        <img src="https://files.catbox.moe/ct2c21.jpg" alt="Seesaw Crate" class="product-img" />
+                        <span class="name">Seesaw Crate</span>
+                        <span class="price">Rp 14.100</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Bear Trap Crate" data-harga="16500" data-img="https://files.catbox.moe/lgjvw9.jpg">
+                        <img src="https://files.catbox.moe/lgjvw9.jpg" alt="Bear Trap Crate" class="product-img" />
+                        <span class="name">Bear Trap Crate</span>
+                        <span class="price">Rp 16.500</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Owner Door Crate" data-harga="17500" data-img="https://files.catbox.moe/6o7l1y.jpg">
+                        <img src="https://files.catbox.moe/6o7l1y.jpg" alt="Owner Door Crate" class="product-img" />
+                        <span class="name">Owner Door Crate</span>
+                        <span class="price">Rp 17.500</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Fence Crate" data-harga="30000" data-img="https://files.catbox.moe/3dnu34.jpg">
+                        <img src="https://files.catbox.moe/3dnu34.jpg" alt="Fence Crate" class="product-img" />
+                        <span class="name">Fence Crate</span>
+                        <span class="price">Rp 30.000</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="Teleport Pad Crate" data-harga="50000" data-img="https://files.catbox.moe/er64xv.jpg">
+                        <img src="https://files.catbox.moe/er64xv.jpg" alt="Teleport Pad Crate" class="product-img" />
+                        <span class="name">Teleport Pad Crate</span>
+                        <span class="price">Rp 50.000</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                </div>
+
+                <!-- Sheckles -->
+                <div class="sub-section">
+                    <div class="sub-section-title"><i class="fas fa-coins"></i> Sheckles <span style="font-weight:400;text-transform:none;color:#6a7da0;font-size:0.7rem;">— mata uang GAG</span></div>
+                    <div class="product-card" data-nama="5.000 Sheckles" data-harga="1300" data-img="https://files.catbox.moe/dr0gay.jpg">
+                        <img src="https://files.catbox.moe/dr0gay.jpg" alt="5.000 Sheckles" class="product-img" />
+                        <span class="name">5.000 Sheckles</span>
+                        <span class="price">Rp 1.300</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="10.000 Sheckles" data-harga="2600" data-img="https://files.catbox.moe/o6cc6w.jpg">
+                        <img src="https://files.catbox.moe/o6cc6w.jpg" alt="10.000 Sheckles" class="product-img" />
+                        <span class="name">10.000 Sheckles</span>
+                        <span class="price">Rp 2.600</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="25.000 Sheckles" data-harga="5600" data-img="https://files.catbox.moe/cstj5k.jpg">
+                        <img src="https://files.catbox.moe/cstj5k.jpg" alt="25.000 Sheckles" class="product-img" />
+                        <span class="name">25.000 Sheckles</span>
+                        <span class="price">Rp 5.600</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="50.000 Sheckles" data-harga="10200" data-img="https://files.catbox.moe/mi84k5.jpg">
+                        <img src="https://files.catbox.moe/mi84k5.jpg" alt="50.000 Sheckles" class="product-img" />
+                        <span class="name">50.000 Sheckles</span>
+                        <span class="price">Rp 10.200</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                    <div class="product-card" data-nama="100.000 Sheckles" data-harga="20000" data-img="https://files.catbox.moe/2u7crk.jpg">
+                        <img src="https://files.catbox.moe/2u7crk.jpg" alt="100.000 Sheckles" class="product-img" />
+                        <span class="name">100.000 Sheckles</span>
+                        <span class="price">Rp 20.000</span>
+                        <button class="btn-buy" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-add-cart" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- BLOK 6 : PRIVATE SERVER                                   -->
+    <!-- ========================================================= -->
+    <div class="category-block">
+        <div class="block-header" data-target="list6">
+            <img src="https://files.catbox.moe/bu441s.jpg" alt="Private Server" class="header-img" />
+            <div class="header-content">
+                <h2>Private Server</h2>
+                <span class="badge-count">1 item</span>
+            </div>
+            <span class="arrow-icon"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="product-list-wrap" id="list6">
+            <div class="product-list">
+                <div class="product-card" data-nama="Private Server (Req)" data-harga="2000" data-img="https://files.catbox.moe/bu441s.jpg">
+                    <img src="https://files.catbox.moe/bu441s.jpg" alt="Private Server" class="product-img" />
+                    <span class="name">Private Server (Req)</span>
+                    <span class="price">Rp 2.000</span>
+                    <button class="btn-buy" onclick="openPrivateModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                    <button class="btn-add-cart" onclick="addPrivateToCart(this)"><i class="fas fa-cart-plus"></i> + Keranjang</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
     <div class="footer-bar">
         <div class="footer-copy">
-            <i class="far fa-copyright"></i> 2025 UMBU STORE — Premium Digital Store
+            <i class="far fa-copyright"></i> 2025 ROLXUM — Premium Digital Store
         </div>
         <div class="footer-contact">
-            <span class="wa-channel">
+            <a href="https://wa.me/6282154329388" class="wa-channel" target="_blank">
                 <i class="fab fa-whatsapp"></i> 0821-5432-9388
-            </span>
+            </a>
+            <a href="https://whatsapp.com/channel/0029Vb89zDn2UPBBMwKszN0t" class="footer-channel" target="_blank">
+                <i class="fab fa-whatsapp"></i> Saluran WhatsApp
+            </a>
             <span class="footer-email">
-                <i class="fas fa-at"></i> @somexustor.id
+                <i class="fas fa-at"></i> @rolxum.id
             </span>
         </div>
         <div class="footer-tagline">
-            <i class="fas fa-crown"></i> UMBU · keren & cepat
+            <i class="fas fa-crown"></i> ROLXUM · keren & cepat
         </div>
     </div>
 
 </div>
 
-<!-- ===== MODAL QRIS ===== -->
-<div class="modal-overlay" id="modalQRIS">
-    <div class="modal-content">
-        <button class="close-modal" id="closeModal"><i class="fas fa-times"></i></button>
-        <h2>💳 Pembayaran QRIS</h2>
-        <p class="modal-product" id="modalProduct">Produk: -</p>
-        <p class="modal-price" id="modalPrice">Total: Rp -</p>
+<!-- ===== MODAL USERNAME ===== -->
+<div class="username-modal-overlay" id="usernameModal">
+    <div class="username-modal">
+        <button class="close-modal" onclick="closeUsernameModal()"><i class="fas fa-times"></i></button>
+        <h2>👤 Detail Pesanan</h2>
+        <p class="modal-product-name" id="modalProductName">Produk: -</p>
+        <p class="modal-product-price" id="modalProductPrice">Harga: Rp -</p>
+        <div class="form-group-modal">
+            <label><i class="fas fa-user"></i> Username Roblox</label>
+            <input type="text" id="modalUsername" placeholder="Masukkan username Roblox Anda" />
+        </div>
+        <div class="qty-group">
+            <button onclick="changeModalQty(-1)">-</button>
+            <span class="qty-display" id="modalQty">1</span>
+            <button onclick="changeModalQty(1)">+</button>
+            <span class="qty-total-display" id="modalTotal">Rp 4.300</span>
+        </div>
+        <button class="btn-continue" onclick="continueToQris()">
+            <i class="fas fa-arrow-right"></i> Lanjut ke Pembayaran
+        </button>
+    </div>
+</div>
 
-        <!-- QRIS -->
+<!-- ===== MODAL PRIVATE SERVER ===== -->
+<div class="private-modal-overlay" id="privateModal">
+    <div class="private-modal">
+        <button class="close-modal" onclick="closePrivateModal()"><i class="fas fa-times"></i></button>
+        <h2>🖥️ Detail Pesanan</h2>
+        <p class="modal-product-name" id="privateProductName">Produk: Private Server (Req)</p>
+        <p class="modal-product-price" id="privateProductPrice">Harga: Rp 2.000</p>
+        <div class="form-group-modal">
+            <label><i class="fas fa-server"></i> Private Server</label>
+            <input type="text" id="privateServer" placeholder="Masukkan nama Private Server yang diinginkan" />
+        </div>
+        <div class="qty-group">
+            <button onclick="changePrivateQty(-1)">-</button>
+            <span class="qty-display" id="privateQty">1</span>
+            <button onclick="changePrivateQty(1)">+</button>
+            <span class="qty-total-display" id="privateTotal">Rp 2.000</span>
+        </div>
+        <button class="btn-continue" onclick="continuePrivateToQris()">
+            <i class="fas fa-arrow-right"></i> Lanjut ke Pembayaran
+        </button>
+    </div>
+</div>
+
+<!-- ===== MODAL KERANJANG ===== -->
+<div class="cart-modal-overlay" id="cartModal">
+    <div class="cart-modal">
+        <button class="close-cart" onclick="closeCart()"><i class="fas fa-times"></i></button>
+        <h2>🛒 Keranjang Belanja</h2>
+        <div id="cartItems"><div class="cart-empty">Keranjang masih kosong</div></div>
+        <div class="cart-total" id="cartTotal" style="display:none;">
+            <span class="total-label">Total</span>
+            <span class="total-amount" id="totalAmount">Rp 0</span>
+        </div>
+        <button class="btn-checkout" id="checkoutBtn" onclick="checkout()" disabled>
+            <i class="fas fa-credit-card"></i> Checkout
+        </button>
+    </div>
+</div>
+
+<!-- ===== MODAL QRIS ===== -->
+<div class="qris-modal-overlay" id="qrisModal">
+    <div class="qris-modal">
+        <button class="close-qris" onclick="closeQris()"><i class="fas fa-times"></i></button>
+        <h2>💳 Pembayaran QRIS</h2>
+        <div id="qrisProductList" class="qris-product-list"></div>
+        <div id="qrisTotal" class="qris-total"></div>
         <div class="qris-container">
             <img src="https://files.catbox.moe/dwga77.jpg" alt="QRIS" />
             <p><i class="fas fa-camera"></i> Scan QRIS di atas untuk melakukan pembayaran</p>
         </div>
-
-        <!-- Upload Bukti -->
-        <div class="upload-section">
-            <label><i class="fas fa-upload"></i> Upload Bukti Pembayaran</label>
-            <input type="file" id="buktiBayar" accept="image/*" />
-            <p class="file-name" id="fileName">Belum ada file dipilih</p>
-            <div class="file-preview" id="filePreview">
-                <img id="previewImage" src="" alt="Preview" />
-            </div>
-        </div>
-
-        <!-- Tombol Selesai -->
-        <button class="btn-submit-order" id="submitOrder">
-            <i class="fas fa-check-circle"></i> Selesaikan Pesanan
+        <button class="btn-pay" onclick="confirmPayment()">
+            <i class="fas fa-check-circle"></i> Saya Sudah Bayar
         </button>
     </div>
 </div>
 
 <!-- ===== SCRIPT ===== -->
 <script>
-    // ===== FUNGSI BUY PRODUCT =====
-    function buyProduct(button) {
-        const card = button.closest('.product-card');
-        if (!card) return;
+    // CAROUSEL
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.dot');
+    let autoSlideInterval;
 
-        const nameEl = card.querySelector('.name');
-        const priceEl = card.querySelector('.price');
-        const productName = nameEl ? nameEl.textContent.trim() : 'Produk';
-        const priceText = priceEl ? priceEl.textContent.trim() : 'Rp 0';
-        const price = parseInt(priceText.replace(/[^0-9]/g, '')) || 0;
-
-        // Cek apakah ini produk Robux
-        const isRobuxProduct = button.classList.contains('robux-btn') || 
-                              productName.includes('RBX');
-
-        // Cek Robux: pastikan username & password diisi
-        if (isRobuxProduct) {
-            const userInput = document.getElementById('robuxUser');
-            const passInput = document.getElementById('robuxPass');
-            const username = userInput ? userInput.value.trim() : '';
-            const password = passInput ? passInput.value.trim() : '';
-
-            if (!username || !password) {
-                alert('⚠️ Mohon isi Username dan Password Roblox terlebih dahulu!');
-                userInput?.focus();
-                return;
-            }
-        }
-
-        openModal(productName, price, isRobuxProduct);
+    function changeSlide(direction) {
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + direction + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+        resetAutoSlide();
     }
 
-    // ===== ACCORDION TOGGLE =====
+    function goToSlide(index) {
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        currentSlide = index;
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+        resetAutoSlide();
+    }
+
+    function resetAutoSlide() {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(() => changeSlide(1), 5000);
+    }
+    autoSlideInterval = setInterval(() => changeSlide(1), 5000);
+
+    // HELP CENTER
+    function helpCenter() {
+        window.open('https://wa.me/6282154329388?text=Halo%20ROLXUM%2C%20saya%20butuh%20bantuan%20untuk%20order%20saya.', '_blank');
+    }
+
+    // ===== VARIABLES =====
+    let cart = [];
+    let modalProduct = {};
+    let modalQty = 1;
+    let privateQty = 1;
+    let privateServer = '';
+
+    // ===== MODAL USERNAME (untuk produk biasa) =====
+    function openUsernameModal(button) {
+        const card = button.closest('.product-card');
+        const nama = card.dataset.nama;
+        const harga = parseInt(card.dataset.harga);
+        modalProduct = { nama, harga };
+        modalQty = 1;
+        document.getElementById('modalProductName').textContent = 'Produk: ' + nama;
+        document.getElementById('modalProductPrice').textContent = 'Harga: Rp ' + harga.toLocaleString('id-ID');
+        document.getElementById('modalQty').textContent = '1';
+        document.getElementById('modalTotal').textContent = 'Rp ' + harga.toLocaleString('id-ID');
+        document.getElementById('modalUsername').value = '';
+        document.getElementById('modalUsername').focus();
+        document.getElementById('usernameModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeUsernameModal() {
+        document.getElementById('usernameModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function changeModalQty(delta) {
+        let qty = modalQty + delta;
+        if (qty < 1) qty = 1;
+        modalQty = qty;
+        document.getElementById('modalQty').textContent = qty;
+        const total = modalProduct.harga * qty;
+        document.getElementById('modalTotal').textContent = 'Rp ' + total.toLocaleString('id-ID');
+    }
+
+    function continueToQris() {
+        const username = document.getElementById('modalUsername').value.trim();
+        if (!username) {
+            alert('⚠️ Mohon isi Username Roblox terlebih dahulu!');
+            document.getElementById('modalUsername').focus();
+            return;
+        }
+        closeUsernameModal();
+        const items = [{ nama: modalProduct.nama, harga: modalProduct.harga, qty: modalQty, username: username }];
+        showQris(items);
+    }
+
+    // ===== MODAL PRIVATE SERVER =====
+    function openPrivateModal(button) {
+        const card = button.closest('.product-card');
+        const nama = card.dataset.nama;
+        const harga = parseInt(card.dataset.harga);
+        modalProduct = { nama, harga };
+        privateQty = 1;
+        privateServer = '';
+        document.getElementById('privateProductName').textContent = 'Produk: ' + nama;
+        document.getElementById('privateProductPrice').textContent = 'Harga: Rp ' + harga.toLocaleString('id-ID');
+        document.getElementById('privateQty').textContent = '1';
+        document.getElementById('privateTotal').textContent = 'Rp ' + harga.toLocaleString('id-ID');
+        document.getElementById('privateServer').value = '';
+        document.getElementById('privateServer').focus();
+        document.getElementById('privateModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePrivateModal() {
+        document.getElementById('privateModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function changePrivateQty(delta) {
+        let qty = privateQty + delta;
+        if (qty < 1) qty = 1;
+        privateQty = qty;
+        document.getElementById('privateQty').textContent = qty;
+        const total = 2000 * qty;
+        document.getElementById('privateTotal').textContent = 'Rp ' + total.toLocaleString('id-ID');
+    }
+
+    function continuePrivateToQris() {
+        const serverName = document.getElementById('privateServer').value.trim();
+        if (!serverName) {
+            alert('⚠️ Mohon isi nama Private Server yang diinginkan!');
+            document.getElementById('privateServer').focus();
+            return;
+        }
+        closePrivateModal();
+        const items = [{ 
+            nama: 'Private Server (Req)', 
+            harga: 2000, 
+            qty: privateQty, 
+            username: serverName,
+            isPrivate: true 
+        }];
+        showQris(items);
+    }
+
+    // ===== ADD TO CART PRIVATE SERVER =====
+    function addPrivateToCart(button) {
+        const card = button.closest('.product-card');
+        const nama = card.dataset.nama;
+        const harga = parseInt(card.dataset.harga);
+        const img = card.dataset.img || '';
+        
+        const serverName = prompt('Masukkan nama Private Server yang diinginkan:');
+        if (!serverName) { alert('⚠️ Nama Private Server wajib diisi!'); return; }
+        
+        const qtyInput = prompt('Masukkan jumlah yang ingin dibeli (minimal 1):', '1');
+        let qty = parseInt(qtyInput) || 1;
+        if (qty < 1) qty = 1;
+        
+        const existing = cart.find(item => item.nama === nama && item.username === serverName);
+        if (existing) { existing.qty += qty; } else { 
+            cart.push({ nama, harga, qty, img, username: serverName, isPrivate: true }); 
+        }
+        updateCartUI();
+        updateCartBadge();
+        button.innerHTML = '<i class="fas fa-check"></i> Ditambahkan';
+        button.style.background = '#25d366';
+        button.style.color = '#0a0e1a';
+        setTimeout(() => {
+            button.innerHTML = '<i class="fas fa-cart-plus"></i> + Keranjang';
+            button.style.background = '';
+            button.style.color = '';
+        }, 1500);
+    }
+
+    // ===== ADD TO CART (umum) =====
+    function addToCart(button) {
+        const card = button.closest('.product-card');
+        const nama = card.dataset.nama;
+        const harga = parseInt(card.dataset.harga);
+        const img = card.dataset.img || '';
+        const username = prompt('Masukkan Username Roblox untuk ' + nama + ':');
+        if (!username) { alert('⚠️ Username Roblox wajib diisi!'); return; }
+        const qtyInput = prompt('Masukkan jumlah yang ingin dibeli (minimal 1):', '1');
+        let qty = parseInt(qtyInput) || 1;
+        if (qty < 1) qty = 1;
+        const existing = cart.find(item => item.nama === nama && item.username === username);
+        if (existing) { existing.qty += qty; } else { cart.push({ nama, harga, qty, img, username }); }
+        updateCartUI();
+        updateCartBadge();
+        button.innerHTML = '<i class="fas fa-check"></i> Ditambahkan';
+        button.style.background = '#25d366';
+        button.style.color = '#0a0e1a';
+        setTimeout(() => {
+            button.innerHTML = '<i class="fas fa-cart-plus"></i> + Keranjang';
+            button.style.background = '';
+            button.style.color = '';
+        }, 1500);
+    }
+
+    function updateCartUI() {
+        const container = document.getElementById('cartItems');
+        const totalContainer = document.getElementById('cartTotal');
+        const totalAmount = document.getElementById('totalAmount');
+        if (cart.length === 0) {
+            container.innerHTML = '<div class="cart-empty">Keranjang masih kosong</div>';
+            totalContainer.style.display = 'none';
+            document.getElementById('checkoutBtn').disabled = true;
+            return;
+        }
+        let html = '';
+        let total = 0;
+        cart.forEach((item, index) => {
+            const subtotal = item.harga * item.qty;
+            total += subtotal;
+            const label = item.isPrivate ? 'Private Server' : 'Username';
+            html += `<div class="cart-item">
+                <div class="item-info">
+                    ${item.img ? `<img src="${item.img}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;border:1px solid #2a3650;">` : ''}
+                    <span class="item-name">${item.nama}</span>
+                    <span class="item-qty">x${item.qty}</span>
+                    <span class="item-user">${label}: ${item.username}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:0.5rem;">
+                    <span class="item-total">Rp ${subtotal.toLocaleString('id-ID')}</span>
+                    <button class="btn-remove" onclick="removeFromCart(${index})"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>`;
+        });
+        container.innerHTML = html;
+        totalContainer.style.display = 'flex';
+        totalAmount.textContent = 'Rp ' + total.toLocaleString('id-ID');
+        document.getElementById('checkoutBtn').disabled = false;
+    }
+
+    function updateCartBadge() {
+        const count = cart.reduce((sum, item) => sum + item.qty, 0);
+        document.getElementById('cartCount').textContent = count;
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartUI();
+        updateCartBadge();
+    }
+
+    function openCart() {
+        document.getElementById('cartModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart() {
+        document.getElementById('cartModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function checkout() {
+        if (cart.length === 0) return;
+        closeCart();
+        showQris(cart);
+    }
+
+    function showQris(items) {
+        const productList = document.getElementById('qrisProductList');
+        let total = 0;
+        let html = '';
+        items.forEach(item => {
+            const subtotal = item.harga * item.qty;
+            total += subtotal;
+            const label = item.isPrivate ? 'Private Server' : 'Username';
+            html += `${item.nama} x${item.qty}`;
+            if (item.username) html += ` (${label}: ${item.username})`;
+            html += ` = Rp ${subtotal.toLocaleString('id-ID')}<br>`;
+        });
+        productList.innerHTML = html;
+        document.getElementById('qrisTotal').textContent = 'Total: Rp ' + total.toLocaleString('id-ID');
+        window._currentOrderItems = items;
+        window._currentOrderTotal = total;
+        document.getElementById('qrisModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeQris() {
+        document.getElementById('qrisModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function confirmPayment() {
+        const items = window._currentOrderItems || [];
+        const total = window._currentOrderTotal || 0;
+        if (items.length === 0) return;
+        let productList = '';
+        items.forEach(item => {
+            const subtotal = item.harga * item.qty;
+            const label = item.isPrivate ? 'Private Server' : 'Username';
+            productList += `${item.nama} x${item.qty}`;
+            if (item.username) productList += ` (${label}: ${item.username})`;
+            productList += ` = Rp ${subtotal.toLocaleString('id-ID')}\n`;
+        });
+        const waNumber = '6282154329388';
+        let msg = `Halo%20ROLXUM%2C%20saya%20mau%20order%3A`;
+        msg += `%0A%0A📦%20Produk%3A`;
+        msg += `%0A${encodeURIComponent(productList)}`;
+        msg += `%0A💰%20Total%3A%20Rp%20${total.toLocaleString('id-ID')}`;
+        msg += `%0A%0A✅%20Saya%20sudah%20melakukan%20pembayaran%20via%20QRIS.`;
+        msg += `%0A📎%20Bukti%20pembayaran%20saya%20lampirkan%20setelah%20teks%20ini.`;
+        const waUrl = `https://wa.me/${waNumber}?text=${msg}`;
+        window.open(waUrl, '_blank');
+        if (cart.length > 0) { cart = []; updateCartUI(); updateCartBadge(); }
+        closeQris();
+        setTimeout(() => {
+            alert('✅ Pesanan berhasil dikirim!\n\n📸 Silakan kirimkan bukti pembayaran Anda di chat WhatsApp.\n\nTerima kasih sudah berbelanja di ROLXUM! 🙏');
+        }, 1500);
+    }
+
+    // ===== BUY ROBUX DIRECT =====
+    function buyRobuxDirect(button) {
+        const card = button.closest('.robux-card');
+        const nama = card.dataset.nama;
+        const harga = parseInt(card.dataset.harga);
+        const userInput = document.getElementById('robuxUser');
+        const passInput = document.getElementById('robuxPass');
+        const username = userInput ? userInput.value.trim() : '';
+        const password = passInput ? passInput.value.trim() : '';
+        if (!username || !password) {
+            alert('⚠️ Mohon isi Username dan Password Roblox terlebih dahulu!');
+            userInput?.focus();
+            return;
+        }
+        const waNumber = '6282154329388';
+        let msg = `Halo%20ROLXUM%2C%20saya%20mau%20order%3A`;
+        msg += `%0A%0A📦%20Produk%3A%20${encodeURIComponent(nama)}`;
+        msg += `%0A💰%20Harga%3A%20Rp%20${harga.toLocaleString('id-ID')}`;
+        msg += `%0AUsername%20Roblox%3A%20${encodeURIComponent(username)}`;
+        msg += `%0APassword%20Roblox%3A%20${encodeURIComponent(password)}`;
+        msg += `%0A%0A✅%20Saya%20sudah%20melakukan%20pembayaran%20via%20QRIS.`;
+        msg += `%0A📎%20Bukti%20pembayaran%20saya%20lampirkan%20setelah%20teks%20ini.`;
+        const waUrl = `https://wa.me/${waNumber}?text=${msg}`;
+        window.open(waUrl, '_blank');
+        button.innerHTML = '<i class="fas fa-check"></i> Terkirim';
+        button.style.background = '#25d366';
+        button.style.color = '#0a0e1a';
+        setTimeout(() => {
+            button.innerHTML = '<i class="fas fa-bolt"></i> Beli Langsung';
+            button.style.background = '#f5b81b';
+            button.style.color = '#0a0e1a';
+        }, 2000);
+        setTimeout(() => {
+            alert('✅ Pesanan Robux berhasil dikirim!\n\n📸 Silakan kirimkan bukti pembayaran Anda di chat WhatsApp.\n\nTerima kasih sudah berbelanja di ROLXUM! 🙏');
+        }, 1500);
+    }
+
+    // ===== ACCORDION =====
     const headers = document.querySelectorAll('.block-header');
     headers.forEach(header => {
-        header.addEventListener('click', function(e) {
+        header.addEventListener('click', function() {
             const targetId = this.dataset.target;
             if (!targetId) return;
             const targetWrap = document.getElementById(targetId);
             if (!targetWrap) return;
-
             targetWrap.classList.toggle('open');
-
             const arrow = this.querySelector('.arrow-icon i');
             if (arrow) {
                 arrow.classList.toggle('fa-chevron-down');
@@ -1390,7 +2830,7 @@
         });
     });
 
-    // BUKA BLOK PERTAMA SECARA DEFAULT
+    // BUKA BLOK PERTAMA
     const firstBlock = document.querySelector('.category-block .block-header');
     if (firstBlock) {
         const targetId = firstBlock.dataset.target;
@@ -1407,124 +2847,14 @@
         }
     }
 
-    // ===== MODAL QRIS =====
-    const modal = document.getElementById('modalQRIS');
-    const closeModal = document.getElementById('closeModal');
-    const modalProduct = document.getElementById('modalProduct');
-    const modalPrice = document.getElementById('modalPrice');
-    const fileInput = document.getElementById('buktiBayar');
-    const fileName = document.getElementById('fileName');
-    const filePreview = document.getElementById('filePreview');
-    const previewImage = document.getElementById('previewImage');
-    const submitBtn = document.getElementById('submitOrder');
-    let currentProduct = '';
-    let currentPrice = 0;
-    let isRobux = false;
-    let imageBase64 = null;
-
-    // Fungsi buka modal
-    function openModal(productName, price, robux = false) {
-        currentProduct = productName;
-        currentPrice = price;
-        isRobux = robux;
-        imageBase64 = null;
-        modalProduct.textContent = 'Produk: ' + productName;
-        modalPrice.textContent = 'Total: Rp ' + price.toLocaleString('id-ID');
-        fileInput.value = '';
-        fileName.textContent = 'Belum ada file dipilih';
-        filePreview.classList.remove('show');
-        previewImage.src = '';
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    // Tutup modal
-    function closeModalFunc() {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    closeModal.addEventListener('click', closeModalFunc);
-    modal.addEventListener('click', function(e) {
-        if (e.target === this) closeModalFunc();
-    });
-
-    // Event listener untuk file upload
-    fileInput.addEventListener('change', function() {
-        if (this.files && this.files[0]) {
-            const file = this.files[0];
-            fileName.textContent = '📎 ' + file.name;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                imageBase64 = e.target.result;
-                previewImage.src = imageBase64;
-                filePreview.classList.add('show');
-                submitBtn.disabled = false;
-            };
-            reader.readAsDataURL(file);
-        } else {
-            fileName.textContent = 'Belum ada file dipilih';
-            filePreview.classList.remove('show');
-            previewImage.src = '';
-            imageBase64 = null;
-            submitBtn.disabled = true;
-        }
-    });
-
-    // ===== SUBMIT ORDER =====
-    submitBtn.addEventListener('click', function() {
-        if (!imageBase64) {
-            alert('⚠️ Mohon upload bukti pembayaran terlebih dahulu!');
-            return;
-        }
-
-        // Ambil username Robux jika ada
-        let robuxData = '';
-        if (isRobux) {
-            const userInput = document.getElementById('robuxUser');
-            const passInput = document.getElementById('robuxPass');
-            const username = userInput ? userInput.value.trim() : '';
-            const password = passInput ? passInput.value.trim() : '';
-            if (username) robuxData += `%0AUsername%20Roblox%3A%20${encodeURIComponent(username)}`;
-            if (password) robuxData += `%0APassword%20Roblox%3A%20${encodeURIComponent(password)}`;
-        }
-
-        const waNumber = '6282154329388';
-
-        // Kirim pesan ke WhatsApp
-        let msg = `Halo%20UMBU%20STORE%2C%20saya%20mau%20order%3A`;
-        msg += `%0A%0A📦%20Produk%3A%20${encodeURIComponent(currentProduct)}`;
-        msg += `%0A💰%20Harga%3A%20Rp%20${currentPrice.toLocaleString('id-ID')}`;
-        if (robuxData) msg += robuxData;
-        msg += `%0A%0A✅%20Saya%20sudah%20melakukan%20pembayaran%20via%20QRIS.`;
-        msg += `%0A📎%20Bukti%20pembayaran%20akan%20saya%20kirim%20setelah%20ini.`;
-
-        const waUrl = `https://wa.me/${waNumber}?text=${msg}`;
-        window.open(waUrl, '_blank');
-
-        // Tutup modal
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
-        closeModalFunc();
-
-        // Tampilkan instruksi
-        setTimeout(() => {
-            alert(
-                '📸 Bukti pembayaran sudah siap!\n\n' +
-                '1. Chat WhatsApp sudah terbuka\n' +
-                '2. Kirimkan file gambar bukti pembayaran di chat tersebut\n' +
-                '3. Tunggu konfirmasi dari admin\n\n' +
-                'Terima kasih sudah berbelanja di UMBU STORE! 🙏'
-            );
-        }, 1500);
-    });
-
-    // ===== KEYBOARD ESC =====
+    // ===== ESC =====
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeModalFunc();
+        if (e.key === 'Escape') {
+            closeCart();
+            closeQris();
+            closeUsernameModal();
+            closePrivateModal();
+        }
     });
 </script>
 
