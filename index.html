@@ -1444,13 +1444,13 @@
             }
         });
 
-        // ===== UPLOAD FILE KE SERVER =====
-        function uploadToServer(file) {
+        // ===== UPLOAD FILE KE SERVER (Catbox) =====
+        function uploadToCatbox(file) {
             return new Promise((resolve, reject) => {
                 const formData = new FormData();
                 formData.append('fileToUpload', file);
+                formData.append('reqtype', 'fileupload');
 
-                // Menggunakan free image hosting (catbox.moe)
                 fetch('https://catbox.moe/user/api.php', {
                     method: 'POST',
                     body: formData,
@@ -1467,11 +1467,38 @@
                     if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
                         resolve(trimmed);
                     } else {
-                        reject('Gagal upload: ' + trimmed);
+                        reject('Catbox error: ' + trimmed);
                     }
                 })
                 .catch(err => {
-                    reject('Error: ' + err.message);
+                    reject('Network error: ' + err.message);
+                });
+            });
+        }
+
+        // ===== UPLOAD KE IMGUR (Fallback) =====
+        function uploadToImgur(file) {
+            return new Promise((resolve, reject) => {
+                const formData = new FormData();
+                formData.append('image', file);
+
+                fetch('https://api.imgur.com/3/image', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Client-ID 546c25a59c58ad7'
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        resolve(data.data.link);
+                    } else {
+                        reject('Imgur error: ' + (data.data?.error || 'Unknown error'));
+                    }
+                })
+                .catch(err => {
+                    reject('Imgur network error: ' + err.message);
                 });
             });
         }
@@ -1523,78 +1550,72 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengupload...';
 
-            // Upload file ke server
-            uploadToServer(uploadedFile)
+            // Coba upload ke Catbox dulu
+            uploadToCatbox(uploadedFile)
                 .then(imageUrl => {
-                    // Ambil username Robux jika ada
-                    let robuxData = '';
-                    if (isRobux) {
-                        const userInput = document.getElementById('robuxUser');
-                        const passInput = document.getElementById('robuxPass');
-                        const username = userInput ? userInput.value.trim() : '';
-                        const password = passInput ? passInput.value.trim() : '';
-                        if (username) robuxData += `%0AUsername%20Roblox%3A%20${encodeURIComponent(username)}`;
-                        if (password) robuxData += `%0APassword%20Roblox%3A%20${encodeURIComponent(password)}`;
-                    }
-
-                    // Format pesan WhatsApp dengan link gambar
-                    const waNumber = '6282154329388';
-                    let msg = `Halo%20UMBU%20STORE%2C%20saya%20mau%20order%3A`;
-                    msg += `%0A%0A📦%20Produk%3A%20${encodeURIComponent(currentProduct)}`;
-                    msg += `%0A💰%20Harga%3A%20Rp%20${currentPrice.toLocaleString('id-ID')}`;
-                    if (robuxData) msg += robuxData;
-                    msg += `%0A%0A✅%20Saya%20sudah%20melakukan%20pembayaran%20via%20QRIS.`;
-                    msg += `%0A📎%20Bukti%20pembayaran%3A%20${encodeURIComponent(imageUrl)}`;
-
-                    // Kirim via WhatsApp
-                    const waUrl = `https://wa.me/${waNumber}?text=${msg}`;
-                    window.open(waUrl, '_blank');
-
-                    // Reset dan tutup modal
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
-                    closeModalFunc();
+                    sendToWhatsApp(imageUrl);
                 })
-                .catch(error => {
-                    // Jika upload gagal, tetap kirim pesan dengan info bahwa bukti gagal diupload
-                    // Tawarkan untuk kirim manual
-                    const confirmSend = confirm(
-                        '❌ Gagal upload bukti pembayaran: ' + error + 
-                        '\n\nApakah Anda ingin tetap melanjutkan pesanan tanpa bukti? ' +
-                        '(Anda bisa kirim bukti manual via chat)'
-                    );
+                .catch(catboxError => {
+                    // Jika Catbox gagal, coba Imgur sebagai fallback
+                    console.log('Catbox error, trying Imgur...', catboxError);
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mencoba Imgur...';
 
-                    if (confirmSend) {
-                        // Ambil username Robux jika ada
-                        let robuxData = '';
-                        if (isRobux) {
-                            const userInput = document.getElementById('robuxUser');
-                            const passInput = document.getElementById('robuxPass');
-                            const username = userInput ? userInput.value.trim() : '';
-                            const password = passInput ? passInput.value.trim() : '';
-                            if (username) robuxData += `%0AUsername%20Roblox%3A%20${encodeURIComponent(username)}`;
-                            if (password) robuxData += `%0APassword%20Roblox%3A%20${encodeURIComponent(password)}`;
-                        }
+                    uploadToImgur(uploadedFile)
+                        .then(imageUrl => {
+                            sendToWhatsApp(imageUrl);
+                        })
+                        .catch(imgurError => {
+                            // Jika semua gagal, tawarkan kirim manual
+                            console.log('Imgur error:', imgurError);
+                            const confirmSend = confirm(
+                                '❌ Gagal upload bukti pembayaran ke semua server.\n\n' +
+                                'Error Catbox: ' + catboxError + '\n' +
+                                'Error Imgur: ' + imgurError + '\n\n' +
+                                'Apakah Anda ingin tetap melanjutkan pesanan tanpa bukti? ' +
+                                '(Anda bisa kirim bukti manual via chat)'
+                            );
 
-                        const waNumber = '6282154329388';
-                        let msg = `Halo%20UMBU%20STORE%2C%20saya%20mau%20order%3A`;
-                        msg += `%0A%0A📦%20Produk%3A%20${encodeURIComponent(currentProduct)}`;
-                        msg += `%0A💰%20Harga%3A%20Rp%20${currentPrice.toLocaleString('id-ID')}`;
-                        if (robuxData) msg += robuxData;
-                        msg += `%0A%0A✅%20Saya%20sudah%20melakukan%20pembayaran%20via%20QRIS.`;
-                        msg += `%0A⚠️%20Bukti%20pembayaran%20gagal%20diupload%2C%20akan%20saya%20kirim%20manual.`;
-
-                        const waUrl = `https://wa.me/${waNumber}?text=${msg}`;
-                        window.open(waUrl, '_blank');
-
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
-                        closeModalFunc();
-                    } else {
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
-                    }
+                            if (confirmSend) {
+                                sendToWhatsApp(null, true);
+                            } else {
+                                submitBtn.disabled = false;
+                                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
+                            }
+                        });
                 });
+
+            function sendToWhatsApp(imageUrl, isManual = false) {
+                // Ambil username Robux jika ada
+                let robuxData = '';
+                if (isRobux) {
+                    const userInput = document.getElementById('robuxUser');
+                    const passInput = document.getElementById('robuxPass');
+                    const username = userInput ? userInput.value.trim() : '';
+                    const password = passInput ? passInput.value.trim() : '';
+                    if (username) robuxData += `%0AUsername%20Roblox%3A%20${encodeURIComponent(username)}`;
+                    if (password) robuxData += `%0APassword%20Roblox%3A%20${encodeURIComponent(password)}`;
+                }
+
+                const waNumber = '6282154329388';
+                let msg = `Halo%20UMBU%20STORE%2C%20saya%20mau%20order%3A`;
+                msg += `%0A%0A📦%20Produk%3A%20${encodeURIComponent(currentProduct)}`;
+                msg += `%0A💰%20Harga%3A%20Rp%20${currentPrice.toLocaleString('id-ID')}`;
+                if (robuxData) msg += robuxData;
+                msg += `%0A%0A✅%20Saya%20sudah%20melakukan%20pembayaran%20via%20QRIS.`;
+
+                if (imageUrl) {
+                    msg += `%0A📎%20Bukti%20pembayaran%3A%20${encodeURIComponent(imageUrl)}`;
+                } else if (isManual) {
+                    msg += `%0A⚠️%20Bukti%20pembayaran%20akan%20saya%20kirim%20manual%20via%20chat.`;
+                }
+
+                const waUrl = `https://wa.me/${waNumber}?text=${msg}`;
+                window.open(waUrl, '_blank');
+
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
+                closeModalFunc();
+            }
         });
 
         // ===== KEYBOARD ESC UNTUK TUTUP MODAL =====
