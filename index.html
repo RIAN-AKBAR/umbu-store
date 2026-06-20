@@ -726,6 +726,15 @@
             font-size: 1rem;
         }
 
+        .modal-content .btn-submit-order .spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* ===== FOOTER ===== */
         .footer-bar {
             margin-top: 2.5rem;
@@ -1411,7 +1420,7 @@
             if (e.target === this) closeModalFunc();
         });
 
-        // Event listener untuk file upload - preview & upload ke server
+        // Event listener untuk file upload
         fileInput.addEventListener('change', function() {
             if (this.files && this.files[0]) {
                 const file = this.files[0];
@@ -1435,26 +1444,35 @@
             }
         });
 
-        // ===== UPLOAD FILE KE SERVER (menggunakan free image hosting) =====
+        // ===== UPLOAD FILE KE SERVER =====
         function uploadToServer(file) {
             return new Promise((resolve, reject) => {
                 const formData = new FormData();
-                formData.append('image', file);
+                formData.append('fileToUpload', file);
 
-                // Menggunakan free image hosting API (catbox.moe)
+                // Menggunakan free image hosting (catbox.moe)
                 fetch('https://catbox.moe/user/api.php', {
                     method: 'POST',
-                    body: formData
+                    body: formData,
+                    mode: 'cors'
                 })
-                .then(response => response.text())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('HTTP error ' + response.status);
+                    }
+                    return response.text();
+                })
                 .then(data => {
-                    if (data.startsWith('http')) {
-                        resolve(data.trim());
+                    const trimmed = data.trim();
+                    if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+                        resolve(trimmed);
                     } else {
-                        reject('Gagal upload gambar: ' + data);
+                        reject('Gagal upload: ' + trimmed);
                     }
                 })
-                .catch(err => reject(err));
+                .catch(err => {
+                    reject('Error: ' + err.message);
+                });
             });
         }
 
@@ -1538,9 +1556,44 @@
                     closeModalFunc();
                 })
                 .catch(error => {
-                    alert('❌ Gagal upload bukti pembayaran: ' + error);
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
+                    // Jika upload gagal, tetap kirim pesan dengan info bahwa bukti gagal diupload
+                    // Tawarkan untuk kirim manual
+                    const confirmSend = confirm(
+                        '❌ Gagal upload bukti pembayaran: ' + error + 
+                        '\n\nApakah Anda ingin tetap melanjutkan pesanan tanpa bukti? ' +
+                        '(Anda bisa kirim bukti manual via chat)'
+                    );
+
+                    if (confirmSend) {
+                        // Ambil username Robux jika ada
+                        let robuxData = '';
+                        if (isRobux) {
+                            const userInput = document.getElementById('robuxUser');
+                            const passInput = document.getElementById('robuxPass');
+                            const username = userInput ? userInput.value.trim() : '';
+                            const password = passInput ? passInput.value.trim() : '';
+                            if (username) robuxData += `%0AUsername%20Roblox%3A%20${encodeURIComponent(username)}`;
+                            if (password) robuxData += `%0APassword%20Roblox%3A%20${encodeURIComponent(password)}`;
+                        }
+
+                        const waNumber = '6282154329388';
+                        let msg = `Halo%20UMBU%20STORE%2C%20saya%20mau%20order%3A`;
+                        msg += `%0A%0A📦%20Produk%3A%20${encodeURIComponent(currentProduct)}`;
+                        msg += `%0A💰%20Harga%3A%20Rp%20${currentPrice.toLocaleString('id-ID')}`;
+                        if (robuxData) msg += robuxData;
+                        msg += `%0A%0A✅%20Saya%20sudah%20melakukan%20pembayaran%20via%20QRIS.`;
+                        msg += `%0A⚠️%20Bukti%20pembayaran%20gagal%20diupload%2C%20akan%20saya%20kirim%20manual.`;
+
+                        const waUrl = `https://wa.me/${waNumber}?text=${msg}`;
+                        window.open(waUrl, '_blank');
+
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
+                        closeModalFunc();
+                    } else {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Selesaikan Pesanan';
+                    }
                 });
         });
 
