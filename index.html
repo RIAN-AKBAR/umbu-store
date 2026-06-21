@@ -25,10 +25,75 @@
             align-items: center;
             justify-content: space-between;
         }
-        .brand-left { display: flex; align-items: center; gap: 1rem; }
-        .brand-icon { width: 50px; height: 50px; border-radius: 0; object-fit: contain; border: 2px solid #f5b81b66; box-shadow: 0 0 28px #f5b81b44; background: #0a0e1a; padding: 3px; }
-        .brand-left h1 { font-size: 1.6rem; font-weight: 800; background: linear-gradient(135deg, #f7d875, #e8a817); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.5px; }
-        .brand-tag { background: #1e2842; padding: 0.2rem 1rem; border-radius: 60px; color: #bcc9e6; font-size: 0.7rem; border: 1px solid #3a4870; display: flex; align-items: center; gap: 0.4rem; }
+        
+        /* HEADER KIRI - HAMBURGER DI PALING KIRI */
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        /* HAMBURGER MENU BUTTON - PALING KIRI SEBELUM LOGO */
+        .hamburger-btn {
+            display: none;
+            background: transparent;
+            border: 1px solid #2a3650;
+            border-radius: 10px;
+            padding: 0.4rem 0.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+            flex-direction: column;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+        .hamburger-btn:hover { border-color: #f5b81b66; background: #1a2340; }
+        .hamburger-btn span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: #8a9cc0;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        .hamburger-btn.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+        .hamburger-btn.active span:nth-child(2) { opacity: 0; }
+        .hamburger-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+        .brand-left { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.8rem; 
+        }
+        .brand-icon { 
+            width: 50px; 
+            height: 50px; 
+            border-radius: 0; 
+            object-fit: contain; 
+            border: 2px solid #f5b81b66; 
+            box-shadow: 0 0 28px #f5b81b44; 
+            background: #0a0e1a; 
+            padding: 3px; 
+        }
+        .brand-left h1 { 
+            font-size: 1.6rem; 
+            font-weight: 800; 
+            background: linear-gradient(135deg, #f7d875, #e8a817); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text; 
+            letter-spacing: -0.5px; 
+        }
+        .brand-tag { 
+            background: #1e2842; 
+            padding: 0.2rem 1rem; 
+            border-radius: 60px; 
+            color: #bcc9e6; 
+            font-size: 0.7rem; 
+            border: 1px solid #3a4870; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.4rem; 
+        }
         .brand-tag i { color: #f5b81b; }
 
         /* STORE STATUS */
@@ -60,13 +125,14 @@
             50% { opacity: 0.5; transform: scale(0.8); }
         }
 
-        /* NAVIGATION MENU - 3 KOLOM */
+        /* NAVIGATION MENU - DEFAULT 3 KOLOM */
         .nav-menu {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 0.3rem;
             width: 100%;
             margin-top: 0.5rem;
+            transition: all 0.3s ease;
         }
         .nav-menu a {
             padding: 0.3rem 0.4rem;
@@ -105,10 +171,54 @@
         .carousel-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; border: none; }
         .carousel-dots .dot.active { background: #f5b81b; width: 20px; border-radius: 10px; }
 
-        .welcome-section { background: linear-gradient(145deg, #111a2e, #0d1424); border-radius: 24px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; border: 1px solid #2a3650; box-shadow: 0 8px 28px -8px #000000aa; }
-        .welcome-section h2 { font-size: 1.5rem; font-weight: 700; color: #f0f4ff; }
-        .welcome-section h2 span { background: linear-gradient(135deg, #f7d875, #e8a817); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .welcome-section p { color: #8a9cc0; font-size: 0.85rem; margin-top: 0.2rem; }
+        /* WELCOME SECTION - ANIMASI */
+        .welcome-section {
+            background: linear-gradient(145deg, #111a2e, #0d1424);
+            border-radius: 24px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #2a3650;
+            box-shadow: 0 8px 28px -8px #000000aa;
+            overflow: hidden;
+        }
+        .welcome-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f0f4ff;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+        .welcome-section h2 span {
+            background: linear-gradient(135deg, #f7d875, #e8a817, #f7d875);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+            display: inline-block;
+        }
+        .welcome-section p {
+            color: #8a9cc0;
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
         .category-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
         .category-card {
@@ -174,12 +284,45 @@
         .qris-modal .btn-pay { width: 100%; padding: 0.7rem; background: #f5b81b; border: none; border-radius: 14px; font-size: 0.95rem; font-weight: 700; color: #0a0e1a; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
         .qris-modal .btn-pay:hover { background: #f5c84a; transform: scale(1.01); }
 
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 760px) {
             .main-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.2rem; }
+            
+            /* HEADER KIRI - HAMBURGER DI PALING KIRI */
+            .header-left { 
+                width: 100%; 
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+            }
+            .hamburger-btn { 
+                display: flex; 
+                flex-shrink: 0;
+                order: -1; /* PALING KIRI */
+            }
+            
+            .brand-left { flex: 1; }
             .brand-left h1 { font-size: 1.4rem; }
             .brand-icon { width: 40px; height: 40px; }
-            .nav-menu { grid-template-columns: repeat(3, 1fr); gap: 0.2rem; }
-            .nav-menu a { font-size: 0.55rem; padding: 0.2rem 0.3rem; }
+            .brand-tag { display: none; }
+            
+            .nav-menu {
+                display: none;
+                grid-template-columns: 1fr;
+                width: 100%;
+                gap: 0.2rem;
+                margin-top: 0.5rem;
+                padding: 0.5rem 0;
+                border-top: 1px solid #1b253d;
+            }
+            .nav-menu.open { display: grid; }
+            .nav-menu a { 
+                padding: 0.4rem 0.6rem; 
+                font-size: 0.7rem; 
+                text-align: center;
+                border-radius: 30px;
+            }
+            
             .header-right { width: 100%; justify-content: space-between; }
             .help-badge span { display: none; }
             .wa-badge span { display: none; }
@@ -195,13 +338,16 @@
             .footer-bar .footer-contact { flex-direction: column; gap: 0.5rem; }
             .carousel-btn { width: 26px; height: 26px; font-size: 0.7rem; }
         }
+        
         @media (max-width: 480px) {
-            .brand-left { flex-wrap: wrap; }
-            .brand-tag { font-size: 0.6rem; padding: 0.15rem 0.7rem; }
+            .header-left { 
+                gap: 0.4rem;
+            }
             .brand-left h1 { font-size: 1.2rem; }
             .brand-icon { width: 35px; height: 35px; }
-            .nav-menu { grid-template-columns: repeat(3, 1fr); gap: 0.15rem; }
-            .nav-menu a { font-size: 0.5rem; padding: 0.15rem 0.2rem; border-radius: 30px; }
+            .hamburger-btn { padding: 0.3rem 0.4rem; }
+            .hamburger-btn span { width: 18px; height: 2px; }
+            .nav-menu a { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
             .category-grid { grid-template-columns: 1fr; gap: 0.5rem; }
             .category-card .cat-img { width: 60px; height: 60px; }
             .carousel-container { height: 120px; }
@@ -209,20 +355,39 @@
             .header-right .wa-badge { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
             .header-right .cart-badge { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
             .store-status .status-time { display: none; }
+            .welcome-section h2 { font-size: 1rem; }
+            .welcome-section p { font-size: 0.75rem; }
+        }
+
+        /* TAMPILAN DEFAULT UNTUK DESKTOP - TETAP 3 KOLOM */
+        @media (min-width: 761px) {
+            .nav-menu { display: grid !important; }
+            .hamburger-btn { display: none; }
+            .header-left { width: auto; }
         }
     </style>
 </head>
 <body>
 <div class="store-wrap">
     <header class="main-header">
-        <div class="brand-left">
-            <img src="https://files.catbox.moe/3kwzxz.jpg" alt="ROLXUM" class="brand-icon" />
-            <h1>ROLXUM</h1>
-            <span class="brand-tag"><i class="fas fa-bolt"></i> digital store</span>
+        <!-- HEADER KIRI: HAMBURGER (PALING KIRI) + BRAND -->
+        <div class="header-left">
+            <!-- HAMBURGER MENU BUTTON - PALING KIRI SEBELUM LOGO -->
+            <button class="hamburger-btn" onclick="toggleMenu()" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="brand-left">
+                <img src="https://files.catbox.moe/3kwzxz.jpg" alt="ROLXUM" class="brand-icon" />
+                <h1>ROLXUM</h1>
+                <span class="brand-tag"><i class="fas fa-bolt"></i> digital store</span>
+            </div>
         </div>
-        
-        <!-- NAVIGATION MENU - 3 KOLOM -->
-        <div class="nav-menu">
+
+        <!-- NAVIGATION MENU -->
+        <div class="nav-menu" id="navMenu">
             <a href="index.html" class="active">🏠 Beranda</a>
             <a href="dds.html">🎮 DDS</a>
             <a href="robux.html">⭐ Robux</a>
@@ -258,6 +423,7 @@
         </div>
     </div>
 
+    <!-- WELCOME SECTION DENGAN ANIMASI -->
     <div class="welcome-section">
         <h2>✨ Selamat Datang di <span>ROLXUM</span></h2>
         <p>Pilih kategori di bawah untuk melihat produk. Klik <span style="color:#f5b81b;">Beli</span> atau <span style="color:#f5b81b;">+ Keranjang</span> untuk memesan!</p>
@@ -335,6 +501,16 @@
 
 <script>
     // ==========================================
+    // HAMBURGER MENU TOGGLE
+    // ==========================================
+    function toggleMenu() {
+        const navMenu = document.getElementById('navMenu');
+        const hamburger = document.querySelector('.hamburger-btn');
+        navMenu.classList.toggle('open');
+        hamburger.classList.toggle('active');
+    }
+
+    // ==========================================
     // STORE STATUS (JAM BUKA/TUTUP)
     // ==========================================
     function updateStoreStatus() {
@@ -393,6 +569,17 @@
     window.addToCartGlobal=function(item){const exist=cart.find(c=>c.nama===item.nama&&c.username===item.username);if(exist)exist.qty+=item.qty;else cart.push(item);updateCartUI();updateCartBadge();localStorage.setItem('rolxum_cart',JSON.stringify(cart));};
     document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeCart();closeQris();}});
     updateCartUI();updateCartBadge();
+
+    // TUTUP MENU SAAT KLIK DI LUAR
+    document.addEventListener('click', function(e) {
+        const navMenu = document.getElementById('navMenu');
+        const hamburger = document.querySelector('.hamburger-btn');
+        const headerLeft = document.querySelector('.header-left');
+        if (!headerLeft.contains(e.target) && !navMenu.contains(e.target)) {
+            navMenu.classList.remove('open');
+            hamburger.classList.remove('active');
+        }
+    });
 </script>
 </body>
 </html>
