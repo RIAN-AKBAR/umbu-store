@@ -9,7 +9,6 @@
     <title>ROLXUM · Robux</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* SAMA SEPERTI dds.html, ditambah style untuk form robux */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
         body { background: #0a0e1a; min-height: 100vh; display: flex; justify-content: center; padding: 1.5rem 1rem; }
         .store-wrap { max-width: 1300px; width: 100%; }
@@ -27,7 +26,7 @@
             justify-content: space-between;
         }
         .brand-left { display: flex; align-items: center; gap: 1rem; }
-        .brand-icon { width: 50px; height: 50px; border-radius: 0; object-fit: contain; border: 2px solid #f5b81b66; box-shadow: 0 0 28px #f5b81b44; background: #0a0e1a; padding: 3px; }
+        .brand-icon { width: 60px; height: 60px; border-radius: 0; object-fit: contain; border: 2px solid #f5b81b66; box-shadow: 0 0 28px #f5b81b44; background: #0a0e1a; padding: 3px; }
         .brand-left h1 { font-size: 1.6rem; font-weight: 800; background: linear-gradient(135deg, #f7d875, #e8a817); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.5px; }
         .brand-tag { background: #1e2842; padding: 0.2rem 1rem; border-radius: 60px; color: #bcc9e6; font-size: 0.7rem; border: 1px solid #3a4870; display: flex; align-items: center; gap: 0.4rem; }
         .brand-tag i { color: #f5b81b; }
@@ -45,7 +44,7 @@
         .cart-badge .cart-count { background: #0a0e1a; color: #f5b81b; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 800; }
 
         .page-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem; padding-bottom: 0.5rem; border-bottom: 1px solid #25304b; }
-        .page-header .page-icon { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; }
+        .page-header .page-icon { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; }
         .page-header h2 { color: #f0f4ff; font-size: 1.2rem; font-weight: 700; }
         .page-header .item-count { color: #6a7da0; font-size: 0.75rem; margin-left: auto; }
 
@@ -63,7 +62,7 @@
             display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.25s ease;
         }
         .robux-card:hover { transform: translateY(-3px); border-color: #f5b81b66; box-shadow: 0 8px 20px -6px #000000cc, 0 0 0 1px #f5b81b33; background: #141d33; }
-        .robux-card .product-img { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; background: #0a0e1a; margin-bottom: 0.3rem; }
+        .robux-card .product-img { width: 65px; height: 65px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; background: #0a0e1a; margin-bottom: 0.3rem; }
         .robux-card .name { color: #e4ebff; font-weight: 600; font-size: 0.85rem; }
         .robux-card .price { color: #f5d76e; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.3rem; }
         .robux-card .btn-buy-robux { width: 100%; background: #f5b81b; border: 1px solid #f5b81b; color: #0a0e1a; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 60px; font-size: 0.7rem; cursor: pointer; transition: 0.2s ease; }
@@ -102,7 +101,7 @@
         @media (max-width: 760px) {
             .main-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.2rem; }
             .brand-left h1 { font-size: 1.4rem; }
-            .brand-icon { width: 40px; height: 40px; }
+            .brand-icon { width: 50px; height: 50px; }
             .nav-menu { width: 100%; justify-content: center; gap: 0.3rem; }
             .nav-menu a { font-size: 0.6rem; padding: 0.2rem 0.6rem; }
             .header-right { width: 100%; justify-content: space-between; }
@@ -110,6 +109,7 @@
             .wa-badge span { display: none; }
             .cart-badge span { display: none; }
             .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.6rem; }
+            .robux-card .product-img { width: 55px; height: 55px; }
             .footer-bar .footer-contact { flex-direction: column; gap: 0.5rem; }
             .form-group { flex-direction: column; align-items: stretch; }
             .form-group label { min-width: auto; }
@@ -119,9 +119,10 @@
             .brand-left { flex-wrap: wrap; }
             .brand-tag { font-size: 0.6rem; padding: 0.15rem 0.7rem; }
             .brand-left h1 { font-size: 1.2rem; }
-            .brand-icon { width: 35px; height: 35px; }
+            .brand-icon { width: 40px; height: 40px; }
             .nav-menu a { font-size: 0.55rem; padding: 0.15rem 0.5rem; }
             .product-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+            .robux-card .product-img { width: 60px; height: 60px; }
         }
     </style>
 </head>
@@ -136,7 +137,6 @@
         <div class="nav-menu">
             <a href="index.html">🏠 Beranda</a>
             <a href="dds.html">🎮 DDS</a>
-            <a href="cash.html">💰 Cash</a>
             <a href="robux.html" class="active">⭐ Robux</a>
             <a href="cdid.html">🏷️ CDID</a>
             <a href="gag.html">👑 GAG</a>
@@ -273,7 +273,7 @@
             total += subtotal;
             html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0.8rem;background:#0b1121;border-radius:12px;border:1px solid #1b253d;margin-bottom:0.4rem;">
                 <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
-                    ${item.img ? `<img src="${item.img}" style="width:35px;height:35px;border-radius:8px;object-fit:cover;border:1px solid #2a3650;">` : ''}
+                    ${item.img ? `<img src="${item.img}" style="width:45px;height:45px;border-radius:8px;object-fit:cover;border:1px solid #2a3650;">` : ''}
                     <div><div style="color:#e4ebff;font-weight:500;font-size:0.85rem;">${item.nama}</div><div style="color:#8a9cc0;font-size:0.65rem;">Username: ${item.username} x${item.qty}</div></div>
                 </div>
                 <div style="display:flex;align-items:center;gap:0.5rem;">
