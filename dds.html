@@ -1,12 +1,12 @@
 <!-- ========================================================= -->
-<!-- FILE 2 : dds.html (GAMEPASS DDS)                          -->
+<!-- FILE : dds.html (GAMEPASS DDS + CASH)                     -->
 <!-- ========================================================= -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ROLXUM · Gamepass DDS</title>
+    <title>ROLXUM · DDS & Cash</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
@@ -47,6 +47,9 @@
         .page-header .page-icon { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; }
         .page-header h2 { color: #f0f4ff; font-size: 1.2rem; font-weight: 700; }
         .page-header .item-count { color: #6a7da0; font-size: 0.75rem; margin-left: auto; }
+
+        .section-title { color: #f0f4ff; font-size: 1rem; font-weight: 600; margin: 1rem 0 0.5rem 0; padding-bottom: 0.3rem; border-bottom: 1px solid #1b253d; display: flex; align-items: center; gap: 0.5rem; }
+        .section-title i { color: #f5b81b; }
 
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
         .product-card {
@@ -141,8 +144,7 @@
         </div>
         <div class="nav-menu">
             <a href="index.html">🏠 Beranda</a>
-            <a href="dds.html" class="active">🎮 DDS</a>
-            <a href="cash.html">💰 Cash</a>
+            <a href="dds.html" class="active">🎮 DDS & Cash</a>
             <a href="robux.html">⭐ Robux</a>
             <a href="cdid.html">🏷️ CDID</a>
             <a href="gag.html">👑 GAG</a>
@@ -157,10 +159,17 @@
 
     <div class="page-header">
         <img src="https://files.catbox.moe/hsr6lw.jpg" alt="DDS" class="page-icon" />
-        <h2>🎮 Gamepass DDS</h2>
-        <span class="item-count">11 item</span>
+        <h2>🎮 Gamepass DDS & 💰 Cash</h2>
+        <span class="item-count" id="totalItems">15 item</span>
     </div>
-    <div class="product-grid" id="productGrid"></div>
+
+    <!-- SECTION: GAMEPASS DDS -->
+    <div class="section-title"><i class="fas fa-gamepad"></i> Gamepass DDS</div>
+    <div class="product-grid" id="ddsGrid"></div>
+
+    <!-- SECTION: CASH -->
+    <div class="section-title" style="margin-top:1.5rem;"><i class="fas fa-money-bill-wave"></i> Cash</div>
+    <div class="product-grid" id="cashGrid"></div>
 
     <div class="footer-bar">
         <div class="footer-copy"><i class="far fa-copyright"></i> 2025 ROLXUM — Premium Digital Store</div>
@@ -173,7 +182,7 @@
     </div>
 </div>
 
-<!-- ===== MODALS ===== -->
+<!-- MODALS -->
 <div class="modal-overlay" id="usernameModal">
     <div class="modal-content">
         <button class="close-modal" onclick="closeUsernameModal()"><i class="fas fa-times"></i></button>
@@ -216,7 +225,10 @@
 </div>
 
 <script>
-    const products = [
+    // ==========================================
+    // DATA PRODUK GABUNGAN DDS + CASH
+    // ==========================================
+    const ddsProducts = [
         { nama: "Suspension", harga: 4300, img: "https://files.catbox.moe/drg7jh.jpg", desc: "Unlock advanced suspension tuning for full control.", sold: "⭐ 4.5 · 699 Terjual" },
         { nama: "Boombox", harga: 3000, img: "https://files.catbox.moe/taebh6.jpg", desc: "Play any Roblox song ID and share your music.", sold: "⭐ 4.8 · 887 Terjual" },
         { nama: "Advance Paint", harga: 7500, img: "https://files.catbox.moe/xru01z.jpg", desc: "Customize your vehicle with premium paint colors.", sold: "⭐ 4.6 · 543 Terjual" },
@@ -230,11 +242,23 @@
         { nama: "2x Paycheck", harga: 54000, img: "https://files.catbox.moe/vkoyom.jpg", desc: "Double your paycheck earnings for a limited time.", sold: "⭐ 4.9 · 1.2k Terjual" }
     ];
 
+    const cashProducts = [
+        { nama: "Cash 10 Juta", harga: 5000, img: "https://files.catbox.moe/taj09h.jpg", desc: "Top up 10 Juta cash instantly for your in-game needs.", sold: "⭐ 4.7 · 1.5k Terjual" },
+        { nama: "Cash 50 Juta", harga: 8000, img: "https://files.catbox.moe/yaf2jk.jpg", desc: "Top up 50 Juta cash instantly for your in-game needs.", sold: "⭐ 4.8 · 987 Terjual" },
+        { nama: "Cash 100 Juta", harga: 14000, img: "https://files.catbox.moe/7krb35.jpg", desc: "Top up 100 Juta cash instantly for your in-game needs.", sold: "⭐ 4.9 · 756 Terjual" },
+        { nama: "Cash 500 Juta", harga: 46000, img: "https://files.catbox.moe/ddioll.jpg", desc: "Top up 500 Juta cash instantly for your in-game needs.", sold: "⭐ 4.9 · 543 Terjual" }
+    ];
+
+    // ==========================================
+    // RENDER PRODUK
+    // ==========================================
     function renderProducts() {
-        const grid = document.getElementById('productGrid');
-        let html = '';
-        products.forEach(p => {
-            html += `
+        const ddsGrid = document.getElementById('ddsGrid');
+        const cashGrid = document.getElementById('cashGrid');
+        let ddsHtml = '', cashHtml = '';
+
+        ddsProducts.forEach(p => {
+            ddsHtml += `
                 <div class="product-card" data-nama="${p.nama}" data-harga="${p.harga}" data-img="${p.img}">
                     <div class="product-top">
                         <img src="${p.img}" alt="${p.nama}" class="product-img" />
@@ -252,10 +276,36 @@
                 </div>
             `;
         });
-        grid.innerHTML = html;
+        ddsGrid.innerHTML = ddsHtml;
+
+        cashProducts.forEach(p => {
+            cashHtml += `
+                <div class="product-card" data-nama="${p.nama}" data-harga="${p.harga}" data-img="${p.img}">
+                    <div class="product-top">
+                        <img src="${p.img}" alt="${p.nama}" class="product-img" />
+                        <div class="product-info">
+                            <div class="name">${p.nama}</div>
+                            <div class="price">Rp ${p.harga.toLocaleString('id-ID')}</div>
+                            <div class="sold">${p.sold}</div>
+                        </div>
+                    </div>
+                    <div class="product-desc">${p.desc}</div>
+                    <div class="product-actions">
+                        <button class="btn-buy-small" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-cart-small" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            `;
+        });
+        cashGrid.innerHTML = cashHtml;
+
+        document.getElementById('totalItems').textContent = (ddsProducts.length + cashProducts.length) + ' item';
     }
     renderProducts();
 
+    // ==========================================
+    // KERANJANG & FUNGSI UMUM
+    // ==========================================
     let cart = JSON.parse(localStorage.getItem('rolxum_cart')) || [];
     let modalProduct = {}, modalQty = 1;
 
