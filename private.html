@@ -26,7 +26,7 @@
             justify-content: space-between;
         }
         .brand-left { display: flex; align-items: center; gap: 1rem; }
-        .brand-icon { width: 50px; height: 50px; border-radius: 0; object-fit: contain; border: 2px solid #f5b81b66; box-shadow: 0 0 28px #f5b81b44; background: #0a0e1a; padding: 3px; }
+        .brand-icon { width: 60px; height: 60px; border-radius: 0; object-fit: contain; border: 2px solid #f5b81b66; box-shadow: 0 0 28px #f5b81b44; background: #0a0e1a; padding: 3px; }
         .brand-left h1 { font-size: 1.6rem; font-weight: 800; background: linear-gradient(135deg, #f7d875, #e8a817); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.5px; }
         .brand-tag { background: #1e2842; padding: 0.2rem 1rem; border-radius: 60px; color: #bcc9e6; font-size: 0.7rem; border: 1px solid #3a4870; display: flex; align-items: center; gap: 0.4rem; }
         .brand-tag i { color: #f5b81b; }
@@ -44,7 +44,7 @@
         .cart-badge .cart-count { background: #0a0e1a; color: #f5b81b; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 800; }
 
         .page-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem; padding-bottom: 0.5rem; border-bottom: 1px solid #25304b; }
-        .page-header .page-icon { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; }
+        .page-header .page-icon { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; }
         .page-header h2 { color: #f0f4ff; font-size: 1.2rem; font-weight: 700; }
         .page-header .item-count { color: #6a7da0; font-size: 0.75rem; margin-left: auto; }
 
@@ -55,7 +55,7 @@
         }
         .product-card:hover { transform: translateY(-3px); border-color: #f5b81b66; box-shadow: 0 8px 20px -6px #000000cc, 0 0 0 1px #f5b81b33; background: #141d33; }
         .product-card .product-top { display: flex; gap: 0.6rem; align-items: flex-start; }
-        .product-card .product-img { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; background: #0a0e1a; flex-shrink: 0; }
+        .product-card .product-img { width: 65px; height: 65px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; background: #0a0e1a; flex-shrink: 0; }
         .product-card .product-info { flex: 1; }
         .product-card .product-info .name { color: #e4ebff; font-weight: 600; font-size: 0.85rem; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .product-card .product-info .price { color: #f5d76e; font-weight: 700; font-size: 0.9rem; margin-top: 0.2rem; }
@@ -107,7 +107,7 @@
         @media (max-width: 760px) {
             .main-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.2rem; }
             .brand-left h1 { font-size: 1.4rem; }
-            .brand-icon { width: 40px; height: 40px; }
+            .brand-icon { width: 50px; height: 50px; }
             .nav-menu { width: 100%; justify-content: center; gap: 0.3rem; }
             .nav-menu a { font-size: 0.6rem; padding: 0.2rem 0.6rem; }
             .header-right { width: 100%; justify-content: space-between; }
@@ -115,6 +115,7 @@
             .wa-badge span { display: none; }
             .cart-badge span { display: none; }
             .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.6rem; }
+            .product-card .product-img { width: 55px; height: 55px; }
             .product-card .product-top { flex-direction: column; align-items: center; }
             .product-card .product-info { text-align: center; }
             .product-card .product-actions { flex-direction: column; }
@@ -125,9 +126,10 @@
             .brand-left { flex-wrap: wrap; }
             .brand-tag { font-size: 0.6rem; padding: 0.15rem 0.7rem; }
             .brand-left h1 { font-size: 1.2rem; }
-            .brand-icon { width: 35px; height: 35px; }
+            .brand-icon { width: 40px; height: 40px; }
             .nav-menu a { font-size: 0.55rem; padding: 0.15rem 0.5rem; }
             .product-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+            .product-card .product-img { width: 60px; height: 60px; }
         }
     </style>
 </head>
@@ -142,7 +144,6 @@
         <div class="nav-menu">
             <a href="index.html">🏠 Beranda</a>
             <a href="dds.html">🎮 DDS</a>
-            <a href="cash.html">💰 Cash</a>
             <a href="robux.html">⭐ Robux</a>
             <a href="cdid.html">🏷️ CDID</a>
             <a href="gag.html">👑 GAG</a>
@@ -211,9 +212,6 @@
 </div>
 
 <script>
-// ==========================================
-// DATA PRIVATE SERVER
-// ==========================================
 const privateProduct = {
     id: 'private-01',
     name: 'Private Server (Req)',
@@ -222,9 +220,6 @@ const privateProduct = {
     img: 'https://files.catbox.moe/bu441s.jpg'
 };
 
-// ==========================================
-// RENDER PRODUK
-// ==========================================
 const grid = document.getElementById('productGrid');
 function renderProduct() {
     const card = document.createElement('div');
@@ -248,9 +243,6 @@ function renderProduct() {
 }
 renderProduct();
 
-// ==========================================
-// KERANJANG
-// ==========================================
 let cart = JSON.parse(localStorage.getItem('rolxum_cart')) || [];
 function updateCartBadge() {
     const count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
@@ -270,9 +262,6 @@ function addPrivateToCart() {
     alert('✅ Private Server ditambahkan ke keranjang!');
 }
 
-// ==========================================
-// MODAL PRIVATE
-// ==========================================
 let privateQty = 1;
 const PRICE_PER_UNIT = 2000;
 
@@ -298,7 +287,6 @@ function processPrivateOrder() {
     const serverName = document.getElementById('privateServer').value.trim() || 'Tidak diisi';
     const total = PRICE_PER_UNIT * privateQty;
     
-    // Simpan ke keranjang
     const existing = cart.find(item => item.id === privateProduct.id);
     if (existing) {
         existing.qty = (existing.qty || 0) + privateQty;
@@ -308,15 +296,11 @@ function processPrivateOrder() {
     updateCartBadge();
     closePrivateModal();
     
-    // Tampilkan QRIS
     document.getElementById('qrisProductList').textContent = `Private Server (Req) x${privateQty} ${serverName !== 'Tidak diisi' ? `- ${serverName}` : ''}`;
     document.getElementById('qrisTotal').textContent = `Total: Rp ${total.toLocaleString()}`;
     document.getElementById('qrisModal').classList.add('active');
 }
 
-// ==========================================
-// QRIS MODAL
-// ==========================================
 function closeQrisModal() {
     document.getElementById('qrisModal').classList.remove('active');
 }
@@ -324,13 +308,9 @@ function closeQrisModal() {
 function confirmPayment() {
     alert('✅ Terima kasih! Pesanan akan diproses. Hubungi WhatsApp untuk konfirmasi.');
     closeQrisModal();
-    // Bisa redirect ke WhatsApp
     window.open('https://wa.me/6282154329388?text=Halo%20ROLXUM%2C%20saya%20sudah%20bayar%20untuk%20Private%20Server', '_blank');
 }
 
-// ==========================================
-// FUNGSI UMUM
-// ==========================================
 function helpCenter() {
     alert('📞 Hubungi kami:\nWhatsApp: 0821-5432-9388\nEmail: @rolxum.id\nSaluran: https://whatsapp.com/channel/0029Vb89zDn2UPBBMwKszN0t');
 }
@@ -356,7 +336,6 @@ function openCart() {
     }
 }
 
-// Tutup modal klik di luar
 document.getElementById('privateModal').addEventListener('click', function(e) {
     if (e.target === this) closePrivateModal();
 });
@@ -364,6 +343,5 @@ document.getElementById('qrisModal').addEventListener('click', function(e) {
     if (e.target === this) closeQrisModal();
 });
 </script>
-
 </body>
 </html>
