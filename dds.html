@@ -48,8 +48,36 @@
         .page-header h2 { color: #f0f4ff; font-size: 1.2rem; font-weight: 700; }
         .page-header .item-count { color: #6a7da0; font-size: 0.75rem; margin-left: auto; }
 
-        .section-title { color: #f0f4ff; font-size: 1rem; font-weight: 600; margin: 1rem 0 0.5rem 0; padding-bottom: 0.3rem; border-bottom: 1px solid #1b253d; display: flex; align-items: center; gap: 0.5rem; }
-        .section-title i { color: #f5b81b; }
+        /* FILTER BAR */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #1b253d;
+        }
+        .filter-btn {
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 1px solid #2a3650;
+            background: transparent;
+            color: #8a9cc0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .filter-btn:hover {
+            background: #1a2340;
+            color: #f0f4ff;
+        }
+        .filter-btn.active {
+            background: #f5b81b;
+            color: #0a0e1a;
+            border-color: #f5b81b;
+            box-shadow: 0 0 20px #f5b81b44;
+        }
 
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
         .product-card {
@@ -117,6 +145,8 @@
             .help-badge span { display: none; }
             .wa-badge span { display: none; }
             .cart-badge span { display: none; }
+            .filter-bar { justify-content: center; }
+            .filter-btn { font-size: 0.6rem; padding: 0.2rem 0.8rem; }
             .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.6rem; }
             .product-card .product-top { flex-direction: column; align-items: center; }
             .product-card .product-info { text-align: center; }
@@ -131,6 +161,7 @@
             .brand-icon { width: 35px; height: 35px; }
             .nav-menu a { font-size: 0.55rem; padding: 0.15rem 0.5rem; }
             .product-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+            .filter-btn { font-size: 0.55rem; padding: 0.15rem 0.6rem; }
         }
     </style>
 </head>
@@ -163,13 +194,14 @@
         <span class="item-count" id="totalItems">15 item</span>
     </div>
 
-    <!-- SECTION: GAMEPASS DDS -->
-    <div class="section-title"><i class="fas fa-gamepad"></i> Gamepass DDS</div>
-    <div class="product-grid" id="ddsGrid"></div>
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">📋 Semua</button>
+        <button class="filter-btn" data-filter="dds">🎮 Gamepass DDS</button>
+        <button class="filter-btn" data-filter="cash">💰 Cash</button>
+    </div>
 
-    <!-- SECTION: CASH -->
-    <div class="section-title" style="margin-top:1.5rem;"><i class="fas fa-money-bill-wave"></i> Cash</div>
-    <div class="product-grid" id="cashGrid"></div>
+    <div class="product-grid" id="productGrid"></div>
 
     <div class="footer-bar">
         <div class="footer-copy"><i class="far fa-copyright"></i> 2025 ROLXUM — Premium Digital Store</div>
@@ -228,80 +260,74 @@
     // ==========================================
     // DATA PRODUK GABUNGAN DDS + CASH
     // ==========================================
-    const ddsProducts = [
-        { nama: "Suspension", harga: 4300, img: "https://files.catbox.moe/drg7jh.jpg", desc: "Unlock advanced suspension tuning for full control.", sold: "⭐ 4.5 · 699 Terjual" },
-        { nama: "Boombox", harga: 3000, img: "https://files.catbox.moe/taebh6.jpg", desc: "Play any Roblox song ID and share your music.", sold: "⭐ 4.8 · 887 Terjual" },
-        { nama: "Advance Paint", harga: 7500, img: "https://files.catbox.moe/xru01z.jpg", desc: "Customize your vehicle with premium paint colors.", sold: "⭐ 4.6 · 543 Terjual" },
-        { nama: "Premium Aksesoris", harga: 6500, img: "https://files.catbox.moe/drg7jh.jpg", desc: "Premium accessories to make your vehicle stand out.", sold: "⭐ 4.7 · 412 Terjual" },
-        { nama: "Exclusive Rims", harga: 10000, img: "https://files.catbox.moe/y83ebh.jpg", desc: "Exclusive limited edition rims for ultimate style.", sold: "⭐ 4.9 · 256 Terjual" },
-        { nama: "Custom Plate", harga: 9000, img: "https://files.catbox.moe/v0wyhz.jpg", desc: "Create your own custom license plate.", sold: "⭐ 4.4 · 378 Terjual" },
-        { nama: "Slot Limit Unlock", harga: 10000, img: "https://files.catbox.moe/o6kz71.jpg", desc: "Unlock additional vehicle slots for customization.", sold: "⭐ 4.3 · 189 Terjual" },
-        { nama: "Drag Space", harga: 14000, img: "https://files.catbox.moe/11s7d2.jpg", desc: "Expand inventory space for more items and upgrades.", sold: "⭐ 4.6 · 234 Terjual" },
-        { nama: "Luxury", harga: 14500, img: "https://files.catbox.moe/l5x1kr.jpg", desc: "Experience ultimate luxury with premium features.", sold: "⭐ 4.8 · 312 Terjual" },
-        { nama: "Police", harga: 17000, img: "https://files.catbox.moe/fv0i1h.jpg", desc: "Become a law enforcer with police vehicle.", sold: "⭐ 4.5 · 567 Terjual" },
-        { nama: "2x Paycheck", harga: 54000, img: "https://files.catbox.moe/vkoyom.jpg", desc: "Double your paycheck earnings for a limited time.", sold: "⭐ 4.9 · 1.2k Terjual" }
+    const allProducts = [
+        // DDS Products
+        { nama: "Suspension", harga: 4300, img: "https://files.catbox.moe/drg7jh.jpg", desc: "Unlock advanced suspension tuning for full control.", sold: "⭐ 4.5 · 699 Terjual", kategori: "dds" },
+        { nama: "Boombox", harga: 3000, img: "https://files.catbox.moe/taebh6.jpg", desc: "Play any Roblox song ID and share your music.", sold: "⭐ 4.8 · 887 Terjual", kategori: "dds" },
+        { nama: "Advance Paint", harga: 7500, img: "https://files.catbox.moe/xru01z.jpg", desc: "Customize your vehicle with premium paint colors.", sold: "⭐ 4.6 · 543 Terjual", kategori: "dds" },
+        { nama: "Premium Aksesoris", harga: 6500, img: "https://files.catbox.moe/drg7jh.jpg", desc: "Premium accessories to make your vehicle stand out.", sold: "⭐ 4.7 · 412 Terjual", kategori: "dds" },
+        { nama: "Exclusive Rims", harga: 10000, img: "https://files.catbox.moe/y83ebh.jpg", desc: "Exclusive limited edition rims for ultimate style.", sold: "⭐ 4.9 · 256 Terjual", kategori: "dds" },
+        { nama: "Custom Plate", harga: 9000, img: "https://files.catbox.moe/v0wyhz.jpg", desc: "Create your own custom license plate.", sold: "⭐ 4.4 · 378 Terjual", kategori: "dds" },
+        { nama: "Slot Limit Unlock", harga: 10000, img: "https://files.catbox.moe/o6kz71.jpg", desc: "Unlock additional vehicle slots for customization.", sold: "⭐ 4.3 · 189 Terjual", kategori: "dds" },
+        { nama: "Drag Space", harga: 14000, img: "https://files.catbox.moe/11s7d2.jpg", desc: "Expand inventory space for more items and upgrades.", sold: "⭐ 4.6 · 234 Terjual", kategori: "dds" },
+        { nama: "Luxury", harga: 14500, img: "https://files.catbox.moe/l5x1kr.jpg", desc: "Experience ultimate luxury with premium features.", sold: "⭐ 4.8 · 312 Terjual", kategori: "dds" },
+        { nama: "Police", harga: 17000, img: "https://files.catbox.moe/fv0i1h.jpg", desc: "Become a law enforcer with police vehicle.", sold: "⭐ 4.5 · 567 Terjual", kategori: "dds" },
+        { nama: "2x Paycheck", harga: 54000, img: "https://files.catbox.moe/vkoyom.jpg", desc: "Double your paycheck earnings for a limited time.", sold: "⭐ 4.9 · 1.2k Terjual", kategori: "dds" },
+        // Cash Products
+        { nama: "Cash 10 Juta", harga: 5000, img: "https://files.catbox.moe/taj09h.jpg", desc: "Top up 10 Juta cash instantly for your in-game needs.", sold: "⭐ 4.7 · 1.5k Terjual", kategori: "cash" },
+        { nama: "Cash 50 Juta", harga: 8000, img: "https://files.catbox.moe/yaf2jk.jpg", desc: "Top up 50 Juta cash instantly for your in-game needs.", sold: "⭐ 4.8 · 987 Terjual", kategori: "cash" },
+        { nama: "Cash 100 Juta", harga: 14000, img: "https://files.catbox.moe/7krb35.jpg", desc: "Top up 100 Juta cash instantly for your in-game needs.", sold: "⭐ 4.9 · 756 Terjual", kategori: "cash" },
+        { nama: "Cash 500 Juta", harga: 46000, img: "https://files.catbox.moe/ddioll.jpg", desc: "Top up 500 Juta cash instantly for your in-game needs.", sold: "⭐ 4.9 · 543 Terjual", kategori: "cash" }
     ];
 
-    const cashProducts = [
-        { nama: "Cash 10 Juta", harga: 5000, img: "https://files.catbox.moe/taj09h.jpg", desc: "Top up 10 Juta cash instantly for your in-game needs.", sold: "⭐ 4.7 · 1.5k Terjual" },
-        { nama: "Cash 50 Juta", harga: 8000, img: "https://files.catbox.moe/yaf2jk.jpg", desc: "Top up 50 Juta cash instantly for your in-game needs.", sold: "⭐ 4.8 · 987 Terjual" },
-        { nama: "Cash 100 Juta", harga: 14000, img: "https://files.catbox.moe/7krb35.jpg", desc: "Top up 100 Juta cash instantly for your in-game needs.", sold: "⭐ 4.9 · 756 Terjual" },
-        { nama: "Cash 500 Juta", harga: 46000, img: "https://files.catbox.moe/ddioll.jpg", desc: "Top up 500 Juta cash instantly for your in-game needs.", sold: "⭐ 4.9 · 543 Terjual" }
-    ];
+    let currentFilter = 'all';
 
     // ==========================================
-    // RENDER PRODUK
+    // RENDER PRODUK DENGAN FILTER
     // ==========================================
-    function renderProducts() {
-        const ddsGrid = document.getElementById('ddsGrid');
-        const cashGrid = document.getElementById('cashGrid');
-        let ddsHtml = '', cashHtml = '';
-
-        ddsProducts.forEach(p => {
-            ddsHtml += `
-                <div class="product-card" data-nama="${p.nama}" data-harga="${p.harga}" data-img="${p.img}">
-                    <div class="product-top">
-                        <img src="${p.img}" alt="${p.nama}" class="product-img" />
-                        <div class="product-info">
-                            <div class="name">${p.nama}</div>
-                            <div class="price">Rp ${p.harga.toLocaleString('id-ID')}</div>
-                            <div class="sold">${p.sold}</div>
+    function renderProducts(filter = 'all') {
+        const grid = document.getElementById('productGrid');
+        const filtered = filter === 'all' ? allProducts : allProducts.filter(p => p.kategori === filter);
+        let html = '';
+        
+        if (filtered.length === 0) {
+            html = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:#6a7da0;font-size:0.9rem;">Tidak ada produk di kategori ini</div>`;
+        } else {
+            filtered.forEach(p => {
+                html += `
+                    <div class="product-card" data-nama="${p.nama}" data-harga="${p.harga}" data-img="${p.img}" data-kategori="${p.kategori}">
+                        <div class="product-top">
+                            <img src="${p.img}" alt="${p.nama}" class="product-img" />
+                            <div class="product-info">
+                                <div class="name">${p.nama}</div>
+                                <div class="price">Rp ${p.harga.toLocaleString('id-ID')}</div>
+                                <div class="sold">${p.sold}</div>
+                            </div>
+                        </div>
+                        <div class="product-desc">${p.desc}</div>
+                        <div class="product-actions">
+                            <button class="btn-buy-small" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                            <button class="btn-cart-small" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i></button>
                         </div>
                     </div>
-                    <div class="product-desc">${p.desc}</div>
-                    <div class="product-actions">
-                        <button class="btn-buy-small" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
-                        <button class="btn-cart-small" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i></button>
-                    </div>
-                </div>
-            `;
-        });
-        ddsGrid.innerHTML = ddsHtml;
-
-        cashProducts.forEach(p => {
-            cashHtml += `
-                <div class="product-card" data-nama="${p.nama}" data-harga="${p.harga}" data-img="${p.img}">
-                    <div class="product-top">
-                        <img src="${p.img}" alt="${p.nama}" class="product-img" />
-                        <div class="product-info">
-                            <div class="name">${p.nama}</div>
-                            <div class="price">Rp ${p.harga.toLocaleString('id-ID')}</div>
-                            <div class="sold">${p.sold}</div>
-                        </div>
-                    </div>
-                    <div class="product-desc">${p.desc}</div>
-                    <div class="product-actions">
-                        <button class="btn-buy-small" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
-                        <button class="btn-cart-small" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i></button>
-                    </div>
-                </div>
-            `;
-        });
-        cashGrid.innerHTML = cashHtml;
-
-        document.getElementById('totalItems').textContent = (ddsProducts.length + cashProducts.length) + ' item';
+                `;
+            });
+        }
+        grid.innerHTML = html;
+        document.getElementById('totalItems').textContent = filtered.length + ' item';
     }
-    renderProducts();
+
+    // ==========================================
+    // FILTER BUTTONS
+    // ==========================================
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentFilter = this.dataset.filter;
+            renderProducts(currentFilter);
+        });
+    });
 
     // ==========================================
     // KERANJANG & FUNGSI UMUM
@@ -444,6 +470,8 @@
         if (e.key === 'Escape') { closeCart(); closeQris(); closeUsernameModal(); }
     });
 
+    // Render awal
+    renderProducts('all');
     updateCartUI();
     updateCartBadge();
 </script>
