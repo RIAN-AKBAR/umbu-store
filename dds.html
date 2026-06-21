@@ -26,7 +26,7 @@
             justify-content: space-between;
         }
         .brand-left { display: flex; align-items: center; gap: 1rem; }
-        .brand-icon { width: 50px; height: 50px; border-radius: 0; object-fit: contain; border: 2px solid #f5b81b66; box-shadow: 0 0 28px #f5b81b44; background: #0a0e1a; padding: 3px; }
+        .brand-icon { width: 60px; height: 60px; border-radius: 0; object-fit: contain; border: 2px solid #f5b81b66; box-shadow: 0 0 28px #f5b81b44; background: #0a0e1a; padding: 3px; }
         .brand-left h1 { font-size: 1.6rem; font-weight: 800; background: linear-gradient(135deg, #f7d875, #e8a817); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.5px; }
         .brand-tag { background: #1e2842; padding: 0.2rem 1rem; border-radius: 60px; color: #bcc9e6; font-size: 0.7rem; border: 1px solid #3a4870; display: flex; align-items: center; gap: 0.4rem; }
         .brand-tag i { color: #f5b81b; }
@@ -44,11 +44,10 @@
         .cart-badge .cart-count { background: #0a0e1a; color: #f5b81b; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 800; }
 
         .page-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem; padding-bottom: 0.5rem; border-bottom: 1px solid #25304b; }
-        .page-header .page-icon { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; }
+        .page-header .page-icon { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; }
         .page-header h2 { color: #f0f4ff; font-size: 1.2rem; font-weight: 700; }
         .page-header .item-count { color: #6a7da0; font-size: 0.75rem; margin-left: auto; }
 
-        /* FILTER BAR */
         .filter-bar {
             display: flex;
             flex-wrap: wrap;
@@ -68,16 +67,8 @@
             cursor: pointer;
             transition: 0.2s;
         }
-        .filter-btn:hover {
-            background: #1a2340;
-            color: #f0f4ff;
-        }
-        .filter-btn.active {
-            background: #f5b81b;
-            color: #0a0e1a;
-            border-color: #f5b81b;
-            box-shadow: 0 0 20px #f5b81b44;
-        }
+        .filter-btn:hover { background: #1a2340; color: #f0f4ff; }
+        .filter-btn.active { background: #f5b81b; color: #0a0e1a; border-color: #f5b81b; box-shadow: 0 0 20px #f5b81b44; }
 
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
         .product-card {
@@ -86,7 +77,7 @@
         }
         .product-card:hover { transform: translateY(-3px); border-color: #f5b81b66; box-shadow: 0 8px 20px -6px #000000cc, 0 0 0 1px #f5b81b33; background: #141d33; }
         .product-card .product-top { display: flex; gap: 0.6rem; align-items: flex-start; }
-        .product-card .product-img { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; background: #0a0e1a; flex-shrink: 0; }
+        .product-card .product-img { width: 65px; height: 65px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; background: #0a0e1a; flex-shrink: 0; }
         .product-card .product-info { flex: 1; }
         .product-card .product-info .name { color: #e4ebff; font-weight: 600; font-size: 0.85rem; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .product-card .product-info .price { color: #f5d76e; font-weight: 700; font-size: 0.9rem; margin-top: 0.2rem; }
@@ -138,7 +129,7 @@
         @media (max-width: 760px) {
             .main-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.2rem; }
             .brand-left h1 { font-size: 1.4rem; }
-            .brand-icon { width: 40px; height: 40px; }
+            .brand-icon { width: 50px; height: 50px; }
             .nav-menu { width: 100%; justify-content: center; gap: 0.3rem; }
             .nav-menu a { font-size: 0.6rem; padding: 0.2rem 0.6rem; }
             .header-right { width: 100%; justify-content: space-between; }
@@ -148,6 +139,7 @@
             .filter-bar { justify-content: center; }
             .filter-btn { font-size: 0.6rem; padding: 0.2rem 0.8rem; }
             .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.6rem; }
+            .product-card .product-img { width: 55px; height: 55px; }
             .product-card .product-top { flex-direction: column; align-items: center; }
             .product-card .product-info { text-align: center; }
             .product-card .product-actions { flex-direction: column; }
@@ -158,9 +150,10 @@
             .brand-left { flex-wrap: wrap; }
             .brand-tag { font-size: 0.6rem; padding: 0.15rem 0.7rem; }
             .brand-left h1 { font-size: 1.2rem; }
-            .brand-icon { width: 35px; height: 35px; }
+            .brand-icon { width: 40px; height: 40px; }
             .nav-menu a { font-size: 0.55rem; padding: 0.15rem 0.5rem; }
             .product-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+            .product-card .product-img { width: 60px; height: 60px; }
             .filter-btn { font-size: 0.55rem; padding: 0.15rem 0.6rem; }
         }
     </style>
@@ -194,7 +187,6 @@
         <span class="item-count" id="totalItems">15 item</span>
     </div>
 
-    <!-- FILTER BAR -->
     <div class="filter-bar">
         <button class="filter-btn active" data-filter="all">📋 Semua</button>
         <button class="filter-btn" data-filter="dds">🎮 Gamepass DDS</button>
@@ -257,11 +249,7 @@
 </div>
 
 <script>
-    // ==========================================
-    // DATA PRODUK GABUNGAN DDS + CASH
-    // ==========================================
     const allProducts = [
-        // DDS Products
         { nama: "Suspension", harga: 4300, img: "https://files.catbox.moe/drg7jh.jpg", desc: "Unlock advanced suspension tuning for full control.", sold: "⭐ 4.5 · 699 Terjual", kategori: "dds" },
         { nama: "Boombox", harga: 3000, img: "https://files.catbox.moe/taebh6.jpg", desc: "Play any Roblox song ID and share your music.", sold: "⭐ 4.8 · 887 Terjual", kategori: "dds" },
         { nama: "Advance Paint", harga: 7500, img: "https://files.catbox.moe/xru01z.jpg", desc: "Customize your vehicle with premium paint colors.", sold: "⭐ 4.6 · 543 Terjual", kategori: "dds" },
@@ -273,7 +261,6 @@
         { nama: "Luxury", harga: 14500, img: "https://files.catbox.moe/l5x1kr.jpg", desc: "Experience ultimate luxury with premium features.", sold: "⭐ 4.8 · 312 Terjual", kategori: "dds" },
         { nama: "Police", harga: 17000, img: "https://files.catbox.moe/fv0i1h.jpg", desc: "Become a law enforcer with police vehicle.", sold: "⭐ 4.5 · 567 Terjual", kategori: "dds" },
         { nama: "2x Paycheck", harga: 54000, img: "https://files.catbox.moe/vkoyom.jpg", desc: "Double your paycheck earnings for a limited time.", sold: "⭐ 4.9 · 1.2k Terjual", kategori: "dds" },
-        // Cash Products
         { nama: "Cash 10 Juta", harga: 5000, img: "https://files.catbox.moe/taj09h.jpg", desc: "Top up 10 Juta cash instantly for your in-game needs.", sold: "⭐ 4.7 · 1.5k Terjual", kategori: "cash" },
         { nama: "Cash 50 Juta", harga: 8000, img: "https://files.catbox.moe/yaf2jk.jpg", desc: "Top up 50 Juta cash instantly for your in-game needs.", sold: "⭐ 4.8 · 987 Terjual", kategori: "cash" },
         { nama: "Cash 100 Juta", harga: 14000, img: "https://files.catbox.moe/7krb35.jpg", desc: "Top up 100 Juta cash instantly for your in-game needs.", sold: "⭐ 4.9 · 756 Terjual", kategori: "cash" },
@@ -282,14 +269,10 @@
 
     let currentFilter = 'all';
 
-    // ==========================================
-    // RENDER PRODUK DENGAN FILTER
-    // ==========================================
     function renderProducts(filter = 'all') {
         const grid = document.getElementById('productGrid');
         const filtered = filter === 'all' ? allProducts : allProducts.filter(p => p.kategori === filter);
         let html = '';
-        
         if (filtered.length === 0) {
             html = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:#6a7da0;font-size:0.9rem;">Tidak ada produk di kategori ini</div>`;
         } else {
@@ -317,9 +300,6 @@
         document.getElementById('totalItems').textContent = filtered.length + ' item';
     }
 
-    // ==========================================
-    // FILTER BUTTONS
-    // ==========================================
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -329,9 +309,6 @@
         });
     });
 
-    // ==========================================
-    // KERANJANG & FUNGSI UMUM
-    // ==========================================
     let cart = JSON.parse(localStorage.getItem('rolxum_cart')) || [];
     let modalProduct = {}, modalQty = 1;
 
@@ -400,7 +377,7 @@
             total += subtotal;
             html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0.8rem;background:#0b1121;border-radius:12px;border:1px solid #1b253d;margin-bottom:0.4rem;">
                 <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
-                    ${item.img ? `<img src="${item.img}" style="width:35px;height:35px;border-radius:8px;object-fit:cover;border:1px solid #2a3650;">` : ''}
+                    ${item.img ? `<img src="${item.img}" style="width:45px;height:45px;border-radius:8px;object-fit:cover;border:1px solid #2a3650;">` : ''}
                     <div><div style="color:#e4ebff;font-weight:500;font-size:0.85rem;">${item.nama}</div><div style="color:#8a9cc0;font-size:0.65rem;">Username: ${item.username} x${item.qty}</div></div>
                 </div>
                 <div style="display:flex;align-items:center;gap:0.5rem;">
@@ -470,7 +447,6 @@
         if (e.key === 'Escape') { closeCart(); closeQris(); closeUsernameModal(); }
     });
 
-    // Render awal
     renderProducts('all');
     updateCartUI();
     updateCartBadge();
