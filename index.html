@@ -66,7 +66,7 @@
             background: #0f1729;
             border: 1px solid #1b253d;
             border-radius: 16px;
-            padding: 1.5rem 1rem;
+            padding: 1.2rem 1rem;
             text-align: center;
             cursor: pointer;
             transition: 0.25s ease;
@@ -74,10 +74,20 @@
             display: block;
         }
         .category-card:hover { transform: translateY(-4px); border-color: #f5b81b66; box-shadow: 0 12px 30px -8px #000000cc, 0 0 0 1px #f5b81b33; background: #141d33; }
-        .category-card .cat-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .category-card .cat-name { color: #e4ebff; font-weight: 600; font-size: 1rem; }
-        .category-card .cat-count { color: #6a7da0; font-size: 0.8rem; margin-top: 0.2rem; }
-        .category-card .cat-arrow { color: #f5b81b; font-size: 0.9rem; margin-top: 0.3rem; }
+        .category-card .cat-img { 
+            width: 70px; 
+            height: 70px; 
+            border-radius: 12px; 
+            object-fit: cover; 
+            border: 2px solid #2a3650; 
+            margin-bottom: 0.5rem;
+            background: #0a0e1a;
+            transition: 0.3s;
+        }
+        .category-card:hover .cat-img { border-color: #f5b81b66; box-shadow: 0 0 20px #f5b81b33; }
+        .category-card .cat-name { color: #e4ebff; font-weight: 600; font-size: 0.95rem; }
+        .category-card .cat-count { color: #6a7da0; font-size: 0.75rem; margin-top: 0.2rem; }
+        .category-card .cat-arrow { color: #f5b81b; font-size: 0.85rem; margin-top: 0.3rem; }
 
         .footer-bar { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #1f2942; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-align: center; }
         .footer-bar .footer-copy { color: #7a8bb0; font-size: 0.75rem; letter-spacing: 0.3px; }
@@ -127,6 +137,7 @@
             .cart-badge span { display: none; }
             .carousel-container { height: 150px; }
             .category-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.6rem; }
+            .category-card .cat-img { width: 55px; height: 55px; }
             .welcome-section { padding: 1.2rem; }
             .welcome-section h2 { font-size: 1.2rem; }
             .footer-bar .footer-contact { flex-direction: column; gap: 0.5rem; }
@@ -139,6 +150,7 @@
             .brand-icon { width: 35px; height: 35px; }
             .nav-menu a { font-size: 0.55rem; padding: 0.15rem 0.5rem; }
             .category-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+            .category-card .cat-img { width: 60px; height: 60px; }
             .carousel-container { height: 120px; }
             .header-right .help-badge { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
             .header-right .wa-badge { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
@@ -157,7 +169,6 @@
         <div class="nav-menu">
             <a href="index.html" class="active">🏠 Beranda</a>
             <a href="dds.html">🎮 DDS</a>
-            <a href="cash.html">💰 Cash</a>
             <a href="robux.html">⭐ Robux</a>
             <a href="cdid.html">🏷️ CDID</a>
             <a href="gag.html">👑 GAG</a>
@@ -170,6 +181,7 @@
         </div>
     </header>
 
+    <!-- CAROUSEL DENGAN FOTO LAMA -->
     <div class="carousel-section">
         <div class="carousel-container">
             <div class="carousel-slide active"><img src="https://files.catbox.moe/hhlf6s.jpg" alt="Iklan 1" /></div>
@@ -188,13 +200,38 @@
         <p>Pilih kategori di bawah untuk melihat produk. Klik <span style="color:#f5b81b;">Beli</span> atau <span style="color:#f5b81b;">+ Keranjang</span> untuk memesan!</p>
     </div>
 
+    <!-- KATEGORI PRODUK DENGAN GAMBAR -->
     <div class="category-grid">
-        <a href="dds.html" class="category-card"><div class="cat-icon">🎮</div><div class="cat-name">Gamepass DDS</div><div class="cat-count">11 item</div><div class="cat-arrow">Klik untuk lihat →</div></a>
-        <a href="cash.html" class="category-card"><div class="cat-icon">💰</div><div class="cat-name">Cash</div><div class="cat-count">4 item</div><div class="cat-arrow">Klik untuk lihat →</div></a>
-        <a href="robux.html" class="category-card"><div class="cat-icon">⭐</div><div class="cat-name">Robux Via Login</div><div class="cat-count">6 item</div><div class="cat-arrow">Klik untuk lihat →</div></a>
-        <a href="cdid.html" class="category-card"><div class="cat-icon">🏷️</div><div class="cat-name">Gamepass CDID</div><div class="cat-count">10 item</div><div class="cat-arrow">Klik untuk lihat →</div></a>
-        <a href="gag.html" class="category-card"><div class="cat-icon">👑</div><div class="cat-name">GAG</div><div class="cat-count">24 item</div><div class="cat-arrow">Klik untuk lihat →</div></a>
-        <a href="private.html" class="category-card"><div class="cat-icon">🖥️</div><div class="cat-name">Private Server</div><div class="cat-count">1 item</div><div class="cat-arrow">Klik untuk lihat →</div></a>
+        <a href="dds.html" class="category-card">
+            <img src="https://files.catbox.moe/hsr6lw.jpg" alt="DDS" class="cat-img" />
+            <div class="cat-name">Gamepass DDS</div>
+            <div class="cat-count">11 item</div>
+            <div class="cat-arrow">Klik untuk lihat →</div>
+        </a>
+        <a href="robux.html" class="category-card">
+            <img src="https://files.catbox.moe/5lvvvz.jpg" alt="Robux" class="cat-img" />
+            <div class="cat-name">Robux Via Login</div>
+            <div class="cat-count">6 item</div>
+            <div class="cat-arrow">Klik untuk lihat →</div>
+        </a>
+        <a href="cdid.html" class="category-card">
+            <img src="https://files.catbox.moe/eqqwan.jpg" alt="CDID" class="cat-img" />
+            <div class="cat-name">Gamepass CDID</div>
+            <div class="cat-count">10 item</div>
+            <div class="cat-arrow">Klik untuk lihat →</div>
+        </a>
+        <a href="gag.html" class="category-card">
+            <img src="https://files.catbox.moe/ych9i8.jpg" alt="GAG" class="cat-img" />
+            <div class="cat-name">GAG</div>
+            <div class="cat-count">24 item</div>
+            <div class="cat-arrow">Klik untuk lihat →</div>
+        </a>
+        <a href="private.html" class="category-card">
+            <img src="https://files.catbox.moe/bu441s.jpg" alt="Private" class="cat-img" />
+            <div class="cat-name">Private Server</div>
+            <div class="cat-count">1 item</div>
+            <div class="cat-arrow">Klik untuk lihat →</div>
+        </a>
     </div>
 
     <div class="footer-bar">
