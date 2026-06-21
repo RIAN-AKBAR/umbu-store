@@ -26,14 +26,12 @@
             justify-content: space-between;
         }
         
-        /* HEADER KIRI - HAMBURGER DI PALING KIRI */
         .header-left {
             display: flex;
             align-items: center;
             gap: 0.8rem;
         }
         
-        /* HAMBURGER MENU BUTTON - PALING KIRI SEBELUM LOGO */
         .hamburger-btn {
             display: none;
             background: transparent;
@@ -65,8 +63,8 @@
             gap: 0.8rem; 
         }
         .brand-icon { 
-            width: 50px; 
-            height: 50px; 
+            width: 60px; 
+            height: 60px; 
             border-radius: 0; 
             object-fit: contain; 
             border: 2px solid #f5b81b66; 
@@ -96,7 +94,6 @@
         }
         .brand-tag i { color: #f5b81b; }
 
-        /* STORE STATUS */
         .store-status {
             display: flex;
             align-items: center;
@@ -125,7 +122,6 @@
             50% { opacity: 0.5; transform: scale(0.8); }
         }
 
-        /* NAVIGATION MENU - DEFAULT 3 KOLOM */
         .nav-menu {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -171,7 +167,6 @@
         .carousel-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; border: none; }
         .carousel-dots .dot.active { background: #f5b81b; width: 20px; border-radius: 10px; }
 
-        /* WELCOME SECTION - ANIMASI */
         .welcome-section {
             background: linear-gradient(145deg, #111a2e, #0d1424);
             border-radius: 24px;
@@ -234,8 +229,8 @@
         }
         .category-card:hover { transform: translateY(-4px); border-color: #f5b81b66; box-shadow: 0 12px 30px -8px #000000cc, 0 0 0 1px #f5b81b33; background: #141d33; }
         .category-card .cat-img { 
-            width: 70px; 
-            height: 70px; 
+            width: 85px; 
+            height: 85px; 
             border-radius: 12px; 
             object-fit: cover; 
             border: 2px solid #2a3650; 
@@ -284,45 +279,17 @@
         .qris-modal .btn-pay { width: 100%; padding: 0.7rem; background: #f5b81b; border: none; border-radius: 14px; font-size: 0.95rem; font-weight: 700; color: #0a0e1a; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
         .qris-modal .btn-pay:hover { background: #f5c84a; transform: scale(1.01); }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 760px) {
             .main-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.2rem; }
-            
-            /* HEADER KIRI - HAMBURGER DI PALING KIRI */
-            .header-left { 
-                width: 100%; 
-                display: flex;
-                align-items: center;
-                gap: 0.6rem;
-            }
-            .hamburger-btn { 
-                display: flex; 
-                flex-shrink: 0;
-                order: -1; /* PALING KIRI */
-            }
-            
+            .header-left { width: 100%; display: flex; align-items: center; gap: 0.6rem; }
+            .hamburger-btn { display: flex; flex-shrink: 0; order: -1; }
             .brand-left { flex: 1; }
             .brand-left h1 { font-size: 1.4rem; }
-            .brand-icon { width: 40px; height: 40px; }
+            .brand-icon { width: 50px; height: 50px; }
             .brand-tag { display: none; }
-            
-            .nav-menu {
-                display: none;
-                grid-template-columns: 1fr;
-                width: 100%;
-                gap: 0.2rem;
-                margin-top: 0.5rem;
-                padding: 0.5rem 0;
-                border-top: 1px solid #1b253d;
-            }
+            .nav-menu { display: none; grid-template-columns: 1fr; width: 100%; gap: 0.2rem; margin-top: 0.5rem; padding: 0.5rem 0; border-top: 1px solid #1b253d; }
             .nav-menu.open { display: grid; }
-            .nav-menu a { 
-                padding: 0.4rem 0.6rem; 
-                font-size: 0.7rem; 
-                text-align: center;
-                border-radius: 30px;
-            }
-            
+            .nav-menu a { padding: 0.4rem 0.6rem; font-size: 0.7rem; text-align: center; border-radius: 30px; }
             .header-right { width: 100%; justify-content: space-between; }
             .help-badge span { display: none; }
             .wa-badge span { display: none; }
@@ -332,7 +299,7 @@
             .store-status .status-text { font-size: 0.65rem; }
             .carousel-container { height: 150px; }
             .category-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.6rem; }
-            .category-card .cat-img { width: 55px; height: 55px; }
+            .category-card .cat-img { width: 65px; height: 65px; }
             .welcome-section { padding: 1.2rem; }
             .welcome-section h2 { font-size: 1.2rem; }
             .footer-bar .footer-contact { flex-direction: column; gap: 0.5rem; }
@@ -340,16 +307,14 @@
         }
         
         @media (max-width: 480px) {
-            .header-left { 
-                gap: 0.4rem;
-            }
+            .header-left { gap: 0.4rem; }
             .brand-left h1 { font-size: 1.2rem; }
-            .brand-icon { width: 35px; height: 35px; }
+            .brand-icon { width: 40px; height: 40px; }
             .hamburger-btn { padding: 0.3rem 0.4rem; }
             .hamburger-btn span { width: 18px; height: 2px; }
             .nav-menu a { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
             .category-grid { grid-template-columns: 1fr; gap: 0.5rem; }
-            .category-card .cat-img { width: 60px; height: 60px; }
+            .category-card .cat-img { width: 70px; height: 70px; }
             .carousel-container { height: 120px; }
             .header-right .help-badge { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
             .header-right .wa-badge { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
@@ -359,7 +324,6 @@
             .welcome-section p { font-size: 0.75rem; }
         }
 
-        /* TAMPILAN DEFAULT UNTUK DESKTOP - TETAP 3 KOLOM */
         @media (min-width: 761px) {
             .nav-menu { display: grid !important; }
             .hamburger-btn { display: none; }
@@ -370,9 +334,7 @@
 <body>
 <div class="store-wrap">
     <header class="main-header">
-        <!-- HEADER KIRI: HAMBURGER (PALING KIRI) + BRAND -->
         <div class="header-left">
-            <!-- HAMBURGER MENU BUTTON - PALING KIRI SEBELUM LOGO -->
             <button class="hamburger-btn" onclick="toggleMenu()" aria-label="Toggle Menu">
                 <span></span>
                 <span></span>
@@ -386,7 +348,6 @@
             </div>
         </div>
 
-        <!-- NAVIGATION MENU -->
         <div class="nav-menu" id="navMenu">
             <a href="index.html" class="active">🏠 Beranda</a>
             <a href="dds.html">🎮 DDS</a>
@@ -397,7 +358,6 @@
         </div>
         
         <div class="header-right">
-            <!-- STORE STATUS -->
             <div class="store-status" id="storeStatus">
                 <span class="status-dot" id="statusDot"></span>
                 <span class="status-text" id="statusText">Loading...</span>
@@ -409,7 +369,6 @@
         </div>
     </header>
 
-    <!-- CAROUSEL -->
     <div class="carousel-section">
         <div class="carousel-container">
             <div class="carousel-slide active"><img src="https://files.catbox.moe/hhlf6s.jpg" alt="Iklan 1" /></div>
@@ -423,13 +382,11 @@
         </div>
     </div>
 
-    <!-- WELCOME SECTION DENGAN ANIMASI -->
     <div class="welcome-section">
         <h2>✨ Selamat Datang di <span>ROLXUM</span></h2>
         <p>Pilih kategori di bawah untuk melihat produk. Klik <span style="color:#f5b81b;">Beli</span> atau <span style="color:#f5b81b;">+ Keranjang</span> untuk memesan!</p>
     </div>
 
-    <!-- KATEGORI PRODUK -->
     <div class="category-grid">
         <a href="dds.html" class="category-card">
             <img src="https://files.catbox.moe/hsr6lw.jpg" alt="DDS" class="cat-img" />
@@ -474,7 +431,6 @@
     </div>
 </div>
 
-<!-- ===== MODALS ===== -->
 <div class="modal-overlay" id="cartModal">
     <div class="modal-content" style="max-width:500px;">
         <button class="close-modal" onclick="closeCart()"><i class="fas fa-times"></i></button>
@@ -500,9 +456,6 @@
 </div>
 
 <script>
-    // ==========================================
-    // HAMBURGER MENU TOGGLE
-    // ==========================================
     function toggleMenu() {
         const navMenu = document.getElementById('navMenu');
         const hamburger = document.querySelector('.hamburger-btn');
@@ -511,15 +464,20 @@
     }
 
     // ==========================================
-    // STORE STATUS (JAM BUKA/TUTUP)
+    // STORE STATUS - FIXED VERSION
     // ==========================================
     function updateStoreStatus() {
+        // Gunakan Date langsung dengan timezone Asia/Jakarta
         const now = new Date();
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
+        const wibHours = now.getHours(); // toLocaleString sudah menyesuaikan dengan timezone browser
         
-        const wibHours = (hours + 7) % 24;
-        const timeStr = String(wibHours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0') + ' WIB';
+        // Tapi untuk lebih akurat, kita gunakan toLocaleString
+        const wibTime = now.toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' });
+        const wibDate = new Date(wibTime);
+        const hours = wibDate.getHours();
+        const minutes = wibDate.getMinutes();
+        
+        const timeStr = String(hours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0') + ' WIB';
         
         const statusDot = document.getElementById('statusDot');
         const statusText = document.getElementById('statusText');
@@ -527,7 +485,8 @@
         
         statusTime.textContent = timeStr;
         
-        const isOpen = wibHours >= 6 && wibHours < 22;
+        // Buka: 06:00 - 22:00 WIB
+        const isOpen = hours >= 6 && hours < 22;
         
         if (isOpen) {
             statusDot.className = 'status-dot open';
@@ -540,12 +499,11 @@
         }
     }
 
+    // Jalankan pertama kali
     updateStoreStatus();
-    setInterval(updateStoreStatus, 30000);
+    // Update setiap 10 detik
+    setInterval(updateStoreStatus, 10000);
 
-    // ==========================================
-    // CAROUSEL
-    // ==========================================
     let currentSlide=0;const slides=document.querySelectorAll('.carousel-slide');const dots=document.querySelectorAll('.dot');let autoSlideInterval;
     function changeSlide(d){slides[currentSlide].classList.remove('active');dots[currentSlide].classList.remove('active');currentSlide=(currentSlide+d+slides.length)%slides.length;slides[currentSlide].classList.add('active');dots[currentSlide].classList.add('active');resetAutoSlide();}
     function goToSlide(i){slides[currentSlide].classList.remove('active');dots[currentSlide].classList.remove('active');currentSlide=i;slides[currentSlide].classList.add('active');dots[currentSlide].classList.add('active');resetAutoSlide();}
@@ -553,11 +511,8 @@
     autoSlideInterval=setInterval(()=>changeSlide(1),5000);
     function helpCenter(){window.open('https://wa.me/6282154329388?text=Halo%20ROLXUM%2C%20saya%20butuh%20bantuan.','_blank');}
 
-    // ==========================================
-    // KERANJANG
-    // ==========================================
     let cart=JSON.parse(localStorage.getItem('rolxum_cart'))||[];
-    function updateCartUI(){const c=document.getElementById('cartItems'),tc=document.getElementById('cartTotal'),ta=document.getElementById('totalAmount');if(cart.length===0){c.innerHTML='<div style="color:#6a7da0;text-align:center;padding:1.5rem 0;font-size:0.9rem;">Keranjang masih kosong</div>';tc.style.display='none';document.getElementById('checkoutBtn').disabled=true;return;}let html='',total=0;cart.forEach((item,index)=>{const subtotal=item.harga*item.qty;total+=subtotal;const label=item.isPrivate?'Private Server':'Username';html+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0.8rem;background:#0b1121;border-radius:12px;border:1px solid #1b253d;margin-bottom:0.4rem;"><div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">${item.img?`<img src="${item.img}" style="width:35px;height:35px;border-radius:8px;object-fit:cover;border:1px solid #2a3650;">`:''}<div><div style="color:#e4ebff;font-weight:500;font-size:0.85rem;">${item.nama}</div><div style="color:#8a9cc0;font-size:0.65rem;">${label}: ${item.username} x${item.qty}</div></div></div><div style="display:flex;align-items:center;gap:0.5rem;"><span style="color:#f5d76e;font-weight:700;font-size:0.85rem;">Rp ${subtotal.toLocaleString('id-ID')}</span><button onclick="removeFromCart(${index})" style="background:none;border:none;color:#6a7da0;cursor:pointer;font-size:0.8rem;"><i class="fas fa-trash"></i></button></div></div>`;});c.innerHTML=html;tc.style.display='flex';ta.textContent='Rp '+total.toLocaleString('id-ID');document.getElementById('checkoutBtn').disabled=false;localStorage.setItem('rolxum_cart',JSON.stringify(cart));}
+    function updateCartUI(){const c=document.getElementById('cartItems'),tc=document.getElementById('cartTotal'),ta=document.getElementById('totalAmount');if(cart.length===0){c.innerHTML='<div style="color:#6a7da0;text-align:center;padding:1.5rem 0;font-size:0.9rem;">Keranjang masih kosong</div>';tc.style.display='none';document.getElementById('checkoutBtn').disabled=true;return;}let html='',total=0;cart.forEach((item,index)=>{const subtotal=item.harga*item.qty;total+=subtotal;const label=item.isPrivate?'Private Server':'Username';html+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0.8rem;background:#0b1121;border-radius:12px;border:1px solid #1b253d;margin-bottom:0.4rem;"><div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">${item.img?`<img src="${item.img}" style="width:45px;height:45px;border-radius:8px;object-fit:cover;border:1px solid #2a3650;">`:''}<div><div style="color:#e4ebff;font-weight:500;font-size:0.85rem;">${item.nama}</div><div style="color:#8a9cc0;font-size:0.65rem;">${label}: ${item.username} x${item.qty}</div></div></div><div style="display:flex;align-items:center;gap:0.5rem;"><span style="color:#f5d76e;font-weight:700;font-size:0.85rem;">Rp ${subtotal.toLocaleString('id-ID')}</span><button onclick="removeFromCart(${index})" style="background:none;border:none;color:#6a7da0;cursor:pointer;font-size:0.8rem;"><i class="fas fa-trash"></i></button></div></div>`;});c.innerHTML=html;tc.style.display='flex';ta.textContent='Rp '+total.toLocaleString('id-ID');document.getElementById('checkoutBtn').disabled=false;localStorage.setItem('rolxum_cart',JSON.stringify(cart));}
     function updateCartBadge(){document.getElementById('cartCount').textContent=cart.reduce((s,i)=>s+i.qty,0);}
     function removeFromCart(i){cart.splice(i,1);updateCartUI();updateCartBadge();localStorage.setItem('rolxum_cart',JSON.stringify(cart));}
     function openCart(){document.getElementById('cartModal').classList.add('active');document.body.style.overflow='hidden';}
@@ -570,7 +525,6 @@
     document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeCart();closeQris();}});
     updateCartUI();updateCartBadge();
 
-    // TUTUP MENU SAAT KLIK DI LUAR
     document.addEventListener('click', function(e) {
         const navMenu = document.getElementById('navMenu');
         const hamburger = document.querySelector('.hamburger-btn');
