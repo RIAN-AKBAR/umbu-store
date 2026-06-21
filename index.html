@@ -464,20 +464,22 @@
     }
 
     // ==========================================
-    // STORE STATUS - FIXED VERSION
+    // STORE STATUS - FIXED VERSION (NaN fix)
     // ==========================================
     function updateStoreStatus() {
-        // Gunakan Date langsung dengan timezone Asia/Jakarta
         const now = new Date();
-        const wibHours = now.getHours(); // toLocaleString sudah menyesuaikan dengan timezone browser
+        // Dapatkan UTC time
+        const utcHours = now.getUTCHours();
+        const utcMinutes = now.getUTCMinutes();
         
-        // Tapi untuk lebih akurat, kita gunakan toLocaleString
-        const wibTime = now.toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' });
-        const wibDate = new Date(wibTime);
-        const hours = wibDate.getHours();
-        const minutes = wibDate.getMinutes();
+        // Konversi ke WIB (UTC+7)
+        let wibHours = utcHours + 7;
+        if (wibHours >= 24) {
+            wibHours = wibHours - 24;
+        }
+        const wibMinutes = utcMinutes;
         
-        const timeStr = String(hours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0') + ' WIB';
+        const timeStr = String(wibHours).padStart(2, '0') + ':' + String(wibMinutes).padStart(2, '0') + ' WIB';
         
         const statusDot = document.getElementById('statusDot');
         const statusText = document.getElementById('statusText');
@@ -486,7 +488,7 @@
         statusTime.textContent = timeStr;
         
         // Buka: 06:00 - 22:00 WIB
-        const isOpen = hours >= 6 && hours < 22;
+        const isOpen = wibHours >= 6 && wibHours < 22;
         
         if (isOpen) {
             statusDot.className = 'status-dot open';
