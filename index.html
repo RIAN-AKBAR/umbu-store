@@ -31,8 +31,57 @@
         .brand-tag { background: #1e2842; padding: 0.2rem 1rem; border-radius: 60px; color: #bcc9e6; font-size: 0.7rem; border: 1px solid #3a4870; display: flex; align-items: center; gap: 0.4rem; }
         .brand-tag i { color: #f5b81b; }
 
-        .nav-menu { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; }
-        .nav-menu a { padding: 0.3rem 0.9rem; border-radius: 60px; font-size: 0.7rem; font-weight: 600; color: #8a9cc0; cursor: pointer; transition: 0.2s; border: 1px solid transparent; background: transparent; text-decoration: none; }
+        /* STORE STATUS */
+        .store-status {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #1a2340;
+            padding: 0.3rem 1rem 0.3rem 0.8rem;
+            border-radius: 60px;
+            border: 1px solid #2a3650;
+        }
+        .store-status .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+        .store-status .status-dot.open { background: #4ade80; box-shadow: 0 0 12px #4ade8055; }
+        .store-status .status-dot.closed { background: #ef4444; box-shadow: 0 0 12px #ef444455; animation: none; }
+        .store-status .status-text { font-weight: 700; font-size: 0.75rem; }
+        .store-status .status-text.open { color: #4ade80; }
+        .store-status .status-text.closed { color: #ef4444; }
+        .store-status .status-time { color: #8a9cc0; font-size: 0.65rem; }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        /* NAVIGATION MENU - 3 KOLOM */
+        .nav-menu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.3rem;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+        .nav-menu a {
+            padding: 0.3rem 0.4rem;
+            border-radius: 60px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #8a9cc0;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid transparent;
+            background: transparent;
+            text-decoration: none;
+            text-align: center;
+            white-space: nowrap;
+        }
         .nav-menu a:hover { color: #f0f4ff; background: #1a2340; }
         .nav-menu a.active { color: #0a0e1a; background: #f5b81b; border-color: #f5b81b; box-shadow: 0 0 20px #f5b81b44; }
 
@@ -129,12 +178,15 @@
             .main-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.2rem; }
             .brand-left h1 { font-size: 1.4rem; }
             .brand-icon { width: 40px; height: 40px; }
-            .nav-menu { width: 100%; justify-content: center; gap: 0.3rem; }
-            .nav-menu a { font-size: 0.6rem; padding: 0.2rem 0.6rem; }
+            .nav-menu { grid-template-columns: repeat(3, 1fr); gap: 0.2rem; }
+            .nav-menu a { font-size: 0.55rem; padding: 0.2rem 0.3rem; }
             .header-right { width: 100%; justify-content: space-between; }
             .help-badge span { display: none; }
             .wa-badge span { display: none; }
             .cart-badge span { display: none; }
+            .store-status { padding: 0.2rem 0.6rem 0.2rem 0.5rem; }
+            .store-status .status-time { display: none; }
+            .store-status .status-text { font-size: 0.65rem; }
             .carousel-container { height: 150px; }
             .category-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.6rem; }
             .category-card .cat-img { width: 55px; height: 55px; }
@@ -148,13 +200,15 @@
             .brand-tag { font-size: 0.6rem; padding: 0.15rem 0.7rem; }
             .brand-left h1 { font-size: 1.2rem; }
             .brand-icon { width: 35px; height: 35px; }
-            .nav-menu a { font-size: 0.55rem; padding: 0.15rem 0.5rem; }
+            .nav-menu { grid-template-columns: repeat(3, 1fr); gap: 0.15rem; }
+            .nav-menu a { font-size: 0.5rem; padding: 0.15rem 0.2rem; border-radius: 30px; }
             .category-grid { grid-template-columns: 1fr; gap: 0.5rem; }
             .category-card .cat-img { width: 60px; height: 60px; }
             .carousel-container { height: 120px; }
             .header-right .help-badge { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
             .header-right .wa-badge { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
             .header-right .cart-badge { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
+            .store-status .status-time { display: none; }
         }
     </style>
 </head>
@@ -166,6 +220,8 @@
             <h1>ROLXUM</h1>
             <span class="brand-tag"><i class="fas fa-bolt"></i> digital store</span>
         </div>
+        
+        <!-- NAVIGATION MENU - 3 KOLOM -->
         <div class="nav-menu">
             <a href="index.html" class="active">🏠 Beranda</a>
             <a href="dds.html">🎮 DDS</a>
@@ -174,14 +230,21 @@
             <a href="gag.html">👑 GAG</a>
             <a href="private.html">🖥️ Private</a>
         </div>
+        
         <div class="header-right">
+            <!-- STORE STATUS -->
+            <div class="store-status" id="storeStatus">
+                <span class="status-dot" id="statusDot"></span>
+                <span class="status-text" id="statusText">Loading...</span>
+                <span class="status-time" id="statusTime">--:-- WIB</span>
+            </div>
             <button class="help-badge" onclick="helpCenter()"><i class="fas fa-question-circle"></i><span>Bantuan</span></button>
             <div class="wa-badge"><i class="fab fa-whatsapp"></i><span>0821-5432-9388</span></div>
             <button class="cart-badge" onclick="openCart()"><i class="fas fa-shopping-cart"></i><span>Keranjang</span><span class="cart-count" id="cartCount">0</span></button>
         </div>
     </header>
 
-    <!-- CAROUSEL DENGAN FOTO LAMA -->
+    <!-- CAROUSEL -->
     <div class="carousel-section">
         <div class="carousel-container">
             <div class="carousel-slide active"><img src="https://files.catbox.moe/hhlf6s.jpg" alt="Iklan 1" /></div>
@@ -200,7 +263,7 @@
         <p>Pilih kategori di bawah untuk melihat produk. Klik <span style="color:#f5b81b;">Beli</span> atau <span style="color:#f5b81b;">+ Keranjang</span> untuk memesan!</p>
     </div>
 
-    <!-- KATEGORI PRODUK DENGAN GAMBAR -->
+    <!-- KATEGORI PRODUK -->
     <div class="category-grid">
         <a href="dds.html" class="category-card">
             <img src="https://files.catbox.moe/hsr6lw.jpg" alt="DDS" class="cat-img" />
@@ -271,6 +334,42 @@
 </div>
 
 <script>
+    // ==========================================
+    // STORE STATUS (JAM BUKA/TUTUP)
+    // ==========================================
+    function updateStoreStatus() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        
+        const wibHours = (hours + 7) % 24;
+        const timeStr = String(wibHours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0') + ' WIB';
+        
+        const statusDot = document.getElementById('statusDot');
+        const statusText = document.getElementById('statusText');
+        const statusTime = document.getElementById('statusTime');
+        
+        statusTime.textContent = timeStr;
+        
+        const isOpen = wibHours >= 6 && wibHours < 22;
+        
+        if (isOpen) {
+            statusDot.className = 'status-dot open';
+            statusText.className = 'status-text open';
+            statusText.textContent = '🟢 Online';
+        } else {
+            statusDot.className = 'status-dot closed';
+            statusText.className = 'status-text closed';
+            statusText.textContent = '🔴 Tutup';
+        }
+    }
+
+    updateStoreStatus();
+    setInterval(updateStoreStatus, 30000);
+
+    // ==========================================
+    // CAROUSEL
+    // ==========================================
     let currentSlide=0;const slides=document.querySelectorAll('.carousel-slide');const dots=document.querySelectorAll('.dot');let autoSlideInterval;
     function changeSlide(d){slides[currentSlide].classList.remove('active');dots[currentSlide].classList.remove('active');currentSlide=(currentSlide+d+slides.length)%slides.length;slides[currentSlide].classList.add('active');dots[currentSlide].classList.add('active');resetAutoSlide();}
     function goToSlide(i){slides[currentSlide].classList.remove('active');dots[currentSlide].classList.remove('active');currentSlide=i;slides[currentSlide].classList.add('active');dots[currentSlide].classList.add('active');resetAutoSlide();}
@@ -278,6 +377,9 @@
     autoSlideInterval=setInterval(()=>changeSlide(1),5000);
     function helpCenter(){window.open('https://wa.me/6282154329388?text=Halo%20ROLXUM%2C%20saya%20butuh%20bantuan.','_blank');}
 
+    // ==========================================
+    // KERANJANG
+    // ==========================================
     let cart=JSON.parse(localStorage.getItem('rolxum_cart'))||[];
     function updateCartUI(){const c=document.getElementById('cartItems'),tc=document.getElementById('cartTotal'),ta=document.getElementById('totalAmount');if(cart.length===0){c.innerHTML='<div style="color:#6a7da0;text-align:center;padding:1.5rem 0;font-size:0.9rem;">Keranjang masih kosong</div>';tc.style.display='none';document.getElementById('checkoutBtn').disabled=true;return;}let html='',total=0;cart.forEach((item,index)=>{const subtotal=item.harga*item.qty;total+=subtotal;const label=item.isPrivate?'Private Server':'Username';html+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0.8rem;background:#0b1121;border-radius:12px;border:1px solid #1b253d;margin-bottom:0.4rem;"><div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">${item.img?`<img src="${item.img}" style="width:35px;height:35px;border-radius:8px;object-fit:cover;border:1px solid #2a3650;">`:''}<div><div style="color:#e4ebff;font-weight:500;font-size:0.85rem;">${item.nama}</div><div style="color:#8a9cc0;font-size:0.65rem;">${label}: ${item.username} x${item.qty}</div></div></div><div style="display:flex;align-items:center;gap:0.5rem;"><span style="color:#f5d76e;font-weight:700;font-size:0.85rem;">Rp ${subtotal.toLocaleString('id-ID')}</span><button onclick="removeFromCart(${index})" style="background:none;border:none;color:#6a7da0;cursor:pointer;font-size:0.8rem;"><i class="fas fa-trash"></i></button></div></div>`;});c.innerHTML=html;tc.style.display='flex';ta.textContent='Rp '+total.toLocaleString('id-ID');document.getElementById('checkoutBtn').disabled=false;localStorage.setItem('rolxum_cart',JSON.stringify(cart));}
     function updateCartBadge(){document.getElementById('cartCount').textContent=cart.reduce((s,i)=>s+i.qty,0);}
