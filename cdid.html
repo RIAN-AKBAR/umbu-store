@@ -26,7 +26,7 @@
             justify-content: space-between;
         }
         .brand-left { display: flex; align-items: center; gap: 1rem; }
-        .brand-icon { width: 50px; height: 50px; border-radius: 0; object-fit: contain; border: 2px solid #f5b81b66; box-shadow: 0 0 28px #f5b81b44; background: #0a0e1a; padding: 3px; }
+        .brand-icon { width: 60px; height: 60px; border-radius: 0; object-fit: contain; border: 2px solid #f5b81b66; box-shadow: 0 0 28px #f5b81b44; background: #0a0e1a; padding: 3px; }
         .brand-left h1 { font-size: 1.6rem; font-weight: 800; background: linear-gradient(135deg, #f7d875, #e8a817); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.5px; }
         .brand-tag { background: #1e2842; padding: 0.2rem 1rem; border-radius: 60px; color: #bcc9e6; font-size: 0.7rem; border: 1px solid #3a4870; display: flex; align-items: center; gap: 0.4rem; }
         .brand-tag i { color: #f5b81b; }
@@ -44,9 +44,30 @@
         .cart-badge .cart-count { background: #0a0e1a; color: #f5b81b; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 800; }
 
         .page-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem; padding-bottom: 0.5rem; border-bottom: 1px solid #25304b; }
-        .page-header .page-icon { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; }
+        .page-header .page-icon { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; }
         .page-header h2 { color: #f0f4ff; font-size: 1.2rem; font-weight: 700; }
         .page-header .item-count { color: #6a7da0; font-size: 0.75rem; margin-left: auto; }
+
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+        }
+        .filter-btn {
+            padding: 0.3rem 1rem;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 1px solid #2a3650;
+            background: transparent;
+            color: #8a9cc0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .filter-btn:hover { background: #1a2340; color: #f0f4ff; }
+        .filter-btn.active { background: #f5b81b; color: #0a0e1a; border-color: #f5b81b; box-shadow: 0 0 20px #f5b81b44; }
 
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
         .product-card {
@@ -55,7 +76,7 @@
         }
         .product-card:hover { transform: translateY(-3px); border-color: #f5b81b66; box-shadow: 0 8px 20px -6px #000000cc, 0 0 0 1px #f5b81b33; background: #141d33; }
         .product-card .product-top { display: flex; gap: 0.6rem; align-items: flex-start; }
-        .product-card .product-img { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; background: #0a0e1a; flex-shrink: 0; }
+        .product-card .product-img { width: 65px; height: 65px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; background: #0a0e1a; flex-shrink: 0; }
         .product-card .product-info { flex: 1; }
         .product-card .product-info .name { color: #e4ebff; font-weight: 600; font-size: 0.85rem; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .product-card .product-info .price { color: #f5d76e; font-weight: 700; font-size: 0.9rem; margin-top: 0.2rem; }
@@ -107,7 +128,7 @@
         @media (max-width: 760px) {
             .main-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.2rem; }
             .brand-left h1 { font-size: 1.4rem; }
-            .brand-icon { width: 40px; height: 40px; }
+            .brand-icon { width: 50px; height: 50px; }
             .nav-menu { width: 100%; justify-content: center; gap: 0.3rem; }
             .nav-menu a { font-size: 0.6rem; padding: 0.2rem 0.6rem; }
             .header-right { width: 100%; justify-content: space-between; }
@@ -115,19 +136,23 @@
             .wa-badge span { display: none; }
             .cart-badge span { display: none; }
             .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.6rem; }
+            .product-card .product-img { width: 55px; height: 55px; }
             .product-card .product-top { flex-direction: column; align-items: center; }
             .product-card .product-info { text-align: center; }
             .product-card .product-actions { flex-direction: column; }
             .footer-bar .footer-contact { flex-direction: column; gap: 0.5rem; }
             .modal-content { padding: 1.2rem; margin: 0.5rem; }
+            .filter-bar { justify-content: center; }
+            .filter-btn { font-size: 0.6rem; padding: 0.2rem 0.7rem; }
         }
         @media (max-width: 480px) {
             .brand-left { flex-wrap: wrap; }
             .brand-tag { font-size: 0.6rem; padding: 0.15rem 0.7rem; }
             .brand-left h1 { font-size: 1.2rem; }
-            .brand-icon { width: 35px; height: 35px; }
+            .brand-icon { width: 40px; height: 40px; }
             .nav-menu a { font-size: 0.55rem; padding: 0.15rem 0.5rem; }
             .product-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+            .product-card .product-img { width: 60px; height: 60px; }
         }
     </style>
 </head>
@@ -142,7 +167,6 @@
         <div class="nav-menu">
             <a href="index.html">🏠 Beranda</a>
             <a href="dds.html">🎮 DDS</a>
-            <a href="cash.html">💰 Cash</a>
             <a href="robux.html">⭐ Robux</a>
             <a href="cdid.html" class="active">🏷️ CDID</a>
             <a href="gag.html">👑 GAG</a>
@@ -158,8 +182,16 @@
     <div class="page-header">
         <img src="https://files.catbox.moe/eqqwan.jpg" alt="CDID" class="page-icon" />
         <h2>🏷️ Gamepass CDID</h2>
-        <span class="item-count">10 item</span>
+        <span class="item-count" id="itemCount">10 item</span>
     </div>
+
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">📋 Semua</button>
+        <button class="filter-btn" data-filter="vehicles">🚗 Vehicles</button>
+        <button class="filter-btn" data-filter="mods">🔧 Mods</button>
+        <button class="filter-btn" data-filter="boosts">⚡ Boosts</button>
+    </div>
+
     <div class="product-grid" id="productGrid"></div>
 
     <div class="footer-bar">
@@ -217,24 +249,27 @@
 
 <script>
     const products = [
-        { nama: "Luxury House", harga: 14000, img: "https://files.catbox.moe/fefclr.jpg", desc: "A luxurious house with premium interior.", sold: "⭐ 4.6 · 432 Terjual" },
-        { nama: "Additional Ownable Car", harga: 13000, img: "https://files.catbox.moe/dtjuvs.jpg", desc: "Add more ownable cars to your collection.", sold: "⭐ 4.5 · 321 Terjual" },
-        { nama: "Emergency Vehicle", harga: 16000, img: "https://files.catbox.moe/cp37xc.jpg", desc: "Emergency response vehicles for quick action.", sold: "⭐ 4.7 · 289 Terjual" },
-        { nama: "Retro Pass", harga: 20000, img: "https://files.catbox.moe/pczy8y.jpg", desc: "Access retro themed items and vehicles.", sold: "⭐ 4.8 · 567 Terjual" },
-        { nama: "Rare Imports", harga: 23000, img: "https://files.catbox.moe/crfbe7.jpg", desc: "Rare imported vehicles from around the world.", sold: "⭐ 4.9 · 234 Terjual" },
-        { nama: "Advance Modification", harga: 26000, img: "https://files.catbox.moe/hw92r2.jpg", desc: "Advanced modification options for vehicles.", sold: "⭐ 4.6 · 345 Terjual" },
-        { nama: "Luxury Car", harga: 27000, img: "https://files.catbox.moe/imwtbm.jpg", desc: "Drive in style with a premium luxury car.", sold: "⭐ 4.8 · 432 Terjual" },
-        { nama: "2x Additional", harga: 27400, img: "https://files.catbox.moe/tj2jo3.jpg", desc: "Double your additional items and rewards.", sold: "⭐ 4.5 · 198 Terjual" },
-        { nama: "2x Paycheck", harga: 46000, img: "https://files.catbox.moe/t1ln91.jpg", desc: "Double your paycheck for a limited period.", sold: "⭐ 4.9 · 876 Terjual" },
-        { nama: "+50% Job Warning", harga: 48000, img: "https://files.catbox.moe/04qmcq.jpg", desc: "Boost your job earnings by 50%.", sold: "⭐ 4.7 · 654 Terjual" }
+        { nama: "Luxury House", harga: 14000, img: "https://files.catbox.moe/fefclr.jpg", desc: "A luxurious house with premium interior.", sold: "⭐ 4.6 · 432 Terjual", kategori: "vehicles" },
+        { nama: "Additional Ownable Car", harga: 13000, img: "https://files.catbox.moe/dtjuvs.jpg", desc: "Add more ownable cars to your collection.", sold: "⭐ 4.5 · 321 Terjual", kategori: "vehicles" },
+        { nama: "Emergency Vehicle", harga: 16000, img: "https://files.catbox.moe/cp37xc.jpg", desc: "Emergency response vehicles for quick action.", sold: "⭐ 4.7 · 289 Terjual", kategori: "vehicles" },
+        { nama: "Retro Pass", harga: 20000, img: "https://files.catbox.moe/pczy8y.jpg", desc: "Access retro themed items and vehicles.", sold: "⭐ 4.8 · 567 Terjual", kategori: "vehicles" },
+        { nama: "Rare Imports", harga: 23000, img: "https://files.catbox.moe/crfbe7.jpg", desc: "Rare imported vehicles from around the world.", sold: "⭐ 4.9 · 234 Terjual", kategori: "vehicles" },
+        { nama: "Advance Modification", harga: 26000, img: "https://files.catbox.moe/hw92r2.jpg", desc: "Advanced modification options for vehicles.", sold: "⭐ 4.6 · 345 Terjual", kategori: "mods" },
+        { nama: "Luxury Car", harga: 27000, img: "https://files.catbox.moe/imwtbm.jpg", desc: "Drive in style with a premium luxury car.", sold: "⭐ 4.8 · 432 Terjual", kategori: "vehicles" },
+        { nama: "2x Additional", harga: 27400, img: "https://files.catbox.moe/tj2jo3.jpg", desc: "Double your additional items and rewards.", sold: "⭐ 4.5 · 198 Terjual", kategori: "boosts" },
+        { nama: "2x Paycheck", harga: 46000, img: "https://files.catbox.moe/t1ln91.jpg", desc: "Double your paycheck for a limited period.", sold: "⭐ 4.9 · 876 Terjual", kategori: "boosts" },
+        { nama: "+50% Job Warning", harga: 48000, img: "https://files.catbox.moe/04qmcq.jpg", desc: "Boost your job earnings by 50%.", sold: "⭐ 4.7 · 654 Terjual", kategori: "boosts" }
     ];
 
-    function renderProducts() {
+    let currentFilter = 'all';
+
+    function renderProducts(filter = 'all') {
         const grid = document.getElementById('productGrid');
+        const filtered = filter === 'all' ? products : products.filter(p => p.kategori === filter);
         let html = '';
-        products.forEach(p => {
+        filtered.forEach(p => {
             html += `
-                <div class="product-card" data-nama="${p.nama}" data-harga="${p.harga}" data-img="${p.img}">
+                <div class="product-card" data-nama="${p.nama}" data-harga="${p.harga}" data-img="${p.img}" data-kategori="${p.kategori}">
                     <div class="product-top">
                         <img src="${p.img}" alt="${p.nama}" class="product-img" />
                         <div class="product-info">
@@ -252,8 +287,17 @@
             `;
         });
         grid.innerHTML = html;
+        document.getElementById('itemCount').textContent = filtered.length + ' item';
     }
-    renderProducts();
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentFilter = this.dataset.filter;
+            renderProducts(currentFilter);
+        });
+    });
 
     let cart = JSON.parse(localStorage.getItem('rolxum_cart')) || [];
     let modalProduct = {}, modalQty = 1;
@@ -323,7 +367,7 @@
             total += subtotal;
             html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0.8rem;background:#0b1121;border-radius:12px;border:1px solid #1b253d;margin-bottom:0.4rem;">
                 <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
-                    ${item.img ? `<img src="${item.img}" style="width:35px;height:35px;border-radius:8px;object-fit:cover;border:1px solid #2a3650;">` : ''}
+                    ${item.img ? `<img src="${item.img}" style="width:45px;height:45px;border-radius:8px;object-fit:cover;border:1px solid #2a3650;">` : ''}
                     <div><div style="color:#e4ebff;font-weight:500;font-size:0.85rem;">${item.nama}</div><div style="color:#8a9cc0;font-size:0.65rem;">Username: ${item.username} x${item.qty}</div></div>
                 </div>
                 <div style="display:flex;align-items:center;gap:0.5rem;">
@@ -393,6 +437,7 @@
         if (e.key === 'Escape') { closeCart(); closeQris(); closeUsernameModal(); }
     });
 
+    renderProducts('all');
     updateCartUI();
     updateCartBadge();
 </script>
