@@ -1,0 +1,400 @@
+<!-- ========================================================= -->
+<!-- FILE 5 : cdid.html (GAMEPASS CDID)                        -->
+<!-- ========================================================= -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ROLXUM · Gamepass CDID</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background: #0a0e1a; min-height: 100vh; display: flex; justify-content: center; padding: 1.5rem 1rem; }
+        .store-wrap { max-width: 1300px; width: 100%; }
+
+        .main-header {
+            background: linear-gradient(145deg, #111a2e, #0d1424);
+            border-radius: 32px;
+            padding: 1.2rem 1.8rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #2a3650;
+            box-shadow: 0 16px 40px -10px #000000cc;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .brand-left { display: flex; align-items: center; gap: 1rem; }
+        .brand-icon { width: 50px; height: 50px; border-radius: 0; object-fit: contain; border: 2px solid #f5b81b66; box-shadow: 0 0 28px #f5b81b44; background: #0a0e1a; padding: 3px; }
+        .brand-left h1 { font-size: 1.6rem; font-weight: 800; background: linear-gradient(135deg, #f7d875, #e8a817); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.5px; }
+        .brand-tag { background: #1e2842; padding: 0.2rem 1rem; border-radius: 60px; color: #bcc9e6; font-size: 0.7rem; border: 1px solid #3a4870; display: flex; align-items: center; gap: 0.4rem; }
+        .brand-tag i { color: #f5b81b; }
+
+        .nav-menu { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; }
+        .nav-menu a { padding: 0.3rem 0.9rem; border-radius: 60px; font-size: 0.7rem; font-weight: 600; color: #8a9cc0; cursor: pointer; transition: 0.2s; border: 1px solid transparent; background: transparent; text-decoration: none; }
+        .nav-menu a:hover { color: #f0f4ff; background: #1a2340; }
+        .nav-menu a.active { color: #0a0e1a; background: #f5b81b; border-color: #f5b81b; box-shadow: 0 0 20px #f5b81b44; }
+
+        .header-right { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+        .wa-badge { background: #25d366; padding: 0.4rem 1.2rem; border-radius: 60px; font-weight: 700; color: #0a0e1a; display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; box-shadow: 0 0 24px #25d36655; }
+        .help-badge { background: #f5b81b; padding: 0.4rem 1rem; border-radius: 60px; font-weight: 700; color: #0a0e1a; display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; cursor: pointer; border: none; box-shadow: 0 0 20px #f5b81b44; transition: 0.2s; }
+        .help-badge:hover { background: #f5c84a; transform: scale(1.02); }
+        .cart-badge { background: #f5b81b; padding: 0.4rem 1.2rem; border-radius: 60px; font-weight: 700; color: #0a0e1a; display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; cursor: pointer; border: none; box-shadow: 0 0 24px #f5b81b55; transition: 0.2s; }
+        .cart-badge .cart-count { background: #0a0e1a; color: #f5b81b; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 800; }
+
+        .page-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem; padding-bottom: 0.5rem; border-bottom: 1px solid #25304b; }
+        .page-header .page-icon { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; }
+        .page-header h2 { color: #f0f4ff; font-size: 1.2rem; font-weight: 700; }
+        .page-header .item-count { color: #6a7da0; font-size: 0.75rem; margin-left: auto; }
+
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .product-card {
+            background: #0b1121; border: 1px solid #1b253d; border-radius: 14px; padding: 0.8rem;
+            display: flex; flex-direction: column; text-align: left; transition: 0.25s ease; cursor: default; position: relative; overflow: hidden;
+        }
+        .product-card:hover { transform: translateY(-3px); border-color: #f5b81b66; box-shadow: 0 8px 20px -6px #000000cc, 0 0 0 1px #f5b81b33; background: #141d33; }
+        .product-card .product-top { display: flex; gap: 0.6rem; align-items: flex-start; }
+        .product-card .product-img { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid #2a3650; background: #0a0e1a; flex-shrink: 0; }
+        .product-card .product-info { flex: 1; }
+        .product-card .product-info .name { color: #e4ebff; font-weight: 600; font-size: 0.85rem; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .product-card .product-info .price { color: #f5d76e; font-weight: 700; font-size: 0.9rem; margin-top: 0.2rem; }
+        .product-card .product-info .sold { color: #6a7da0; font-size: 0.65rem; }
+        .product-card .product-desc { color: #8a9cc0; font-size: 0.7rem; margin-top: 0.4rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .product-card .product-actions { display: flex; gap: 0.4rem; margin-top: 0.5rem; width: 100%; }
+        .product-card .btn-buy-small { background: #f5b81b; border: 1px solid #f5b81b; color: #0a0e1a; font-weight: 700; padding: 0.25rem 0.8rem; border-radius: 60px; font-size: 0.7rem; cursor: pointer; transition: 0.2s ease; flex: 1; }
+        .product-card .btn-buy-small:hover { background: #f5c84a; transform: scale(1.02); }
+        .product-card .btn-cart-small { background: #1a2340; border: 1px solid #2a3650; color: #b0c0df; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 60px; font-size: 0.65rem; cursor: pointer; transition: 0.2s ease; }
+
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; padding: 1rem; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background: #0f1729; border-radius: 24px; max-width: 450px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 1.8rem 1.8rem 1.5rem; border: 1px solid #2a3650; box-shadow: 0 24px 60px -12px #000000ee; position: relative; }
+        .modal-content .close-modal { position: absolute; top: 0.8rem; right: 1.2rem; font-size: 1.3rem; color: #6a7da0; cursor: pointer; transition: 0.2s; background: none; border: none; }
+        .modal-content .close-modal:hover { color: #f0f4ff; transform: rotate(90deg); }
+        .modal-content h2 { color: #f0f4ff; font-size: 1.2rem; margin-bottom: 0.3rem; }
+        .modal-content .modal-product-name { color: #b0c0df; font-size: 0.85rem; margin-bottom: 0.2rem; }
+        .modal-content .modal-product-price { color: #f5d76e; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+        .modal-content .form-group-modal { margin-bottom: 0.8rem; }
+        .modal-content .form-group-modal label { display: block; color: #b0c0df; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.2rem; }
+        .modal-content .form-group-modal input { width: 100%; padding: 0.5rem 0.8rem; background: #0a0e1a; border: 1px solid #1b253d; border-radius: 10px; color: #e4ebff; font-size: 0.85rem; outline: none; transition: 0.2s; }
+        .modal-content .form-group-modal input:focus { border-color: #f5b81b; box-shadow: 0 0 0 3px #f5b81b33; }
+        .modal-content .qty-group { display: flex; align-items: center; gap: 0.8rem; justify-content: center; margin-bottom: 1rem; }
+        .modal-content .qty-group button { background: #1a2340; border: 1px solid #2a3650; color: #b0c0df; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .modal-content .qty-group button:hover { background: #2a3650; border-color: #f5b81b66; color: #f5b81b; }
+        .modal-content .qty-group .qty-display { color: #f0f4ff; font-weight: 700; font-size: 1.2rem; min-width: 35px; text-align: center; }
+        .modal-content .qty-group .qty-total-display { color: #f5d76e; font-size: 0.85rem; font-weight: 600; margin-left: 0.3rem; }
+        .modal-content .btn-continue { width: 100%; padding: 0.7rem; background: #f5b81b; border: none; border-radius: 14px; font-size: 0.95rem; font-weight: 700; color: #0a0e1a; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+
+        .qris-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1001; justify-content: center; align-items: center; padding: 1rem; }
+        .qris-modal-overlay.active { display: flex; }
+        .qris-modal { background: #0f1729; border-radius: 24px; max-width: 450px; width: 100%; max-height: 95vh; overflow-y: auto; padding: 1.8rem 1.8rem 1.5rem; border: 1px solid #2a3650; box-shadow: 0 24px 60px -12px #000000ee; position: relative; }
+        .qris-modal .close-qris { position: absolute; top: 0.8rem; right: 1.2rem; font-size: 1.3rem; color: #6a7da0; cursor: pointer; transition: 0.2s; background: none; border: none; }
+        .qris-modal .qris-product-list { color: #b0c0df; font-size: 0.85rem; margin-bottom: 0.2rem; }
+        .qris-modal .qris-total { color: #f5d76e; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+        .qris-modal .qris-container { background: #0a0e1a; border-radius: 14px; padding: 1rem; text-align: center; border: 1px solid #1b253d; margin-bottom: 1rem; }
+        .qris-modal .qris-container img { max-width: 100%; max-height: 220px; border-radius: 10px; }
+        .qris-modal .qris-container p { color: #8a9cc0; font-size: 0.7rem; margin-top: 0.3rem; }
+        .qris-modal .btn-pay { width: 100%; padding: 0.7rem; background: #f5b81b; border: none; border-radius: 14px; font-size: 0.95rem; font-weight: 700; color: #0a0e1a; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+
+        .footer-bar { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #1f2942; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-align: center; }
+        .footer-bar .footer-copy { color: #7a8bb0; font-size: 0.75rem; letter-spacing: 0.3px; }
+        .footer-bar .footer-contact { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem; }
+        .footer-bar .footer-contact .wa-channel { background: #182033; padding: 0.2rem 1.2rem; border-radius: 60px; border: 1px solid #2e3b5a; color: #c8d6f0; font-weight: 500; font-size: 0.8rem; display: flex; align-items: center; gap: 0.5rem; text-decoration: none; transition: 0.2s; }
+        .footer-bar .footer-contact .footer-email { color: #7a8bb0; font-size: 0.75rem; display: flex; align-items: center; gap: 0.4rem; }
+        .footer-bar .footer-tagline { color: #4a5a7a; font-size: 0.65rem; letter-spacing: 1px; }
+        .footer-channel { background: #182033; padding: 0.2rem 1.2rem; border-radius: 60px; border: 1px solid #2e3b5a; color: #c8d6f0; font-weight: 500; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; transition: 0.2s; }
+
+        @media (max-width: 760px) {
+            .main-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.2rem; }
+            .brand-left h1 { font-size: 1.4rem; }
+            .brand-icon { width: 40px; height: 40px; }
+            .nav-menu { width: 100%; justify-content: center; gap: 0.3rem; }
+            .nav-menu a { font-size: 0.6rem; padding: 0.2rem 0.6rem; }
+            .header-right { width: 100%; justify-content: space-between; }
+            .help-badge span { display: none; }
+            .wa-badge span { display: none; }
+            .cart-badge span { display: none; }
+            .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.6rem; }
+            .product-card .product-top { flex-direction: column; align-items: center; }
+            .product-card .product-info { text-align: center; }
+            .product-card .product-actions { flex-direction: column; }
+            .footer-bar .footer-contact { flex-direction: column; gap: 0.5rem; }
+            .modal-content { padding: 1.2rem; margin: 0.5rem; }
+        }
+        @media (max-width: 480px) {
+            .brand-left { flex-wrap: wrap; }
+            .brand-tag { font-size: 0.6rem; padding: 0.15rem 0.7rem; }
+            .brand-left h1 { font-size: 1.2rem; }
+            .brand-icon { width: 35px; height: 35px; }
+            .nav-menu a { font-size: 0.55rem; padding: 0.15rem 0.5rem; }
+            .product-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="store-wrap">
+    <header class="main-header">
+        <div class="brand-left">
+            <img src="https://files.catbox.moe/3kwzxz.jpg" alt="ROLXUM" class="brand-icon" />
+            <h1>ROLXUM</h1>
+            <span class="brand-tag"><i class="fas fa-bolt"></i> digital store</span>
+        </div>
+        <div class="nav-menu">
+            <a href="index.html">🏠 Beranda</a>
+            <a href="dds.html">🎮 DDS</a>
+            <a href="cash.html">💰 Cash</a>
+            <a href="robux.html">⭐ Robux</a>
+            <a href="cdid.html" class="active">🏷️ CDID</a>
+            <a href="gag.html">👑 GAG</a>
+            <a href="private.html">🖥️ Private</a>
+        </div>
+        <div class="header-right">
+            <button class="help-badge" onclick="helpCenter()"><i class="fas fa-question-circle"></i><span>Bantuan</span></button>
+            <div class="wa-badge"><i class="fab fa-whatsapp"></i><span>0821-5432-9388</span></div>
+            <button class="cart-badge" onclick="openCart()"><i class="fas fa-shopping-cart"></i><span>Keranjang</span><span class="cart-count" id="cartCount">0</span></button>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <img src="https://files.catbox.moe/eqqwan.jpg" alt="CDID" class="page-icon" />
+        <h2>🏷️ Gamepass CDID</h2>
+        <span class="item-count">10 item</span>
+    </div>
+    <div class="product-grid" id="productGrid"></div>
+
+    <div class="footer-bar">
+        <div class="footer-copy"><i class="far fa-copyright"></i> 2025 ROLXUM — Premium Digital Store</div>
+        <div class="footer-contact">
+            <a href="https://wa.me/6282154329388" class="wa-channel" target="_blank"><i class="fab fa-whatsapp"></i> 0821-5432-9388</a>
+            <a href="https://whatsapp.com/channel/0029Vb89zDn2UPBBMwKszN0t" class="footer-channel" target="_blank"><i class="fab fa-whatsapp"></i> Saluran WhatsApp</a>
+            <span class="footer-email"><i class="fas fa-at"></i> @rolxum.id</span>
+        </div>
+        <div class="footer-tagline"><i class="fas fa-crown"></i> ROLXUM · keren & cepat</div>
+    </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="usernameModal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeUsernameModal()"><i class="fas fa-times"></i></button>
+        <h2>👤 Detail Pesanan</h2>
+        <p class="modal-product-name" id="modalProductName">Produk: -</p>
+        <p class="modal-product-price" id="modalProductPrice">Harga: Rp -</p>
+        <div class="form-group-modal"><label><i class="fas fa-user"></i> Username Roblox</label><input type="text" id="modalUsername" placeholder="Masukkan username Roblox Anda" /></div>
+        <div class="qty-group">
+            <button onclick="changeModalQty(-1)">-</button>
+            <span class="qty-display" id="modalQty">1</span>
+            <button onclick="changeModalQty(1)">+</button>
+            <span class="qty-total-display" id="modalTotal">Rp 4.300</span>
+        </div>
+        <button class="btn-continue" onclick="continueToQris()"><i class="fas fa-arrow-right"></i> Lanjut ke Pembayaran</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="cartModal">
+    <div class="modal-content" style="max-width:500px;">
+        <button class="close-modal" onclick="closeCart()"><i class="fas fa-times"></i></button>
+        <h2>🛒 Keranjang Belanja</h2>
+        <div id="cartItems"><div style="color:#6a7da0;text-align:center;padding:1.5rem 0;font-size:0.9rem;">Keranjang masih kosong</div></div>
+        <div class="cart-total" id="cartTotal" style="display:none;justify-content:space-between;padding:0.8rem 0;border-top:1px solid #1b253d;margin-top:0.5rem;">
+            <span style="color:#b0c0df;font-weight:600;">Total</span>
+            <span style="color:#f5d76e;font-weight:700;font-size:1.1rem;" id="totalAmount">Rp 0</span>
+        </div>
+        <button class="btn-continue" id="checkoutBtn" onclick="checkout()" disabled><i class="fas fa-credit-card"></i> Checkout</button>
+    </div>
+</div>
+
+<div class="qris-modal-overlay" id="qrisModal">
+    <div class="qris-modal">
+        <button class="close-qris" onclick="closeQris()"><i class="fas fa-times"></i></button>
+        <h2>💳 Pembayaran QRIS</h2>
+        <div id="qrisProductList" class="qris-product-list"></div>
+        <div id="qrisTotal" class="qris-total"></div>
+        <div class="qris-container"><img src="https://files.catbox.moe/dwga77.jpg" alt="QRIS" /><p><i class="fas fa-camera"></i> Scan QRIS di atas untuk melakukan pembayaran</p></div>
+        <button class="btn-pay" onclick="confirmPayment()"><i class="fas fa-check-circle"></i> Saya Sudah Bayar</button>
+    </div>
+</div>
+
+<script>
+    const products = [
+        { nama: "Luxury House", harga: 14000, img: "https://files.catbox.moe/fefclr.jpg", desc: "A luxurious house with premium interior.", sold: "⭐ 4.6 · 432 Terjual" },
+        { nama: "Additional Ownable Car", harga: 13000, img: "https://files.catbox.moe/dtjuvs.jpg", desc: "Add more ownable cars to your collection.", sold: "⭐ 4.5 · 321 Terjual" },
+        { nama: "Emergency Vehicle", harga: 16000, img: "https://files.catbox.moe/cp37xc.jpg", desc: "Emergency response vehicles for quick action.", sold: "⭐ 4.7 · 289 Terjual" },
+        { nama: "Retro Pass", harga: 20000, img: "https://files.catbox.moe/pczy8y.jpg", desc: "Access retro themed items and vehicles.", sold: "⭐ 4.8 · 567 Terjual" },
+        { nama: "Rare Imports", harga: 23000, img: "https://files.catbox.moe/crfbe7.jpg", desc: "Rare imported vehicles from around the world.", sold: "⭐ 4.9 · 234 Terjual" },
+        { nama: "Advance Modification", harga: 26000, img: "https://files.catbox.moe/hw92r2.jpg", desc: "Advanced modification options for vehicles.", sold: "⭐ 4.6 · 345 Terjual" },
+        { nama: "Luxury Car", harga: 27000, img: "https://files.catbox.moe/imwtbm.jpg", desc: "Drive in style with a premium luxury car.", sold: "⭐ 4.8 · 432 Terjual" },
+        { nama: "2x Additional", harga: 27400, img: "https://files.catbox.moe/tj2jo3.jpg", desc: "Double your additional items and rewards.", sold: "⭐ 4.5 · 198 Terjual" },
+        { nama: "2x Paycheck", harga: 46000, img: "https://files.catbox.moe/t1ln91.jpg", desc: "Double your paycheck for a limited period.", sold: "⭐ 4.9 · 876 Terjual" },
+        { nama: "+50% Job Warning", harga: 48000, img: "https://files.catbox.moe/04qmcq.jpg", desc: "Boost your job earnings by 50%.", sold: "⭐ 4.7 · 654 Terjual" }
+    ];
+
+    function renderProducts() {
+        const grid = document.getElementById('productGrid');
+        let html = '';
+        products.forEach(p => {
+            html += `
+                <div class="product-card" data-nama="${p.nama}" data-harga="${p.harga}" data-img="${p.img}">
+                    <div class="product-top">
+                        <img src="${p.img}" alt="${p.nama}" class="product-img" />
+                        <div class="product-info">
+                            <div class="name">${p.nama}</div>
+                            <div class="price">Rp ${p.harga.toLocaleString('id-ID')}</div>
+                            <div class="sold">${p.sold}</div>
+                        </div>
+                    </div>
+                    <div class="product-desc">${p.desc}</div>
+                    <div class="product-actions">
+                        <button class="btn-buy-small" onclick="openUsernameModal(this)"><i class="fas fa-bolt"></i> Beli</button>
+                        <button class="btn-cart-small" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            `;
+        });
+        grid.innerHTML = html;
+    }
+    renderProducts();
+
+    let cart = JSON.parse(localStorage.getItem('rolxum_cart')) || [];
+    let modalProduct = {}, modalQty = 1;
+
+    function openUsernameModal(btn) {
+        const card = btn.closest('.product-card');
+        modalProduct = { nama: card.dataset.nama, harga: parseInt(card.dataset.harga) };
+        modalQty = 1;
+        document.getElementById('modalProductName').textContent = 'Produk: ' + modalProduct.nama;
+        document.getElementById('modalProductPrice').textContent = 'Harga: Rp ' + modalProduct.harga.toLocaleString('id-ID');
+        document.getElementById('modalQty').textContent = '1';
+        document.getElementById('modalTotal').textContent = 'Rp ' + modalProduct.harga.toLocaleString('id-ID');
+        document.getElementById('modalUsername').value = '';
+        document.getElementById('usernameModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeUsernameModal() {
+        document.getElementById('usernameModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function changeModalQty(delta) {
+        let qty = modalQty + delta;
+        if (qty < 1) qty = 1;
+        modalQty = qty;
+        document.getElementById('modalQty').textContent = qty;
+        document.getElementById('modalTotal').textContent = 'Rp ' + (modalProduct.harga * qty).toLocaleString('id-ID');
+    }
+
+    function continueToQris() {
+        const username = document.getElementById('modalUsername').value.trim();
+        if (!username) { alert('⚠️ Mohon isi Username Roblox!'); return; }
+        closeUsernameModal();
+        showQris([{ nama: modalProduct.nama, harga: modalProduct.harga, qty: modalQty, username: username }]);
+    }
+
+    function addToCart(btn) {
+        const card = btn.closest('.product-card');
+        const username = prompt('Masukkan Username Roblox:');
+        if (!username) return;
+        const qty = parseInt(prompt('Jumlah:', '1')) || 1;
+        const item = { nama: card.dataset.nama, harga: parseInt(card.dataset.harga), qty: qty, img: card.dataset.img, username: username };
+        const exist = cart.find(c => c.nama === item.nama && c.username === username);
+        if (exist) exist.qty += qty; else cart.push(item);
+        localStorage.setItem('rolxum_cart', JSON.stringify(cart));
+        updateCartUI();
+        updateCartBadge();
+        btn.innerHTML = '<i class="fas fa-check"></i>';
+        btn.style.background = '#25d366';
+        setTimeout(() => { btn.innerHTML = '<i class="fas fa-cart-plus"></i>'; btn.style.background = ''; }, 1500);
+    }
+
+    function updateCartUI() {
+        const container = document.getElementById('cartItems');
+        const totalContainer = document.getElementById('cartTotal');
+        const totalAmount = document.getElementById('totalAmount');
+        if (cart.length === 0) {
+            container.innerHTML = '<div style="color:#6a7da0;text-align:center;padding:1.5rem 0;font-size:0.9rem;">Keranjang masih kosong</div>';
+            totalContainer.style.display = 'none';
+            document.getElementById('checkoutBtn').disabled = true;
+            return;
+        }
+        let html = '', total = 0;
+        cart.forEach((item, index) => {
+            const subtotal = item.harga * item.qty;
+            total += subtotal;
+            html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0.8rem;background:#0b1121;border-radius:12px;border:1px solid #1b253d;margin-bottom:0.4rem;">
+                <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+                    ${item.img ? `<img src="${item.img}" style="width:35px;height:35px;border-radius:8px;object-fit:cover;border:1px solid #2a3650;">` : ''}
+                    <div><div style="color:#e4ebff;font-weight:500;font-size:0.85rem;">${item.nama}</div><div style="color:#8a9cc0;font-size:0.65rem;">Username: ${item.username} x${item.qty}</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:0.5rem;">
+                    <span style="color:#f5d76e;font-weight:700;font-size:0.85rem;">Rp ${subtotal.toLocaleString('id-ID')}</span>
+                    <button onclick="removeFromCart(${index})" style="background:none;border:none;color:#6a7da0;cursor:pointer;font-size:0.8rem;"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>`;
+        });
+        container.innerHTML = html;
+        totalContainer.style.display = 'flex';
+        totalAmount.textContent = 'Rp ' + total.toLocaleString('id-ID');
+        document.getElementById('checkoutBtn').disabled = false;
+        localStorage.setItem('rolxum_cart', JSON.stringify(cart));
+    }
+
+    function updateCartBadge() {
+        document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartUI();
+        updateCartBadge();
+        localStorage.setItem('rolxum_cart', JSON.stringify(cart));
+    }
+
+    function openCart() { document.getElementById('cartModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeCart() { document.getElementById('cartModal').classList.remove('active'); document.body.style.overflow = ''; }
+    function checkout() { if (cart.length === 0) return; closeCart(); showQris(cart); }
+
+    function showQris(items) {
+        const productList = document.getElementById('qrisProductList');
+        let total = 0, html = '';
+        items.forEach(item => {
+            const subtotal = item.harga * item.qty;
+            total += subtotal;
+            html += `${item.nama} x${item.qty} (Username: ${item.username}) = Rp ${subtotal.toLocaleString('id-ID')}<br>`;
+        });
+        productList.innerHTML = html;
+        document.getElementById('qrisTotal').textContent = 'Total: Rp ' + total.toLocaleString('id-ID');
+        window._currentOrderItems = items;
+        window._currentOrderTotal = total;
+        document.getElementById('qrisModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeQris() { document.getElementById('qrisModal').classList.remove('active'); document.body.style.overflow = ''; }
+
+    function confirmPayment() {
+        const items = window._currentOrderItems || [], total = window._currentOrderTotal || 0;
+        if (items.length === 0) return;
+        let productList = '';
+        items.forEach(item => {
+            productList += `${item.nama} x${item.qty} (Username: ${item.username}) = Rp ${(item.harga * item.qty).toLocaleString('id-ID')}\n`;
+        });
+        const waNumber = '6282154329388';
+        let msg = `Halo%20ROLXUM%2C%20saya%20mau%20order%3A%0A%0A📦%20Produk%3A%0A${encodeURIComponent(productList)}%0A💰%20Total%3A%20Rp%20${total.toLocaleString('id-ID')}%0A%0A✅%20Saya%20sudah%20melakukan%20pembayaran%20via%20QRIS.%0A📎%20Bukti%20pembayaran%20saya%20lampirkan%20setelah%20teks%20ini.`;
+        window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
+        if (cart.length > 0) { cart = []; updateCartUI(); updateCartBadge(); localStorage.setItem('rolxum_cart', JSON.stringify(cart)); }
+        closeQris();
+        setTimeout(() => alert('✅ Pesanan berhasil dikirim!\n\n📸 Silakan kirimkan bukti pembayaran Anda di chat WhatsApp.\n\nTerima kasih sudah berbelanja di ROLXUM! 🙏'), 1500);
+    }
+
+    function helpCenter() { window.open('https://wa.me/6282154329388?text=Halo%20ROLXUM%2C%20saya%20butuh%20bantuan.', '_blank'); }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { closeCart(); closeQris(); closeUsernameModal(); }
+    });
+
+    updateCartUI();
+    updateCartBadge();
+</script>
+</body>
+</html>
